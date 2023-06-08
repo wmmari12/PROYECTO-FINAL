@@ -9,6 +9,7 @@ package Clases;
 public class Cliente {
     
     private int idCliente;
+    private String dni;
     private String apellido;
     private String nombre;
     private String domicilio;
@@ -17,15 +18,17 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String apellido, String nombre, String domicilio, String telefono) {
+    public Cliente(String dni, String apellido, String nombre, String domicilio, String telefono) {
+        this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public Cliente(int idCliente, String apellido, String nombre, String domicilio, String telefono) {
+    public Cliente(int idCliente, String dni, String apellido, String nombre, String domicilio, String telefono) {
         this.idCliente = idCliente;
+        this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -38,6 +41,14 @@ public class Cliente {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getApellido() {
@@ -70,6 +81,12 @@ public class Cliente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "Cliente: " + idCliente + " - " + dni + " - " + apellido + " - "+ nombre + " - " + domicilio + " - "+ telefono;
     }
     
     

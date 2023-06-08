@@ -5,7 +5,7 @@
  */
 package Clases;
 
-import AccesoADatos.Conexion;
+import AccesoADatos.*;
 import java.sql.Connection;
 
 
@@ -16,7 +16,11 @@ public class Inventario {
      */
     public static void main(String[] args) {
        
-        Connection con=Conexion.getConexion();;
+        Connection con=Conexion.getConexion();
+        ClienteData c=new ClienteData();
+        //c.guardarCliente(new Cliente("33445566", "Perez", "Juan", "San Martin 200", "2664112233"));
+        //System.out.println(c.obtenerClientePorId(7));
+        //System.out.println(c.listaDeClientes());
         
     }
     
