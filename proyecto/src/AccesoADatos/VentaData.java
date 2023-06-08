@@ -5,8 +5,18 @@
  */
 package AccesoADatos;
 
+import java.sql.Connection;
+
 
 public class VentaData {
     
+    private Connection con=null;
 
+    public VentaData() {
+        
+        con=Conexion.getConexion();
+
+    }
+    
+    
 }
