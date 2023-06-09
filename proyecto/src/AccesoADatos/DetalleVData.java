@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class DetalleVData {
     
     private Connection con = null;
+    private ProductoData pd=new ProductoData();
 
     public DetalleVData() {
         

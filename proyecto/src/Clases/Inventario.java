@@ -24,8 +24,12 @@ public class Inventario {
         //System.out.println(c.obtenerClientePorId(7));
         //System.out.println(c.listaDeClientes());
         
-        CompraData c=new CompraData();
-        System.out.println(c.obtenerComprasPorFecha(LocalDate.of(2023, Month.JUNE, 8)));
+//      CompraData c=new CompraData();
+//      System.out.println(c.obtenerComprasPorFecha(LocalDate.of(2023, Month.JUNE, 8)));
+        
+        ProductoData pd=new ProductoData();
+        pd.modificarStock(35, 1, 1);
+        
         
     }
     

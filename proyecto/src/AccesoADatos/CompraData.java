@@ -83,7 +83,6 @@ public class CompraData {
         
     return c;
     }
-
     
     public List<Compra> obtenerComprasPorFecha(LocalDate fecha){
         
@@ -115,7 +114,6 @@ public class CompraData {
 
         return listaCompras;
     }
-    
     
     public List<Compra> listaDeCompras(){
         List<Compra> compras = new ArrayList<>();

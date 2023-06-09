@@ -83,7 +83,7 @@ public class ClienteData {
     return c;
 }
     
-    public void eliminarCliente(int id){
+    public void bajaCliente(int id){
         
         try{
             String sql="UPDATE cliente SET estado=0 WHERE idCliente=?";
@@ -130,7 +130,6 @@ public class ClienteData {
 
         return c;
     }
-
      
     public List<Cliente> listaDeClientes() {
         

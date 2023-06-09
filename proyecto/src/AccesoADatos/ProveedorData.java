@@ -50,7 +50,7 @@ public class ProveedorData {
         }
     }
     
-    public Producto modificarProveedor(Proveedor p) {
+    public Proveedor modificarProveedor(Proveedor p) {
 
         String sql = "UPDATE proveedor SET razonSocial=?,domicilio=?, telefono=?, estado=? WHERE idProducto=?";
         PreparedStatement ps = null;
@@ -61,6 +61,7 @@ public class ProveedorData {
             ps.setString(2, p.getDomicilio());
             ps.setString(3, p.getTelefono());
             ps.setBoolean(4, p.isEstado());
+            ps.setInt(5, p.getIdProveedor());
             
             int filas=ps.executeUpdate();
             if(filas==1){
@@ -75,27 +76,28 @@ public class ProveedorData {
     return p;
 }
     
-    public void eliminarProducto(int id){
+    public void bajaProveedor(int id){
         
         try{
-            String sql="UPDATE producto SET estado=0 WHERE idProducto=?";
+            String sql="UPDATE proveedor SET estado=0 WHERE idProveedor=?";
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El producto ha sido dado de baja.");
+                 JOptionPane.showMessageDialog(null, "El Proveedor ha sido dado de baja.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el producto!");
+                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
             }
             ps.close(); 
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al eliminar el producto: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al dar de baja el Proveedor: "+ex.getMessage());
         }
         
     }
     
-    public Producto obtenerProductoPorId(int id) {
+    public Proveedor obtenerProveedorPorId(int id) {
+        
         Producto p = null;
         String sql = "SELECT * FROM producto WHERE idProducto = ?";
         PreparedStatement ps=null;

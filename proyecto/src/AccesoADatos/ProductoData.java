@@ -91,16 +91,15 @@ public class ProductoData {
 
     public Producto modificarProducto(Producto p) {
 
-        String sql = "UPDATE producto SET descripcion=?, precioActual=?, stock=?, estado=? WHERE idProducto=?";
+        String sql = "UPDATE producto SET descripcion=?, precioActual=?, estado=? WHERE idProducto=?";
         PreparedStatement ps = null;
         try
         {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
             ps.setString(1, p.getDescripcion());
             ps.setDouble(2, p.getPrecioActual());
-            ps.setInt(3, p.getStock());
-            ps.setBoolean(4, p.isEstado());
-            ps.setInt(5, p.getIdProducto());
+            ps.setBoolean(3, p.isEstado());
+            ps.setInt(4, p.getIdProducto());
             int filas = ps.executeUpdate();
             if (filas == 1)
             {
@@ -122,9 +121,10 @@ public class ProductoData {
         //el flag es para indetificar si es una compra o una venta, 1:venta 2:compra
         String sql = "UPDATE producto SET stock=? WHERE idProducto=?";
         PreparedStatement ps = null;
+       
         try
         {
-            Producto aux = buscarProducto(id);//buscamos el producto por id
+            Producto aux=buscarProducto(id);//buscamos el producto por id
             int stockActual = aux.getStock();//guardamos el stock actual
 
             switch (flag)
@@ -132,24 +132,27 @@ public class ProductoData {
                 case 1://venta
                     if (cant <= stockActual){//vendemos producto
                         stockActual -= cant;
+                        JOptionPane.showMessageDialog(null, "Venta realizada");
                     } else {
                         JOptionPane.showMessageDialog(null, "Cantidad insuficiente! El stock actual es: "+stockActual);
                     }
                     break;
 
                 case 2://compra
-                    stockActual -= cant;
+                    stockActual += cant;
+                    JOptionPane.showMessageDialog(null, "Compra realizada");
                     break;
             }
             
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
 
             ps.setInt(1,stockActual);//modificamos el stock con el calculo del stock actual
-
+            ps.setInt(2, id);
             int filas = ps.executeUpdate();
+            
             if (filas == 1)
             {
-                JOptionPane.showMessageDialog(null, "Stock modificado");
+                JOptionPane.showMessageDialog(null, "Consulta realizada con exito!");
             } 
             
             ps.close();//cerramos la conexion
@@ -160,7 +163,7 @@ public class ProductoData {
 
     }
 
-    public void eliminarProducto(int id) {
+    public void bajaProducto(int id) {
 
         try
         {
@@ -182,36 +185,6 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, "Error al eliminar el producto: " + ex.getMessage());
         }
 
-    }
-
-    public Producto obtenerProductoPorId(int id) {
-        Producto p = null;
-        String sql = "SELECT * FROM producto WHERE idProducto = ?";
-        PreparedStatement ps = null;
-        try
-        {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next())
-            {
-                p = new Producto();
-                p.setIdProducto(rs.getInt("idProducto"));
-                p.setDescripcion(rs.getString("descripcion"));
-                p.setPrecioActual(rs.getInt("precioActual"));
-                p.setStock(rs.getInt("stock"));
-                p.setEstado(rs.getBoolean("estado"));
-            } else
-            {
-                JOptionPane.showMessageDialog(null, "No se encontro el producto!");
-            }
-        } catch (SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null, "Error al obtener el producto: " + ex.getMessage());
-        }
-
-        return p;
     }
 
     public List<Producto> listaDeProductos() {
