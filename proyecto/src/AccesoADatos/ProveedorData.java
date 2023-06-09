@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -98,8 +100,8 @@ public class ProveedorData {
     
     public Proveedor obtenerProveedorPorId(int id) {
         
-        Producto p = null;
-        String sql = "SELECT * FROM producto WHERE idProducto = ?";
+        Proveedor p = null;
+        String sql = "SELECT * FROM proveedor WHERE idProveedor = ?";
         PreparedStatement ps=null;
         try{
             ps = con.prepareStatement(sql);
@@ -107,47 +109,47 @@ public class ProveedorData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                p= new Producto();
-                p.setIdProducto(rs.getInt("idProducto"));
-                p.setDescripcion(rs.getString("descripcion"));
-                p.setPrecioActual(rs.getInt("precioActual"));
-                p.setStock(rs.getInt("stock"));
+                p= new Proveedor();
+                p.setIdProveedor(rs.getInt("idProveedor"));
+                p.setRazonSocial(rs.getString("razonSocial"));
+                p.setDomicilio(rs.getString("domicilio"));
+                p.setTelefono(rs.getString("telefono"));
                 p.setEstado(rs.getBoolean("estado"));
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el producto!");
+                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
             }
         } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al obtener el producto: "+ex.getMessage());        }
+                JOptionPane.showMessageDialog(null, "Error al obtener el Proveedor: "+ex.getMessage());        }
 
         return p;
     }
 
      
-    public List<Producto> listaDeProductos() {
+    public List<Proveedor> listaDeProductos() {
         
-        List<Producto> productos = new ArrayList<>();
+        List<Proveedor> proveedores = new ArrayList<>();
 
         try{
-            String sql = "SELECT * FROM producto";
+            String sql = "SELECT * FROM Proveedor";
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("idProducto");
-                String desc = rs.getString("descripcion");
-                Double precio = rs.getDouble("precioActual");
-                int stock = rs.getInt("stock");
+                int id = rs.getInt("idProveedor");
+                String razon = rs.getString("razonSocial");
+                String dom = rs.getString("domicilio");
+                String tel = rs.getString("telefonno");
                 boolean estado = rs.getBoolean("estado");
 
-                Producto p = new Producto(id, desc, precio, stock, estado);
-                productos.add(p);
+                Proveedor p = new Proveedor(id, razon, dom, tel, estado);
+                proveedores.add(p);
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al listar Clientes: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al obtener lista de Proveedores: "+ex.getMessage());
 
         }
 
-        return productos;
+        return proveedores;
     }
 
 

@@ -30,12 +30,13 @@ public class VentaData {
     
     public void realizarVenta(Venta v) {
         
-        String sql = "INSERT INTO venta(fecha, idCliente) VALUES (?,?)";
+        String sql = "INSERT INTO venta(fecha, idCliente,estado) VALUES (?,?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(v.getFecha()));
             ps.setInt(2, v.getIdCliente());
+            ps.setBoolean(3, v.isEstado());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -53,13 +54,15 @@ public class VentaData {
     
     public Venta modificarVenta(Venta v) {
         
-        String sql = "UPDATE venta SET fecha=?, idCliente=? WHERE idVenta=?";
+        String sql = "UPDATE venta SET fecha=?, idCliente=? estado=? WHERE idVenta=?";
        PreparedStatement ps = null;
     try
     {
         ps = con.prepareStatement(sql);
         ps.setDate(1, Date.valueOf(v.getFecha()));
         ps.setInt(2, v.getIdCliente());
+        ps.setBoolean(3, v.isEstado());
+        
         int filas=ps.executeUpdate();
         if(filas==1){
             JOptionPane.showMessageDialog(null, "Venta modificada");
@@ -68,14 +71,15 @@ public class VentaData {
 
         }
     }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al modificar Cliente: "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al modificar Venta: "+ex.getMessage());
     }
     return v;
 }
     
     public Venta obtenerVentaPorId(int id){
+        
         Venta v = null;
-        String sql = "SELECT * FROM venta WHERE idVenta = ?";
+        String sql = "SELECT * FROM venta WHERE idVenta = ? AND estado=1";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
@@ -86,6 +90,8 @@ public class VentaData {
                 v = new Venta();
                 v.setIdVenta(rs.getInt("idVenta"));
                 v.setFecha(rs.getDate("fecha").toLocalDate());
+                v.setEstado(rs.getBoolean("estado"));
+                v.setIdCliente(id);
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontro la venta!");
 
@@ -99,6 +105,7 @@ public class VentaData {
 }
 
     public List<Venta> listaDeVentas(){
+        
         List<Venta> ventas = new ArrayList<>();
         
         try{
@@ -110,8 +117,9 @@ public class VentaData {
                 int idVta = rs.getInt("idVenta");
                 LocalDate fecha = rs.getDate("fecha").toLocalDate();
                 int idCte = rs.getInt("idCliente");
+                boolean estado= rs.getBoolean("estado");
                 
-                Venta venta = new Venta(idVta,fecha,idCte);
+                Venta venta = new Venta(idVta,fecha,idCte,estado);
                 ventas.add(venta);
             }
         }catch (SQLException ex) {
