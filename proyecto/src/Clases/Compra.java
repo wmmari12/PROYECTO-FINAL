@@ -12,15 +12,15 @@ public class Compra {
     
     private int idCompra;
     private LocalDate fecha;
-    private int iDventa;
+    private int idProveedor;//idproveedor como en la BD;
 
     public Compra() {
     }
 
-    public Compra(int idCompra, LocalDate fecha, int iDventa) {
+    public Compra(int idCompra, LocalDate fecha, int idProveedor) {
         this.idCompra = idCompra;
         this.fecha = fecha;
-        this.iDventa = iDventa;
+        this.idProveedor = idProveedor;
     }
 
     public int getIdCompra() {
@@ -39,12 +39,12 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public int getiDventa() {
-        return iDventa;
+    public int getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setiDventa(int iDventa) {
-        this.iDventa = iDventa;
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     

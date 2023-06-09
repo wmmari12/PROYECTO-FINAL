@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -31,7 +31,7 @@ public class ClienteData {
 
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, c.getDni());
+            ps.setString(1, c.getDni());//en la DB no hay dni
             ps.setString(2, c.getApellido());
             ps.setString(3, c.getNombre());
             ps.setString(4, c.getDomicilio());

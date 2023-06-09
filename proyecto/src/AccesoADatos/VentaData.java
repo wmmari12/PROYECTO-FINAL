@@ -5,7 +5,17 @@
  */
 package AccesoADatos;
 
+import Clases.Venta;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class VentaData {
@@ -18,5 +28,96 @@ public class VentaData {
 
     }
     
+    public void realizarVenta(Venta v) {
+        String sql = "INSERT INTO venta(idVenta, fecha, idCliente) VALUES (?,?,?)";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, v.getIdVenta());
+            ps.setDate(2, Date.valueOf(v.getFecha()));
+            ps.setInt(3, v.getIdCliente());
+            
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            
+            if(rs.next()){
+                v.setIdVenta(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "La venta fue cargada con exito");
+            }
+            ps.close();
+            
+        }catch (SQLException ex)
+        {JOptionPane.showMessageDialog(null, "Error al realizar Venta" + ex.getMessage());
+         }
+    }
     
+    public Venta modificarVenta(Venta v) {
+        
+        String sql = "UPDATE venta SET fecha=?, idCliente=? WHERE idVenta=?";
+       PreparedStatement ps = null;
+    try
+    {
+        ps = con.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(v.getFecha()));
+        ps.setInt(2, v.getIdCliente());
+        int filas=ps.executeUpdate();
+        if(filas==1){
+            JOptionPane.showMessageDialog(null, "Venta modificada");
+        }else{
+                        JOptionPane.showMessageDialog(null, "Error al modificar Venta: " + ps.toString());
+
+        }
+    }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al modificar Cliente: "+ex.getMessage());
+    }
+    return v;
+}
+    
+    public Venta obtenerVentaPorId(int id){
+        Venta v = null;
+        String sql = "SELECT * FROM venta WHERE idVenta = ?";
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                v = new Venta();
+                v.setIdVenta(rs.getInt("idVenta"));
+                v.setFecha(rs.getDate("fecha").toLocalDate());
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro la venta!");
+
+            }
+    }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener Venta: "+ex.getMessage());        }
+
+        return v;
+    
+
+}
+
+    public List<Venta> listaDeVentas(){
+        List<Venta> ventas = new ArrayList<>();
+        
+        try{
+            String sql = "SELECT * FROM venta";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                int idVta = rs.getInt("idVenta");
+                LocalDate fecha = rs.getDate("fecha").toLocalDate();
+                int idCte = rs.getInt("idCliente");
+                
+                Venta venta = new Venta(idVta,fecha,idCte);
+                ventas.add(venta);
+            }
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al listar Ventas: "+ex.getMessage());
+        }
+    
+        return ventas;
+    }
 }
