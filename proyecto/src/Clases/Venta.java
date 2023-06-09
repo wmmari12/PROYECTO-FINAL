@@ -6,6 +6,7 @@
 package Clases;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 
 public class Venta {
@@ -13,16 +14,32 @@ public class Venta {
     private int idVenta;
     private LocalDate fecha;
     private int idCliente;
+    private boolean estado;
 
     public Venta() {
     }
 
-    public Venta(int idVenta, LocalDate fecha, int idCliente) {
+    public Venta(int idVenta, LocalDate fecha, int idCliente, boolean estado) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.idCliente = idCliente;
+        this.estado = estado;
     }
 
+    public Venta(LocalDate fecha, int idCliente, boolean estado) {
+        this.fecha = fecha;
+        this.idCliente = idCliente;
+        this.estado = estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     public int getIdVenta() {
         return idVenta;
     }

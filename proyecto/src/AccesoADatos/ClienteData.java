@@ -27,7 +27,7 @@ public class ClienteData {
 
     public void guardarCliente(Cliente c) {
         
-        String sql = "INSERT INTO cliente (dni,apellido,nombre,domicilio,telefono) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO cliente (dni,apellido,nombre,domicilio,telefono,estado) VALUES (?,?,?,?,?)";
 
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,6 +36,7 @@ public class ClienteData {
             ps.setString(3, c.getNombre());
             ps.setString(4, c.getDomicilio());
             ps.setString(5, c.getTelefono());
+            ps.setBoolean(6, c.isEstado());
 
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
@@ -57,7 +58,7 @@ public class ClienteData {
     
     public Cliente modificarCliente(Cliente c) {
 
-        String sql = "UPDATE cliente SET apellido=?, nombre=?, domicilio=?, telefono=? WHERE idCliente=?";
+        String sql = "UPDATE cliente SET apellido=?, nombre=?, domicilio=?, telefono=?, estado=? WHERE idCliente=?";
         PreparedStatement ps = null;
         try
         {
@@ -66,7 +67,9 @@ public class ClienteData {
             ps.setString(2, c.getNombre());
             ps.setString(3, c.getDomicilio());
             ps.setString(4, c.getTelefono());
-            ps.setInt(5, c.getIdCliente());
+            ps.setBoolean(5, c.isEstado());
+            ps.setInt(6, c.getIdCliente());
+            
             int filas=ps.executeUpdate();
             if(filas==1){
                 JOptionPane.showMessageDialog(null, "Cliente modificado");
@@ -100,13 +103,14 @@ public class ClienteData {
         
     }
     
-    public Cliente obtenerClientePorId(int id) {
+    public Cliente obtenerClientePorDni(int dni) {
+        
         Cliente c = null;
-        String sql = "SELECT * FROM cliente WHERE idCliente = ?";
+        String sql = "SELECT * FROM cliente WHERE dni = ?";
         PreparedStatement ps=null;
         try{
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(2, dni);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -117,6 +121,7 @@ public class ClienteData {
                 c.setNombre(rs.getString("nombre"));
                 c.setDomicilio(rs.getString("domicilio"));
                 c.setTelefono(rs.getString("telefono"));
+                c.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
             }
@@ -142,8 +147,9 @@ public class ClienteData {
                 String nombre = rs.getString("nombre");
                 String domicilio = rs.getString("domicilio");
                 String telefono = rs.getString("telefono");
+                boolean estado=rs.getBoolean("estado");
 
-                Cliente cliente = new Cliente(id, dni, apellido, nombre, domicilio, telefono);
+                Cliente cliente = new Cliente(id, dni, apellido, nombre, domicilio, telefono,estado);
                 clientes.add(cliente);
             }
             ps.close();

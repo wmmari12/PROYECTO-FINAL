@@ -29,13 +29,13 @@ public class VentaData {
     }
     
     public void realizarVenta(Venta v) {
-        String sql = "INSERT INTO venta(idVenta, fecha, idCliente) VALUES (?,?,?)";
+        
+        String sql = "INSERT INTO venta(fecha, idCliente) VALUES (?,?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, v.getIdVenta());
-            ps.setDate(2, Date.valueOf(v.getFecha()));
-            ps.setInt(3, v.getIdCliente());
+            ps.setDate(1, Date.valueOf(v.getFecha()));
+            ps.setInt(2, v.getIdCliente());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -64,7 +64,7 @@ public class VentaData {
         if(filas==1){
             JOptionPane.showMessageDialog(null, "Venta modificada");
         }else{
-                        JOptionPane.showMessageDialog(null, "Error al modificar Venta: " + ps.toString());
+            JOptionPane.showMessageDialog(null, "Error al modificar Venta: " + ps.toString());
 
         }
     }catch(SQLException ex){

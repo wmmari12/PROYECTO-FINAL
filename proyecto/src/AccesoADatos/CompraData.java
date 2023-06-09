@@ -29,13 +29,14 @@ public class CompraData {
     }
     
     public void hacerCompra(Compra c){
-        String sql = "INSERT INTO compra (idCompra,fecha,idProveedor) VALUES (?,?,?)";
+        String sql = "INSERT INTO compra (fecha,idProveedor,estado) VALUES (?,?,?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, c.getIdCompra());
+            
             ps.setDate(1, Date.valueOf(c.getFecha()));
-            ps.setInt(3, c.getIdProveedor());
+            ps.setInt(2, c.getIdProveedor());
+            ps.setBoolean(3, c.isEstado());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -57,13 +58,15 @@ public class CompraData {
     
     public Compra modificarCompra(Compra c){
         
-        String sql = "UPDATE compra SET idCompra, fecha, idProveedor WHERE idCompra";
+        String sql = "UPDATE compra SET fecha=?, idProveedor=?, estado=? WHERE idCompra=?";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
-            ps.setInt(1, c.getIdCompra());
-            ps.setDate(2, Date.valueOf(c.getFecha()));
-            ps.setInt(3, c.getIdProveedor());
+            
+            ps.setDate(1, Date.valueOf(c.getFecha()));
+            ps.setInt(2, c.getIdProveedor());
+            ps.setBoolean(3, c.isEstado());
+            ps.setInt(4, c.getIdCompra());
             
             int filas = ps.executeUpdate();
             
@@ -78,33 +81,39 @@ public class CompraData {
             JOptionPane.showMessageDialog(null, "Error al modificar Compra: "+ex.getMessage());
     }
         
-        
     return c;
     }
 
     
-    public Compra obtenerComprasPorId(int id){
+    public List<Compra> obtenerComprasPorFecha(LocalDate fecha){
+        
+        List<Compra> listaCompras = new ArrayList<>();
+        
         Compra c = null;
-        String sql = "SELECT * FROM compra WHERE idCompra=?";
+        String sql = "SELECT * FROM compra WHERE fecha=?";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setDate(1, java.sql.Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
             
-            if(rs.next()){
+            while(rs.next()){
                 c = new Compra();
-                c.setIdCompra(rs.getInt("idVenta"));
+                c.setIdCompra(rs.getInt("idCompra"));
                 c.setFecha(rs.getDate("fecha").toLocalDate());
                 c.setIdProveedor(rs.getInt("idProveedor"));
-            }else{
-                 JOptionPane.showMessageDialog(null, "No se encontraron compras con ese id!");
+                c.setEstado(rs.getBoolean("estado"));
+                listaCompras.add(c);
+//          
+            }
+            if(listaCompras.size()==0){
+                JOptionPane.showMessageDialog(null, "No se encontraron compras ese dia.");
             }
             ps.close();
         }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al obtener compras: "+ex.getMessage());        }
 
-        return c;
+        return listaCompras;
     }
     
     
@@ -120,8 +129,9 @@ public class CompraData {
                 int idComp = rs.getInt("idCompra");
                 LocalDate fecha = rs.getDate("fecha").toLocalDate();
                 int idProv = rs.getInt("idProveedor");
+                boolean estado=rs.getBoolean("estado");
                 
-                Compra compra = new Compra(idComp, fecha, idProv);
+                Compra compra = new Compra(idComp, fecha, idProv,estado);
                 compras.add(compra);
             }
             ps.close();
@@ -130,6 +140,26 @@ public class CompraData {
         }
 
         return compras;
+    }
+    
+    public void anularCompra(int id){
+        
+        try{
+            String sql="UPDATE compra SET estado=0 WHERE idCompra=?";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila=ps.executeUpdate();
+            
+            if(fila==1){
+                 JOptionPane.showMessageDialog(null, "La compra ha sido anulado");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro la compra!");
+            }
+            ps.close(); 
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al anular compra: "+ex.getMessage());
+        }
+        
     }
     
     
