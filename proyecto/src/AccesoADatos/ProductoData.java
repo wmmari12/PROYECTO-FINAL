@@ -116,7 +116,7 @@ public class ProductoData {
         return p;
     }
 
-    public void modificarStock(int cant, int id, int flag) {
+    public void modificarStock(int cant, int idP, int flag) {
 
         //el flag es para indetificar si es una compra o una venta, 1:venta 2:compra
         String sql = "UPDATE producto SET stock=? WHERE idProducto=?";
@@ -124,7 +124,7 @@ public class ProductoData {
        
         try
         {
-            Producto aux=buscarProducto(id);//buscamos el producto por id
+            Producto aux=buscarProducto(idP);//buscamos el producto por id
             int stockActual = aux.getStock();//guardamos el stock actual
 
             switch (flag)
@@ -147,7 +147,7 @@ public class ProductoData {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
 
             ps.setInt(1,stockActual);//modificamos el stock con el calculo del stock actual
-            ps.setInt(2, id);
+            ps.setInt(2, idP);
             int filas = ps.executeUpdate();
             
             if (filas == 1)

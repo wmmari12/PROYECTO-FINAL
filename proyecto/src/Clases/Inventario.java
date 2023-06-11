@@ -27,10 +27,17 @@ public class Inventario {
 //      CompraData c=new CompraData();
 //      System.out.println(c.obtenerComprasPorFecha(LocalDate.of(2023, Month.JUNE, 8)));
         
-        ProductoData pd=new ProductoData();
-        pd.modificarStock(35, 1, 1);
-        
-        
+//        ProductoData pd=new ProductoData();
+//        pd.modificarStock(35, 1, 1);
+//        
+          DetalleVData dVD = new DetalleVData();
+          DetalleVenta dv = new DetalleVenta(13, 200, 1, 3);
+          //guardarDetalleVta(DetalleVenta dv) 
+          //DetalleVenta(int cantidad, double precioVenta, int idVenta, int idProducto
+          System.out.println("Detalle:" + dVD.obtenerDetalleXventa(1));
+          
+
+//        
     }
     
 }

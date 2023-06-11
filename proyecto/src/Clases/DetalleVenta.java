@@ -24,6 +24,14 @@ public class DetalleVenta {
         this.idProducto = idProducto;
     }
 
+    public DetalleVenta(int cantidad, double precioVenta, int idVenta, int idProducto) {
+        this.cantidad = cantidad;
+        this.precioVenta = precioVenta;
+        this.idVenta = idVenta;
+        this.idProducto = idProducto;
+    }
+    
+
     public int getIdDetalleVenta() {
         return idDetalleVenta;
     }
