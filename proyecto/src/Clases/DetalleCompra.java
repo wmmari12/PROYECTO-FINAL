@@ -17,6 +17,14 @@ public class DetalleCompra {
     public DetalleCompra() {
     }
 
+    public DetalleCompra(int cantidad, double precioCosto, int idCompra, int idProducto) {
+        this.cantidad = cantidad;
+        this.precioCosto = precioCosto;
+        this.idCompra = idCompra;
+        this.idProducto = idProducto;
+    }
+    
+    
     public DetalleCompra(int idDetalle, int cantidad, double precioCosto, int idCompra, int idProducto) {
         this.idDetalle = idDetalle;
         this.cantidad = cantidad;

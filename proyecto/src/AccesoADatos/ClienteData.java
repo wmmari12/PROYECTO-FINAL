@@ -27,7 +27,7 @@ public class ClienteData {
 
     public void guardarCliente(Cliente c) {
         
-        String sql = "INSERT INTO cliente (dni,apellido,nombre,domicilio,telefono,estado) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO cliente (dni,apellido,nombre,domicilio,telefono,estado) VALUES (?,?,?,?,?,?)";
 
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -103,14 +103,14 @@ public class ClienteData {
         
     }
     
-    public Cliente obtenerClientePorDni(int dni) {
+    public Cliente obtenerClientePorDni(String dni) {
         
         Cliente c = null;
         String sql = "SELECT * FROM cliente WHERE dni = ?";
         PreparedStatement ps=null;
         try{
             ps = con.prepareStatement(sql);
-            ps.setInt(2, dni);
+            ps.setString(1, dni);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

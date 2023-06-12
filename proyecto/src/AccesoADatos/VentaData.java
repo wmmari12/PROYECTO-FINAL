@@ -30,7 +30,7 @@ public class VentaData {
     
     public void realizarVenta(Venta v) {
         
-        String sql = "INSERT INTO venta(fecha, idCliente,estado) VALUES (?,?)";
+        String sql = "INSERT INTO venta(fecha, idCliente,estado) VALUES (?,?,?)";
         
         try{
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

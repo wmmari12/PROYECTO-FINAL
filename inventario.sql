@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 11-06-2023 a las 00:51:56
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 12-06-2023 a las 03:34:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `inventarioPrueba`
+-- Base de datos: `inventario`
 --
 
 -- --------------------------------------------------------
@@ -48,7 +48,8 @@ INSERT INTO `cliente` (`idCliente`, `dni`, `apellido`, `nombre`, `domicilio`, `t
 (6, NULL, 'Perez', 'Luis', 'Sa Martin 400', '2664998877', 0),
 (7, NULL, 'Perez', 'Luis', 'Sa Martin 400', '2664998877', 0),
 (8, NULL, 'Perez', 'Luis', 'Sa Martin 400', '2664998877', 0),
-(9, '33445566', 'Perez', 'Juan', 'San Martin 200', '2664112233', 0);
+(9, '33445566', 'Perez', 'Juan', 'San Martin 200', '2664112233', 0),
+(12, '33445568', 'Perez', 'Juan', 'San Martin 200', '2664112233', 1);
 
 -- --------------------------------------------------------
 
@@ -69,15 +70,17 @@ CREATE TABLE `compra` (
 
 INSERT INTO `compra` (`idCompra`, `fecha`, `idProveedor`, `estado`) VALUES
 (1, '2023-06-08', 1, 0),
-(3, '2023-06-03', 2, 1);
+(3, '2023-06-03', 2, 1),
+(4, '2023-06-08', 3, 1),
+(5, '2023-06-08', 3, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalleCompra`
+-- Estructura de tabla para la tabla `detallecompra`
 --
 
-CREATE TABLE `detalleCompra` (
+CREATE TABLE `detallecompra` (
   `idDetalle` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioCosto` double NOT NULL,
@@ -86,21 +89,23 @@ CREATE TABLE `detalleCompra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `detalleCompra`
+-- Volcado de datos para la tabla `detallecompra`
 --
 
-INSERT INTO `detalleCompra` (`idDetalle`, `cantidad`, `precioCosto`, `idCompra`, `idProducto`) VALUES
+INSERT INTO `detallecompra` (`idDetalle`, `cantidad`, `precioCosto`, `idCompra`, `idProducto`) VALUES
 (1, 3, 250, 1, 1),
 (8, 3, 200, 1, 2),
-(9, 10, 250, 1, 3);
+(9, 10, 250, 1, 3),
+(10, 1, 150000, 1, 3),
+(11, 1, 150000, 1, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalleVenta`
+-- Estructura de tabla para la tabla `detalleventa`
 --
 
-CREATE TABLE `detalleVenta` (
+CREATE TABLE `detalleventa` (
   `idDetalleVenta` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioVenta` double NOT NULL,
@@ -109,12 +114,20 @@ CREATE TABLE `detalleVenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `detalleVenta`
+-- Volcado de datos para la tabla `detalleventa`
 --
 
-INSERT INTO `detalleVenta` (`idDetalleVenta`, `cantidad`, `precioVenta`, `idVenta`, `idProducto`) VALUES
+INSERT INTO `detalleventa` (`idDetalleVenta`, `cantidad`, `precioVenta`, `idVenta`, `idProducto`) VALUES
 (1, 3, 350, 1, 1),
-(2, 3, 500, 1, 3);
+(2, 3, 500, 1, 3),
+(3, 13, 200, 1, 2),
+(4, 3, 155, 2, 2),
+(5, 13, 200, 1, 1),
+(6, 13, 200, 1, 1),
+(7, 13, 200, 1, 3),
+(8, 1, 200000, 1, 3),
+(9, 1, 200000, 1, 3),
+(10, 1, 200000, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -135,9 +148,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `descripcion`, `precioActual`, `stock`, `estado`) VALUES
-(1, 'Cuaderno', 300, 0, 1),
-(2, 'Lapicera', 200, 20, 1),
-(3, 'Reglas', 200, 30, 1);
+(1, 'Heladera', 300000, 10, 1),
+(2, 'Cocina', 200500, 7, 1),
+(3, 'Microondas', 50000, 16, 1),
+(7, 'Lavarropas', 350000, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -160,7 +174,9 @@ CREATE TABLE `proveedor` (
 INSERT INTO `proveedor` (`idProveedor`, `razonSocial`, `domicilio`, `telefono`, `estado`) VALUES
 (1, 'Ledesma', 'Belgrano 510', '3518763456', 0),
 (2, 'Rivadavia', '25 de Mayo 300', '2664998877', 1),
-(3, 'Bic', '25 de Mayo 350', '2664345675', 1);
+(3, 'Bic', '25 de Mayo 350', '2664345675', 1),
+(4, 'Fravega', 'San Martin 510', '234411332', 1),
+(6, 'Ribeiro', 'San Martin 510', '234411332', 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +196,8 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`idVenta`, `fecha`, `idCliente`, `estado`) VALUES
-(1, '2023-06-01', 4, 0);
+(1, '2023-06-01', 4, 0),
+(2, '2023-06-11', 3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -197,18 +214,19 @@ ALTER TABLE `cliente`
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`idCompra`);
+  ADD PRIMARY KEY (`idCompra`),
+  ADD KEY `compra_ibfk_1` (`idProveedor`);
 
 --
--- Indices de la tabla `detalleCompra`
+-- Indices de la tabla `detallecompra`
 --
-ALTER TABLE `detalleCompra`
+ALTER TABLE `detallecompra`
   ADD PRIMARY KEY (`idDetalle`);
 
 --
--- Indices de la tabla `detalleVenta`
+-- Indices de la tabla `detalleventa`
 --
-ALTER TABLE `detalleVenta`
+ALTER TABLE `detalleventa`
   ADD PRIMARY KEY (`idDetalleVenta`);
 
 --
@@ -229,7 +247,8 @@ ALTER TABLE `proveedor`
 -- Indices de la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD PRIMARY KEY (`idVenta`);
+  ADD PRIMARY KEY (`idVenta`),
+  ADD KEY `venta_ibfk_1` (`idCliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -239,43 +258,43 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `detalleCompra`
+-- AUTO_INCREMENT de la tabla `detallecompra`
 --
-ALTER TABLE `detalleCompra`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `detallecompra`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `detalleVenta`
+-- AUTO_INCREMENT de la tabla `detalleventa`
 --
-ALTER TABLE `detalleVenta`
-  MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `detalleventa`
+  MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -288,16 +307,16 @@ ALTER TABLE `compra`
   ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`);
 
 --
--- Filtros para la tabla `detalleCompra`
+-- Filtros para la tabla `detallecompra`
 --
-ALTER TABLE `detalleCompra`
+ALTER TABLE `detallecompra`
   ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`),
   ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`);
 
 --
--- Filtros para la tabla `detalleVenta`
+-- Filtros para la tabla `detalleventa`
 --
-ALTER TABLE `detalleVenta`
+ALTER TABLE `detalleventa`
   ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`),
   ADD CONSTRAINT `detalleventa_ibfk_2` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`);
 

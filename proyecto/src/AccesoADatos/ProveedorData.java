@@ -125,7 +125,7 @@ public class ProveedorData {
     }
 
      
-    public List<Proveedor> listaDeProductos() {
+    public List<Proveedor> listaDeProveedores() {
         
         List<Proveedor> proveedores = new ArrayList<>();
 
@@ -137,7 +137,7 @@ public class ProveedorData {
                 int id = rs.getInt("idProveedor");
                 String razon = rs.getString("razonSocial");
                 String dom = rs.getString("domicilio");
-                String tel = rs.getString("telefonno");
+                String tel = rs.getString("telefono");
                 boolean estado = rs.getBoolean("estado");
 
                 Proveedor p = new Proveedor(id, razon, dom, tel, estado);
