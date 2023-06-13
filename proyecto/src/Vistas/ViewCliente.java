@@ -117,6 +117,11 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         });
 
         jbtnAlta.setText("ALTA");
+        jbtnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAltaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,8 +269,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnSalirActionPerformed
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
-        
-//        try{
+
             //Obtenemos los datos ingresados por el usuario
             String dni=jtfDni.getText();
             try
@@ -281,7 +285,6 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             int id=Integer.parseInt(jtfIdCliente.getText());
             String nombre = jtfNombre.getText();
             String apellido = jtfApellido.getText();
-//            String dni = jtfDni.getText();
             String dom=jtfDomicilio.getText();
             String tel=jtfTelefono.getText();
             Boolean estado = jcbEstado.isSelected(); 
@@ -294,16 +297,31 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             jtfIdCliente.setText("");
             jbtnBaja.setEnabled(true);
             jbtnGuardar.setEnabled(true);
-
-//        } catch (Exception ex)
-//        {
-//            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
-//            jtfLegajo.requestFocus();
-//        }
     }//GEN-LAST:event_jbtnModificarActionPerformed
 
     private void jbtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBajaActionPerformed
         // TODO add your handling code here:
+            String dni=jtfDni.getText();
+            try
+            {
+                int num = Integer.parseInt(dni);
+            } catch (NumberFormatException e)
+            {
+                
+                JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+            jtfIdCliente.setEnabled(true);
+            int id=Integer.parseInt(jtfIdCliente.getText());
+            //public void bajaCliente(int id)
+            //Cliente c = new Cliente();
+            clienteData.bajaCliente(id);
+            
+            jbtnBaja.setEnabled(true);
+            jbtnGuardar.setEnabled(true);
+            jbtnLimpiar.setEnabled(true);
+            jbtnModificar.setEnabled(true);
+            limpiar();
     }//GEN-LAST:event_jbtnBajaActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
@@ -356,6 +374,31 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             jbtnGuardar.setEnabled(false);
             
     }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
+        // TODO add your handling code here:
+        String dni=jtfDni.getText();
+            try
+            {
+                int num = Integer.parseInt(dni);
+            } catch (NumberFormatException e)
+            {
+                
+                JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+            jtfIdCliente.setEnabled(true);
+            int id=Integer.parseInt(jtfIdCliente.getText());
+            //public void bajaCliente(int id)
+            //Cliente c = new Cliente();
+            clienteData.altaCliente(id);
+            
+            jbtnBaja.setEnabled(true);
+            jbtnGuardar.setEnabled(true);
+            jbtnLimpiar.setEnabled(true);
+            jbtnModificar.setEnabled(true);
+            limpiar();
+    }//GEN-LAST:event_jbtnAltaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

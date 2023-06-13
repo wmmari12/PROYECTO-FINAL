@@ -103,6 +103,26 @@ public class ClienteData {
         
     }
     
+    public void altaCliente(int id){
+        
+        try{
+            String sql="UPDATE cliente SET estado=1 WHERE idCliente=?";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila=ps.executeUpdate();
+            
+            if(fila==1){
+                 JOptionPane.showMessageDialog(null, "El cliente ha sido dado de alta.");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+            }
+            ps.close(); 
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al eliminar Cliente: "+ex.getMessage());
+        }
+        
+    }
+    
     public Cliente obtenerClientePorDni(String dni) {
         
         Cliente c = null;
