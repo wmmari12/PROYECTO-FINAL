@@ -71,7 +71,7 @@ public class ClienteData {
             ps.setInt(6, c.getIdCliente());
             
             int filas=ps.executeUpdate();
-            if(filas==1){
+            if(filas>0){
                 JOptionPane.showMessageDialog(null, "Cliente modificado");
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontro el cliente!"+ps.toString());

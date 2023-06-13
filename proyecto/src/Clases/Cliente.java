@@ -37,6 +37,7 @@ public class Cliente {
         this.telefono = telefono;
         this.estado = estado;
     }
+    
 
     public boolean isEstado() {
         return estado;

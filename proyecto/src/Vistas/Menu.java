@@ -41,7 +41,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Nuevo");
+        jMenu1.setText("Administrar");
 
         jMenuItemNvoCliente.setText("Cliente");
         jMenuItemNvoCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +120,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.setText("Salir");
 
         jMenuItemSalir.setText("Salir");
+        jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSalirActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItemSalir);
 
         jMenuBar1.add(jMenu6);
@@ -134,7 +139,9 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,6 +168,11 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItemListaVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemListaVActionPerformed
+
+    private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
+        // SALIR
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     /**
      * @param args the command line arguments
