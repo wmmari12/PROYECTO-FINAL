@@ -9,13 +9,13 @@ import AccesoADatos.*;
 import Clases.*;
 import javax.swing.JOptionPane;
 
-
 public class ViewCliente extends javax.swing.JInternalFrame {
 
     private ClienteData clienteData = null;
+
     public ViewCliente() {
         initComponents();
-        this.clienteData=new ClienteData();
+        this.clienteData = new ClienteData();
     }
 
     /**
@@ -95,6 +95,11 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         jcbEstado.setText("Activo/Inactivo");
 
         Salir.setText("SALIR");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,55 +107,59 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbtnGuardar)
+                        .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
-                                .addComponent(jLabel1)
+                                .addGap(40, 40, 40)
+                                .addComponent(jtfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtfDni)
+                                        .addComponent(jtfApellido)
+                                        .addComponent(jtfNombre)
+                                        .addComponent(jtfDomicilio)
+                                        .addComponent(jtfTelefono)
+                                        .addComponent(jtfEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtfDni)
-                                            .addComponent(jtfApellido)
-                                            .addComponent(jtfNombre)
-                                            .addComponent(jtfDomicilio)
-                                            .addComponent(jtfTelefono)
-                                            .addComponent(jtfEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                            .addComponent(jbtnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(jbtnModificar)
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1)
-                                            .addComponent(jcbEstado)
-                                            .addComponent(Salir))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jbtnGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnModificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnBaja)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jbtnBaja)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbtnLimpiar)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(jcbEstado)
+                                    .addComponent(Salir))
+                                .addContainerGap(58, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +196,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jLabel8)))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -200,27 +209,41 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                     .addComponent(jbtnBaja)
                     .addComponent(jbtnLimpiar)
                     .addComponent(Salir))
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(0, 63, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
-        try{
+        jbtnBaja.setEnabled(false);
+        jtfIdCliente.setEditable(false);
+        try
+        {
+
             String nombre = jtfNombre.getText();
             String apellido = jtfApellido.getText();
             String dni = jtfDni.getText();
             String domicilio = jtfDomicilio.getText();
             String telefono = jtfTelefono.getText();
             Boolean estado = jcbEstado.isSelected();
-            //String dni, String apellido, String nombre, String domicilio, String telefono, boolean estado
-            Cliente cliente=new Cliente(dni,apellido,nombre,domicilio,telefono,estado);
-            clienteData.guardarCliente(cliente);
-            jtfIdCliente.setText(cliente.getIdCliente()+"");
-            jbtnBaja.setEnabled(true);
+            try
+            {
+                int num = Integer.parseInt(dni);
+                int num1=Integer.parseInt(jtfTelefono.getText());
+                System.out.println("DNI válido: " + dni);
+            } catch (NumberFormatException e)
+            {
+                
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI y telefono", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
             
-        }catch (Exception ex)
+            Cliente cliente = new Cliente(dni, apellido, nombre, domicilio, telefono, estado);
+            clienteData.guardarCliente(cliente);
+            jtfIdCliente.setText(cliente.getIdCliente() + "");
+        
+        } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
             jtfDni.requestFocus();
@@ -230,6 +253,11 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     private void jtfIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIdClienteActionPerformed
+
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_SalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
