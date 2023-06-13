@@ -5,17 +5,17 @@
  */
 package Vistas;
 
-/**
- *
- * @author solmedina
- */
+import AccesoADatos.*;
+import Clases.*;
+import javax.swing.JOptionPane;
+
+
 public class ViewCliente extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ViewCliente
-     */
+    private ClienteData clienteData = null;
     public ViewCliente() {
         initComponents();
+        this.clienteData=new ClienteData();
     }
 
     /**
@@ -26,6 +26,8 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,8 +49,10 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         jbtnModificar = new javax.swing.JButton();
         jbtnBaja = new javax.swing.JButton();
         jbtnLimpiar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jcbEstado = new javax.swing.JCheckBox();
         Salir = new javax.swing.JButton();
+
+        jScrollPane1.setViewportView(jEditorPane1);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("CLIENTES");
@@ -67,9 +71,20 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
         jLabel8.setText("ESTADO");
 
+        jtfIdCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfIdClienteActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("BUSCAR");
 
         jbtnGuardar.setText("GUARDAR");
+        jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGuardarActionPerformed(evt);
+            }
+        });
 
         jbtnModificar.setText("MODIFICAR");
 
@@ -77,7 +92,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
         jbtnLimpiar.setText("LIMPIAR");
 
-        jCheckBox1.setText("jCheckBox1");
+        jcbEstado.setText("Activo/Inactivo");
 
         Salir.setText("SALIR");
 
@@ -122,7 +137,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton1)
-                                            .addComponent(jCheckBox1)
+                                            .addComponent(jcbEstado)
                                             .addComponent(Salir))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
             .addGroup(layout.createSequentialGroup()
@@ -166,7 +181,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1)))
+                            .addComponent(jcbEstado)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -191,12 +206,37 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
+        try{
+            String nombre = jtfNombre.getText();
+            String apellido = jtfApellido.getText();
+            String dni = jtfDni.getText();
+            String domicilio = jtfDomicilio.getText();
+            String telefono = jtfTelefono.getText();
+            Boolean estado = jcbEstado.isSelected();
+            //String dni, String apellido, String nombre, String domicilio, String telefono, boolean estado
+            Cliente cliente=new Cliente(dni,apellido,nombre,domicilio,telefono,estado);
+            clienteData.guardarCliente(cliente);
+            jtfIdCliente.setText(cliente.getIdCliente()+"");
+            jbtnBaja.setEnabled(true);
+            
+        }catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
+            jtfDni.requestFocus();
+        }
+    }//GEN-LAST:event_jbtnGuardarActionPerformed
+
+    private void jtfIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfIdClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Salir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -205,11 +245,13 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnBaja;
     private javax.swing.JButton jbtnGuardar;
     private javax.swing.JButton jbtnLimpiar;
     private javax.swing.JButton jbtnModificar;
+    private javax.swing.JCheckBox jcbEstado;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfDni;
     private javax.swing.JTextField jtfDomicilio;
