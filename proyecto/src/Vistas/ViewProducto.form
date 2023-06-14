@@ -70,9 +70,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jlPrecio" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlStock" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jtfIdProducto" max="32767" attributes="0"/>
                                   <Component id="jtfStock" pref="283" max="32767" attributes="0"/>
                                   <Component id="jtfPrecio" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jtfNombre" alignment="0" max="32767" attributes="0"/>
@@ -119,7 +121,12 @@
                   <Component id="jlStock" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfStock" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtfIdProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -203,6 +210,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtbnActivarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfIdProducto">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xd3;DIGO"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

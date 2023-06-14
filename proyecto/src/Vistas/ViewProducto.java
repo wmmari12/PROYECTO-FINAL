@@ -24,9 +24,9 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         initComponents();
         
         this.productoData = new ProductoData();
-        jbtnLimpiar.setEnabled(false);
+        jbtnLimpiar.setEnabled(true);
         jbtnBaja.setEnabled(true);
-        //jtfIdProducto.setEnabled(false);
+        jtfIdProducto.setEnabled(false);
     }
 
     /**
@@ -55,6 +55,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jbtnLimpiar = new javax.swing.JButton();
         jbtnBaja = new javax.swing.JButton();
         jtbnActivar = new javax.swing.JButton();
+        jtfIdProducto = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -112,6 +114,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setText("CÓDIGO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,9 +136,11 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlPrecio)
-                                    .addComponent(jlStock))
+                                    .addComponent(jlStock)
+                                    .addComponent(jLabel7))
                                 .addGap(67, 67, 67)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfIdProducto)
                                     .addComponent(jtfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                                     .addComponent(jtfPrecio)
                                     .addComponent(jtfNombre)))))
@@ -170,7 +176,11 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlStock)
                     .addComponent(jtfStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegistrar)
                     .addComponent(jbtnSalir)
@@ -198,7 +208,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
 
             jbtnLimpiar.setEnabled(true);
             jbtnBaja.setEnabled(true);
-            //jtfIdProducto.setEnabled(true);
+            jtfIdProducto.setEnabled(true);
 
         } catch (Exception ex)
         {
@@ -241,6 +251,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnBaja;
     private javax.swing.JButton jbtnLimpiar;
@@ -249,6 +260,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlPrecio;
     private javax.swing.JLabel jlStock;
     private javax.swing.JButton jtbnActivar;
+    private javax.swing.JTextField jtfIdProducto;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecio;
     private javax.swing.JTextField jtfStock;
