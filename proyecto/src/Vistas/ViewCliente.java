@@ -239,17 +239,23 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
             String nombre = jtfNombre.getText();
             String apellido = jtfApellido.getText();
-            String dni = jtfDni.getText();
             String domicilio = jtfDomicilio.getText();
             String telefono = jtfTelefono.getText();
             Boolean estado = jcbEstado.isSelected();
+            String dni;
+            do{
+             dni = jtfDni.getText();
+             JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un dni válido.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }while(dni.length()!=7||dni.length()!=8);
             try{
                 int num = Integer.parseInt(dni);
+                
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI ", "Error", JOptionPane.ERROR_MESSAGE);
             }
             try{
-                int num1=Integer.parseInt(jtfTelefono.getText());
+                long num1=Long.parseLong(jtfTelefono.getText());
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
             }
