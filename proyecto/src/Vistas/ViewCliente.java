@@ -248,7 +248,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                 int num = Integer.parseInt(dni);
                 
                     if(dni.length()!=8){
-                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un dni válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
                      jtfDni.setText(""); // Limpiar el campo JTextField
                     }
                     
