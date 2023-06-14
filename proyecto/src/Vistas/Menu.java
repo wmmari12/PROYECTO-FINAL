@@ -60,6 +60,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.add(jMenuItemNvoProv);
 
         jMenuItemNvoProd.setText("Producto");
+        jMenuItemNvoProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNvoProdActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItemNvoProd);
 
         jMenuBar1.add(jMenu1);
@@ -221,6 +226,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(vCompra);//agregarla al escritorio
         escritorio.moveToFront(vCompra);//llevarla al frente
     }//GEN-LAST:event_jMenuItemCompraActionPerformed
+
+    private void jMenuItemNvoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNvoProdActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();//removemos todo
+        escritorio.repaint();
+        ViewProducto vp=new ViewProducto();//crer nueva ventana
+        vp.setVisible(true);//hacerla visible
+        escritorio.add(vp);//agregarla al escritorio
+        escritorio.moveToFront(vp);//llevarla al frente
+    }//GEN-LAST:event_jMenuItemNvoProdActionPerformed
 
     /**
      * @param args the command line arguments

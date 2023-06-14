@@ -59,7 +59,7 @@ public class ProductoData {
     public Producto buscarProducto(int id) {
 
         Producto p = null;
-        String sql = "SELECT descripcion,precioActual,stock,estado FROM producto WHERE idProducto=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
+        String sql = "SELECT * FROM producto WHERE idProducto=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
 
         PreparedStatement ps = null;
         try
@@ -71,7 +71,7 @@ public class ProductoData {
             if (rs.next())
             {//se posiciona en la primer fila de la busqueda
                 p = new Producto();
-                p.setIdProducto(id);
+                p.setIdProducto(rs.getInt("idProducto"));
                 p.setDescripcion(rs.getString("descripcion"));
                 p.setPrecioActual(rs.getDouble("precioActual"));
                 p.setStock(rs.getInt("stock"));
@@ -163,13 +163,13 @@ public class ProductoData {
 
     }
 
-    public void bajaProducto(int id) {
+    public void bajaProducto(String nombre) {
 
         try
         {
-            String sql = "UPDATE producto SET estado=0 WHERE idProducto=?";
+            String sql = "UPDATE producto SET estado=0 WHERE descripcion=?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, nombre);
             int fila = ps.executeUpdate();
 
             if (fila == 1)
@@ -185,6 +185,26 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, "Error al eliminar el producto: " + ex.getMessage());
         }
 
+    }
+    
+     public void altaProducto(String nombre){
+        
+        try{
+            String sql="UPDATE cliente SET estado=1 WHERE descripcion=?";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            int fila=ps.executeUpdate();
+            
+            if(fila==1){
+                 JOptionPane.showMessageDialog(null, "El Producto ha sido dado de alta.");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro el Producto!");
+            }
+            ps.close(); 
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al eliminar Producto: "+ex.getMessage());
+        }
+        
     }
 
     public List<Producto> listaDeProductos() {
