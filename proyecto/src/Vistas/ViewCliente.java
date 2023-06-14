@@ -15,6 +15,8 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
     public ViewCliente() {
         initComponents();
+        jtfIdCliente.setEditable(false);
+        jtfEstado.setEditable(false);
         this.clienteData = new ClienteData();
     }
 
@@ -71,6 +73,8 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         jLabel7.setText("TELEFONO");
 
         jLabel8.setText("ESTADO");
+
+        jtfIdCliente.setEditable(false);
 
         jbtnBuscar.setText("BUSCAR");
         jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -229,8 +233,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
-        jbtnBaja.setEnabled(false);
-        jtfIdCliente.setEditable(false);
+        
         try
         {
 
@@ -240,16 +243,15 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             String domicilio = jtfDomicilio.getText();
             String telefono = jtfTelefono.getText();
             Boolean estado = jcbEstado.isSelected();
-            try
-            {
+            try{
                 int num = Integer.parseInt(dni);
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI ", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            try{
                 int num1=Integer.parseInt(jtfTelefono.getText());
-                System.out.println("DNI válido: " + dni);
-            } catch (NumberFormatException e)
-            {
-                
-                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI y telefono", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
             Cliente cliente = new Cliente(dni, apellido, nombre, domicilio, telefono, estado);
@@ -272,16 +274,18 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
             //Obtenemos los datos ingresados por el usuario
             String dni=jtfDni.getText();
-            try
-            {
+            try{
                 int num = Integer.parseInt(dni);
             } catch (NumberFormatException e)
             {
-                
                 JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
             }
-            jtfIdCliente.setEnabled(true);
+            try{
+                int num1=Integer.parseInt(jtfTelefono.getText());
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
             int id=Integer.parseInt(jtfIdCliente.getText());
             String nombre = jtfNombre.getText();
             String apellido = jtfApellido.getText();
@@ -334,12 +338,14 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             jtfEstado.setText("");
             jtfIdCliente.setText("");
             jtfDni.requestFocus();
+            jbtnGuardar.setEnabled(true);
+            jbtnBaja.setEnabled(true);
     }//GEN-LAST:event_jbtnLimpiarActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         // TODO add your handling code here:
-//        try
-//        {
+        try
+        {
             String dni=jtfDni.getText();
             try
             {
@@ -372,7 +378,11 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             jbtnLimpiar.setEnabled(true);
             jbtnModificar.setEnabled(true);
             jbtnGuardar.setEnabled(false);
-            
+            } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
+            jtfDni.requestFocus();
+        }
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
