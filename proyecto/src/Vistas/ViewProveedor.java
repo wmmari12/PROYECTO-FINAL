@@ -25,15 +25,113 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jtfNombre = new javax.swing.JTextField();
+        jtfDomicilio = new javax.swing.JTextField();
+        jtfTelefono = new javax.swing.JTextField();
+        jtfEstado = new javax.swing.JTextField();
+        jbtnGuardar = new javax.swing.JButton();
+        JbtnEditar = new javax.swing.JButton();
+        jbtnAlta = new javax.swing.JButton();
+        jbnBaja = new javax.swing.JButton();
+        jbtnSalir = new javax.swing.JButton();
+        jbtnBuscar = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setText("PROVEEDOR");
+
+        jLabel2.setText("NOMBRE");
+
+        jLabel3.setText("DOMICILIO");
+
+        jLabel4.setText("TELEFONO");
+
+        jLabel5.setText("ESTADO");
+
+        jbtnGuardar.setText("GUARDAR");
+
+        JbtnEditar.setText("EDITAR");
+
+        jbtnAlta.setText("ALTA");
+
+        jbnBaja.setText("BAJA");
+
+        jbtnSalir.setText("SALIR");
+
+        jbtnBuscar.setText("BUSCAR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                                    .addComponent(jtfTelefono)
+                                    .addComponent(jtfNombre)
+                                    .addComponent(jtfEstado))
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtnGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(JbtnEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnAlta)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbnBaja)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnSalir)))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBuscar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnGuardar)
+                    .addComponent(JbtnEditar)
+                    .addComponent(jbtnAlta)
+                    .addComponent(jbnBaja)
+                    .addComponent(jbtnSalir))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -41,5 +139,20 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JbtnEditar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jbnBaja;
+    private javax.swing.JButton jbtnAlta;
+    private javax.swing.JButton jbtnBuscar;
+    private javax.swing.JButton jbtnGuardar;
+    private javax.swing.JButton jbtnSalir;
+    private javax.swing.JTextField jtfDomicilio;
+    private javax.swing.JTextField jtfEstado;
+    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 }

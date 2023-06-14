@@ -26,7 +26,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemCompra = new javax.swing.JMenuItem();
         jMenuItemDetalleC = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuVenta = new javax.swing.JMenu();
         jMenuItemVenta = new javax.swing.JMenuItem();
         jMenuItemDetalleV = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -84,7 +84,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Venta");
+        jMenuVenta.setText("Venta");
 
         jMenuItemVenta.setText("Nueva");
         jMenuItemVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItemVentaActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItemVenta);
+        jMenuVenta.add(jMenuItemVenta);
 
         jMenuItemDetalleV.setText("Detalle");
         jMenuItemDetalleV.addActionListener(new java.awt.event.ActionListener() {
@@ -100,9 +100,9 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItemDetalleVActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItemDetalleV);
+        jMenuVenta.add(jMenuItemDetalleV);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuVenta);
 
         jMenu5.setText("Inventario");
 
@@ -207,6 +207,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItemVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVentaActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();//removemos todo
+        escritorio.repaint();
+        ViewVenta vv=new ViewVenta();//crer nueva ventana
+        vv.setVisible(true);//hacerla visible
+        escritorio.add(vv);//agregarla al escritorio
+        escritorio.moveToFront(vv);//llevarla al frente
     }//GEN-LAST:event_jMenuItemVentaActionPerformed
 
     private void jMenuItemListaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaVentaActionPerformed
@@ -284,7 +290,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
@@ -301,5 +306,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNvoProv;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenuItem jMenuItemVenta;
+    private javax.swing.JMenu jMenuVenta;
     // End of variables declaration//GEN-END:variables
 }
