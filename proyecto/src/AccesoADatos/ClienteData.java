@@ -36,7 +36,7 @@ public class ClienteData {
             ps.setString(3, c.getNombre());
             ps.setString(4, c.getDomicilio());
             ps.setString(5, c.getTelefono());
-            ps.setBoolean(6, c.isEstado());
+            ps.setBoolean(6, true);
 
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
