@@ -242,15 +242,16 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             String domicilio = jtfDomicilio.getText();
             String telefono = jtfTelefono.getText();
             Boolean estado = jcbEstado.isSelected();
-            String dni;
-            do{
-             dni = jtfDni.getText();
-             JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un dni válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            String dni = jtfDni.getText();
 
-            }while(dni.length()!=7||dni.length()!=8);
             try{
                 int num = Integer.parseInt(dni);
                 
+                    if(dni.length()!=8){
+                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un dni válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                     jtfDni.setText(""); // Limpiar el campo JTextField
+                    }
+                    
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI ", "Error", JOptionPane.ERROR_MESSAGE);
             }
