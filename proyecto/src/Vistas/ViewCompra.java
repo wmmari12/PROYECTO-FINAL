@@ -1,14 +1,18 @@
 
 package Vistas;
 
+import AccesoADatos.*;
 import Clases.*;
+import java.util.List;
 
 
 public class ViewCompra extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ViewCompra
-     */
+    private CompraData compraData=null;
+    private DetalleCData detCompra=null;
+    private List<Producto> productos=null;
+    private List<Proveedor> proveedores=null;
+    
     public ViewCompra() {
         initComponents();
         jcbProductos.setEnabled(false);
@@ -71,17 +75,17 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jcbInactivo.setText("INACTIVO");
 
         jbtnGuardar.setText("GUARDAR");
+        jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGuardarActionPerformed(evt);
+            }
+        });
 
         jbtnSalir.setText("SALIR");
 
         jLabel5.setText("NRO.  COMPRA");
 
         jtfIdCompra.setEditable(false);
-        jtfIdCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfIdCompraActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("ELEGIR PRODUCTO:");
 
@@ -114,32 +118,27 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jcbProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 41, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
                                 .addGap(206, 206, 206)
                                 .addComponent(jbtnAgregar)
                                 .addGap(158, 158, 158))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel8))
-                                        .addGap(28, 28, 28)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jbtnLimpiar)
-                                                .addGap(42, 42, 42)
-                                                .addComponent(jbtnTerminar)
-                                                .addGap(46, 46, 46)
-                                                .addComponent(jbtnSalir))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(251, 251, 251)
-                                        .addComponent(jbtnGuardar)))
+                                        .addComponent(jbtnLimpiar)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(jbtnTerminar)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jbtnSalir)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(64, 64, 64))
                     .addGroup(layout.createSequentialGroup()
@@ -171,6 +170,10 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(231, 231, 231))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(jbtnGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +195,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jcbActivo)
                         .addComponent(jcbInactivo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(18, 134, Short.MAX_VALUE)
                 .addComponent(jbtnGuardar)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
@@ -224,9 +227,14 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfIdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdCompraActionPerformed
+    private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfIdCompraActionPerformed
+        try{
+            //Date
+        }catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_jbtnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
