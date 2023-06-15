@@ -77,6 +77,12 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
         jLabel3.setText("PROVEEDOR: ");
 
+        jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProveedorActionPerformed(evt);
+            }
+        });
+
         jcbActivo.setText("ACTIVO");
 
         jcbInactivo.setText("INACTIVO");
@@ -277,6 +283,10 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
+
+    private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProveedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
