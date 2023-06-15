@@ -50,7 +50,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jbtnGuardar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="JbtnEditar" min="-2" max="-2" attributes="0"/>
+                              <Component id="JbtnModificar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jbtnAlta" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -101,7 +101,7 @@
               <EmptySpace pref="48" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JbtnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JbtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnAlta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -157,10 +157,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnGuardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="JbtnEditar">
+    <Component class="javax.swing.JButton" name="JbtnModificar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="EDITAR"/>
+        <Property name="text" type="java.lang.String" value="MODIFICAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JbtnModificarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnAlta">
       <Properties>
@@ -174,16 +177,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="BAJA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnBajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="SALIR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnSalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="BUSCAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnBuscarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>

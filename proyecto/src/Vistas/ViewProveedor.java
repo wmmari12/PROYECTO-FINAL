@@ -42,7 +42,7 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         jtfTelefono = new javax.swing.JTextField();
         jtfEstado = new javax.swing.JTextField();
         jbtnGuardar = new javax.swing.JButton();
-        JbtnEditar = new javax.swing.JButton();
+        JbtnModificar = new javax.swing.JButton();
         jbtnAlta = new javax.swing.JButton();
         jbtnBaja = new javax.swing.JButton();
         jbtnSalir = new javax.swing.JButton();
@@ -69,7 +69,12 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        JbtnEditar.setText("EDITAR");
+        JbtnModificar.setText("MODIFICAR");
+        JbtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbtnModificarActionPerformed(evt);
+            }
+        });
 
         jbtnAlta.setText("ALTA");
         jbtnAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -79,10 +84,25 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         });
 
         jbtnBaja.setText("BAJA");
+        jbtnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBajaActionPerformed(evt);
+            }
+        });
 
         jbtnSalir.setText("SALIR");
+        jbtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSalirActionPerformed(evt);
+            }
+        });
 
         jbtnBuscar.setText("BUSCAR");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("CODIGO");
 
@@ -124,7 +144,7 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbtnGuardar)
                                 .addGap(18, 18, 18)
-                                .addComponent(JbtnEditar)
+                                .addComponent(JbtnModificar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtnAlta)
                                 .addGap(18, 18, 18)
@@ -164,7 +184,7 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnGuardar)
-                    .addComponent(JbtnEditar)
+                    .addComponent(JbtnModificar)
                     .addComponent(jbtnAlta)
                     .addComponent(jbtnBaja)
                     .addComponent(jbtnSalir)
@@ -209,13 +229,71 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
 
     private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
         // TODO add your handling code here:
-        
-        
+        int id=Integer.parseInt(jtfIdProveedor.getText());
+        proveedorData.altaProveedor(id);
     }//GEN-LAST:event_jbtnAltaActionPerformed
 
+    private void JbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnModificarActionPerformed
+        // TODO add your handling code here:
+        boolean estado;
+        int id=Integer.parseInt(jtfIdProveedor.getText());
+        
+        String nombre = jtfNombre.getText();
+        String domicilio = jtfDomicilio.getText();
+        String telefono = jtfTelefono.getText();
+        String estadoString = jtfEstado.getText();
+        if(estadoString=="Activo"){
+            estado=true;
+        }else{
+            estado=false;
+        }
+        int idProveedor = Integer.parseInt(jtfIdProveedor.getText());
+       
+        //(int idProveedor, String razonSocial, String domicilio, String telefono, boolean estado)
+        Proveedor p = new Proveedor(idProveedor, nombre, domicilio, telefono, estado);
+        proveedorData.modificarProveedor(p);
+        limpiar();
+    }//GEN-LAST:event_JbtnModificarActionPerformed
+
+    private void jbtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBajaActionPerformed
+        // TODO add your handling code here:
+        int id=Integer.parseInt(jtfIdProveedor.getText());
+        proveedorData.bajaProveedor(id);
+    }//GEN-LAST:event_jbtnBajaActionPerformed
+
+    private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbtnSalirActionPerformed
+
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+        // TODO add your handling code here:
+       try{ 
+            Proveedor p = new Proveedor();
+            String nombre = jtfNombre.getText();
+            p=proveedorData.obtenerProveedorPorNombre(nombre);
+            jtfDomicilio.setText(p.getDomicilio());
+            jtfTelefono.setText(p.getTelefono());
+            if(p.isEstado()){
+                jtfEstado.setText("Activo");
+                jbtnAlta.setEnabled(false);
+                jbtnBaja.setEnabled(true);
+            }else{
+                jtfEstado.setText("Inactivo");
+                jbtnAlta.setEnabled(true);
+                jbtnBaja.setEnabled(false);
+            }
+            jtfIdProveedor.setText(String.valueOf(p.getIdProveedor()));
+       } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
+            jtfNombre.requestFocus();
+        }
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JbtnEditar;
+    private javax.swing.JButton JbtnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

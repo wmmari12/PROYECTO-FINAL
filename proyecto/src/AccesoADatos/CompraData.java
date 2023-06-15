@@ -36,7 +36,7 @@ public class CompraData {
             
             ps.setDate(1, Date.valueOf(c.getFecha()));
             ps.setInt(2, c.getIdProveedor());
-            ps.setBoolean(3, c.isEstado());
+            ps.setBoolean(3, true);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();

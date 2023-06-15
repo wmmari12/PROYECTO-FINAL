@@ -31,6 +31,13 @@ public class Compra {
         this.estado = estado;
     }
 
+    public Compra(LocalDate fecha, int idProveedor) {
+        this.fecha = fecha;
+        this.idProveedor = idProveedor;
+    }
+    
+    
+
     public boolean isEstado() {
         return estado;
     }
