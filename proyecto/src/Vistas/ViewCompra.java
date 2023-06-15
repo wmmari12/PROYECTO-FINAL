@@ -6,6 +6,7 @@ import Clases.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import javax.swing.JOptionPane;
 
 
 public class ViewCompra extends javax.swing.JInternalFrame {
@@ -19,12 +20,12 @@ public class ViewCompra extends javax.swing.JInternalFrame {
     public ViewCompra() {
         initComponents();
         cargaProveedores();
-//        jcbProductos.setEnabled(false);
-//        jtfCantidad.setEnabled(false);
-//        jtfPrecio.setEnabled(false);
-//        jtfTotal.setEnabled(false);
-//        jbtnAgregar.setEnabled(false);
-//        jbtnTerminar.setEnabled(false);
+        jcbProductos.setEnabled(false);
+        jtfCantidad.setEnabled(false);
+        jtfPrecio.setEnabled(false);
+        jtfTotal.setEnabled(false);
+        jbtnAgregar.setEnabled(false);
+        jbtnTerminar.setEnabled(false);
     }
 
     /**
@@ -257,14 +258,24 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
-//        try{
-//            Date date = jdcFecha.getDate();
-//            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            
-//
-//        }catch(Exception ex){
-//            
-//        }
+        try{
+            Date date = jdcFecha.getDate();
+            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Proveedor provSelec=(Proveedor) jcbProveedor.getSelectedItem();
+            
+            Compra compra=new Compra(fecha,provSelec.getIdProveedor());
+            compraData.hacerCompra(compra);
+            jtfIdCompra.setText(compra.getIdCompra()+"");
+            jcbProductos.setEnabled(true);
+            jtfCantidad.setEnabled(true);
+            jtfPrecio.setEnabled(true);
+            jtfTotal.setEnabled(true);
+            jbtnAgregar.setEnabled(true);
+            jbtnTerminar.setEnabled(true);
+
+        }catch(Exception ex){
+            
+        }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
 
@@ -300,9 +311,11 @@ public class ViewCompra extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargaProveedores() {
-        jcbProveedor.removeAllItems();
         List<Proveedor> proveedores= proveedorData.listaDeProveedores();
         for(Proveedor item: proveedores){
             jcbProveedor.addItem(item);
-        }    }
+            }    
+        
+    }
 }
+
