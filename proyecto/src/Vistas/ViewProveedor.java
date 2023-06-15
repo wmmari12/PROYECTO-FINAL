@@ -5,17 +5,24 @@
  */
 package Vistas;
 
+import AccesoADatos.ProveedorData;
+import Clases.Proveedor;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author solmedina
  */
 public class ViewProveedor extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form ViewProveedor
-     */
+    
+    private ProveedorData proveedorData;
+    
     public ViewProveedor() {
         initComponents();
+        this.proveedorData = null;
+        jbtnLimpiar.setEnabled(false);
+        jbtnBaja.setEnabled(false);
+        jtfEstado.setEnabled(false);
     }
 
     /**
@@ -37,9 +44,12 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         jbtnGuardar = new javax.swing.JButton();
         JbtnEditar = new javax.swing.JButton();
         jbtnAlta = new javax.swing.JButton();
-        jbnBaja = new javax.swing.JButton();
+        jbtnBaja = new javax.swing.JButton();
         jbtnSalir = new javax.swing.JButton();
         jbtnBuscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jtfIdProveedor = new javax.swing.JTextField();
+        jbtnLimpiar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("PROVEEDOR");
@@ -53,16 +63,35 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         jLabel5.setText("ESTADO");
 
         jbtnGuardar.setText("GUARDAR");
+        jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGuardarActionPerformed(evt);
+            }
+        });
 
         JbtnEditar.setText("EDITAR");
 
         jbtnAlta.setText("ALTA");
+        jbtnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAltaActionPerformed(evt);
+            }
+        });
 
-        jbnBaja.setText("BAJA");
+        jbtnBaja.setText("BAJA");
 
         jbtnSalir.setText("SALIR");
 
         jbtnBuscar.setText("BUSCAR");
+
+        jLabel6.setText("CODIGO");
+
+        jbtnLimpiar.setText("LIMPIAR");
+        jbtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,13 +110,15 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtfDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                                     .addComponent(jtfTelefono)
                                     .addComponent(jtfNombre)
-                                    .addComponent(jtfEstado))
+                                    .addComponent(jtfEstado)
+                                    .addComponent(jtfIdProveedor))
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtnBuscar))
                             .addGroup(layout.createSequentialGroup()
@@ -97,9 +128,11 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtnAlta)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbnBaja)
+                                .addComponent(jbtnBaja)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtnSalir)))))
+                                .addComponent(jbtnSalir)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnLimpiar)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,18 +157,61 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnGuardar)
                     .addComponent(JbtnEditar)
                     .addComponent(jbtnAlta)
-                    .addComponent(jbnBaja)
-                    .addComponent(jbtnSalir))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(jbtnBaja)
+                    .addComponent(jbtnSalir)
+                    .addComponent(jbtnLimpiar))
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
+        // TODO add your handling code here:
+        
+         try
+        {
+            //Obtenemos los datos ingresados por el usuario
+            String nombre = jtfNombre.getText();
+            String domicilio = jtfDomicilio.getText();
+            String telefono = jtfTelefono.getText();
+            Boolean estado = true;
+
+            Proveedor proveedor = new Proveedor(nombre, domicilio, telefono, true);
+            proveedorData.guardarProveedor(proveedor);
+            
+            jtfIdProveedor.setText(proveedor.getIdProveedor() + "");
+            jbtnLimpiar.setEnabled(true);
+            jbtnBaja.setEnabled(true);
+            jtfIdProveedor.setEnabled(true);
+            jtfEstado.setText("Activo");
+            
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
+            jtfNombre.requestFocus();
+        }
+    }//GEN-LAST:event_jbtnGuardarActionPerformed
+
+    private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jbtnLimpiarActionPerformed
+
+    private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jbtnAltaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -145,14 +221,25 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JButton jbnBaja;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbtnAlta;
+    private javax.swing.JButton jbtnBaja;
     private javax.swing.JButton jbtnBuscar;
     private javax.swing.JButton jbtnGuardar;
+    private javax.swing.JButton jbtnLimpiar;
     private javax.swing.JButton jbtnSalir;
     private javax.swing.JTextField jtfDomicilio;
     private javax.swing.JTextField jtfEstado;
+    private javax.swing.JTextField jtfIdProveedor;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
+
+private void limpiar(){
+    jtfNombre.setText("");
+    jtfDomicilio.setText("");
+    jtfTelefono.setText("");
+    jtfEstado.setText("");
+    jtfIdProveedor.setText("");
+}
 }

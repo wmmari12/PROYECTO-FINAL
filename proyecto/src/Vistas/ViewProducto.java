@@ -27,6 +27,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jbtnLimpiar.setEnabled(true);
         jbtnBaja.setEnabled(true);
         jtfIdProducto.setEnabled(false);
+        jtfEstado.setEnabled(false);
+        jtfIdProducto.setEnabled(false);
     }
 
     /**
@@ -49,14 +51,17 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jtfPrecio = new javax.swing.JTextField();
         jtfStock = new javax.swing.JTextField();
         jLNombre = new javax.swing.JLabel();
-        jtfNombre = new javax.swing.JTextField();
-        jbtnRegistrar = new javax.swing.JButton();
+        jtfDescripcion = new javax.swing.JTextField();
+        jbtnGuardar = new javax.swing.JButton();
         jbtnSalir = new javax.swing.JButton();
         jbtnLimpiar = new javax.swing.JButton();
         jbtnBaja = new javax.swing.JButton();
         jtbnActivar = new javax.swing.JButton();
         jtfIdProducto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jtfEstado = new javax.swing.JTextField();
+        jbtnBuscar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -79,10 +84,10 @@ public class ViewProducto extends javax.swing.JInternalFrame {
 
         jLNombre.setText("NOMBRE");
 
-        jbtnRegistrar.setText("REGISTRAR");
-        jbtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        jbtnGuardar.setText("GUARDAR");
+        jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnRegistrarActionPerformed(evt);
+                jbtnGuardarActionPerformed(evt);
             }
         });
 
@@ -116,58 +121,81 @@ public class ViewProducto extends javax.swing.JInternalFrame {
 
         jLabel7.setText("CÓDIGO");
 
+        jLabel8.setText("ESTADO");
+
+        jbtnBuscar.setText("BUSCAR");
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLNombre)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlPrecio)
-                                    .addComponent(jlStock)
-                                    .addComponent(jLabel7))
-                                .addGap(67, 67, 67)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfIdProducto)
-                                    .addComponent(jtfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                                    .addComponent(jtfPrecio)
-                                    .addComponent(jtfNombre)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLNombre)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel7)
+                                                    .addGap(8, 8, 8)
+                                                    .addComponent(jtfIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jlPrecio)
+                                                        .addComponent(jlStock)
+                                                        .addComponent(jLabel8))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jtfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                                                        .addComponent(jtfPrecio)
+                                                        .addComponent(jtfDescripcion)
+                                                        .addComponent(jtfEstado)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jbtnBaja)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jbtnLimpiar)
+                                        .addGap(30, 30, 30)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbtnSalir)
+                                    .addComponent(jbtnBuscar)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jbtnRegistrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtbnActivar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnBaja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(192, 192, 192)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbtnGuardar)
+                                .addGap(27, 27, 27)
+                                .addComponent(jtbnActivar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLNombre))
+                    .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNombre)
+                    .addComponent(jbtnBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPrecio)
@@ -178,44 +206,50 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                     .addComponent(jtfStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnRegistrar)
-                    .addComponent(jbtnSalir)
-                    .addComponent(jbtnLimpiar)
+                    .addComponent(jbtnGuardar)
+                    .addComponent(jtbnActivar)
                     .addComponent(jbtnBaja)
-                    .addComponent(jtbnActivar))
-                .addGap(76, 76, 76))
+                    .addComponent(jbtnLimpiar)
+                    .addComponent(jbtnSalir))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegistrarActionPerformed
+    private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
          try
         {
             //Obtenemos los datos ingresados por el usuario
-            String nombre = jtfNombre.getText();
+            String nombre = jtfDescripcion.getText();
             double precio =(double) Double.parseDouble(jtfPrecio.getText());
             int stock = Integer.parseInt(jtfStock.getText());
             Boolean estado = true;
 //String descripcion, double precioActual, int stock, boolean estado
             Producto producto = new Producto(nombre, precio, stock, true);
             productoData.guardarProducto(producto);
-
+            
+            jtfIdProducto.setText(producto.getIdProducto() + "");
             jbtnLimpiar.setEnabled(true);
             jbtnBaja.setEnabled(true);
             jtfIdProducto.setEnabled(true);
-
+            jtfEstado.setText("Activo");
+            
         } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
-            jtfNombre.requestFocus();
+            jtfDescripcion.requestFocus();
         }
-    }//GEN-LAST:event_jbtnRegistrarActionPerformed
+    }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
         // TODO add your handling code here:
@@ -224,8 +258,10 @@ public class ViewProducto extends javax.swing.JInternalFrame {
 
     private void jbtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBajaActionPerformed
         // TODO add your handling code here:
-        String nombre = jtfNombre.getText();
-        productoData.bajaProducto(nombre);
+        int idProducto = Integer.parseInt(jtfIdProducto.getText());
+        productoData.bajaProducto(idProducto);
+        //String descripcion, double precioActual, int stock, boolean estado
+        jtfEstado.setText("Inactivo");
         
         
     }//GEN-LAST:event_jbtnBajaActionPerformed
@@ -237,9 +273,23 @@ public class ViewProducto extends javax.swing.JInternalFrame {
 
     private void jtbnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbnActivarActionPerformed
         // TODO add your handling code here:
-        String nombre = jtfNombre.getText();
-        productoData.altaProducto(nombre);
+        int id=Integer.parseInt(jtfIdProducto.getText());
+        productoData.altaProducto(id);
+        jtfEstado.setText("Activo");
     }//GEN-LAST:event_jtbnActivarActionPerformed
+
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+        // TODO add your handling code here:
+        String nombre=jtfDescripcion.getText();
+        
+        Producto prod=new Producto();
+        prod=productoData.buscarProductoXnombre(nombre);
+        jtfDescripcion.setText(prod.getDescripcion());
+        jtfPrecio.setText(prod.getPrecioActual()+"");
+        jtfStock.setText(prod.getStock()+"");
+        jtfEstado.setText(prod.isEstado()+"");
+        jtfIdProducto.setText(prod.getIdProducto()+"");
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -252,21 +302,24 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnBaja;
+    private javax.swing.JButton jbtnBuscar;
+    private javax.swing.JButton jbtnGuardar;
     private javax.swing.JButton jbtnLimpiar;
-    private javax.swing.JButton jbtnRegistrar;
     private javax.swing.JButton jbtnSalir;
     private javax.swing.JLabel jlPrecio;
     private javax.swing.JLabel jlStock;
     private javax.swing.JButton jtbnActivar;
+    private javax.swing.JTextField jtfDescripcion;
+    private javax.swing.JTextField jtfEstado;
     private javax.swing.JTextField jtfIdProducto;
-    private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecio;
     private javax.swing.JTextField jtfStock;
     // End of variables declaration//GEN-END:variables
 private void limpiar(){
-    jtfNombre.setText("");
+    jtfDescripcion.setText("");
     jtfPrecio.setText("");
     jtfStock.setText("");
 }

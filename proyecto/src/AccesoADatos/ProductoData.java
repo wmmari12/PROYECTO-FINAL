@@ -55,7 +55,7 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, "Error al guardar producto: " + ex.getMessage());
         }
     }
-
+    
     public Producto buscarProducto(int id) {
 
         Producto p = null;
@@ -66,6 +66,39 @@ public class ProductoData {
         {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
             ps.setInt(1, id);//1 es el primer atributo que buscamos con where y id es el valor a buscar
+            ResultSet rs = ps.executeQuery();//guardamos el resultado obtenido de la base de datos
+
+            if (rs.next())
+            {//se posiciona en la primer fila de la busqueda
+                p = new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setPrecioActual(rs.getDouble("precioActual"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+            }
+            ps.close();//cerramos la conexion
+        } catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
+        }
+        return p;
+    }
+
+    public Producto buscarProductoXnombre(String nombre) {
+
+        Producto p = null;
+        String sql = "SELECT * FROM producto WHERE descripcion=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
+
+        PreparedStatement ps = null;
+        try
+        {
+            ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
+            ps.setString(1, nombre);//1 es el primer atributo que buscamos con where y id es el valor a buscar
             ResultSet rs = ps.executeQuery();//guardamos el resultado obtenido de la base de datos
 
             if (rs.next())
@@ -163,13 +196,13 @@ public class ProductoData {
 
     }
 
-    public void bajaProducto(String nombre) {
+    public void bajaProducto(int id) {
 
         try
         {
-            String sql = "UPDATE producto SET estado=0 WHERE descripcion=?";
+            String sql = "UPDATE producto SET estado=0 WHERE idProducto=?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre);
+            ps.setInt(1, id);
             int fila = ps.executeUpdate();
 
             if (fila == 1)
@@ -187,12 +220,12 @@ public class ProductoData {
 
     }
     
-     public void altaProducto(String nombre){
+     public void altaProducto(int id){
         
         try{
-            String sql="UPDATE cliente SET estado=1 WHERE descripcion=?";
+            String sql="UPDATE cliente SET estado=1 WHERE idProducto=?";
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setString(1, nombre);
+            ps.setInt(1, id);
             int fila=ps.executeUpdate();
             
             if(fila==1){
