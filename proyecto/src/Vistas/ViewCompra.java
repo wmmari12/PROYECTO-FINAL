@@ -26,7 +26,6 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jtfPrecio.setEnabled(false);
         jtfTotal.setEnabled(false);
         jbtnAgregar.setEnabled(false);
-        jbtnTerminar.setEnabled(false);
         jbtnNvaCompra.setEnabled(false);
     }
 

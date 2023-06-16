@@ -32,6 +32,10 @@ public class Venta {
         this.estado = estado;
     }
 
+    public Venta(LocalDate fecha, int idCliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public boolean isEstado() {
         return estado;
     }
