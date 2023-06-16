@@ -300,6 +300,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             jbtnAgregar.setEnabled(true);
             jbtnTerminar.setEnabled(true);
             jbtnGuardar.setEnabled(false);
+            
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"El número ingresado no es correcto para un DNI válido."+ ex.getMessage());
