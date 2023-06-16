@@ -40,6 +40,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         menuBar1 = new java.awt.MenuBar();
         menu1 = new java.awt.Menu();
         menu2 = new java.awt.Menu();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,7 +57,6 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jtfPrecio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jbtnAgregar = new javax.swing.JButton();
-        jbtnTerminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jtfTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -106,9 +106,12 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel9.setText("CARGAR  PRODUCTOS");
 
-        jbtnAgregar.setText("AGREGAR");
-
-        jbtnTerminar.setText("TERMINAR COMPRA");
+        jbtnAgregar.setText("AGREGAR PRODUCTO");
+        jbtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("PRECIO TOTAL");
 
@@ -144,12 +147,13 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel6)
                             .addGap(45, 45, 45)
                             .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -165,14 +169,11 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel4))
                                     .addGap(184, 184, 184)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnAgregar)
-                            .addGap(45, 45, 45)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jbtnTerminar)
-                                .addComponent(jbtnSalir)
-                                .addComponent(jbtnNvaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jbtnNvaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbtnSalir)))
+                        .addComponent(jbtnAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -223,13 +224,12 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnNvaCompra))
+                            .addComponent(jbtnAgregar))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnAgregar)
-                            .addComponent(jbtnTerminar))
+                            .addComponent(jbtnNvaCompra))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,7 +265,6 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             jtfPrecio.setEnabled(true);
             jtfTotal.setEnabled(true);
             jbtnAgregar.setEnabled(true);
-            jbtnTerminar.setEnabled(true);
             
             jbtnGuardar.setEnabled(false);
             jdcFecha.setEnabled(false);
@@ -282,6 +281,45 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbProveedorActionPerformed
 
+    private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
+        // TODO add your handling code here:
+        try{
+            int idCompra=Integer.parseInt(jtfIdCompra.getText());
+            Producto prodSelec=(Producto) jcbProductos.getSelectedItem();
+            int cant=Integer.parseInt(jtfCantidad.getText());
+            double precio=0;
+            try{
+                precio=Double.parseDouble(jtfPrecio.getText());
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "El precio debe ser un valor numerico.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            //double precio=Double.parseDouble(jtfPrecio.getText());
+            double total=cant*precio;
+            jtfTotal.setText(total+"");
+            jtfTotal.setEditable(false);
+            
+            DetalleCompra detalleCompra=new DetalleCompra(cant,precio,idCompra,prodSelec.getIdProducto());
+            detCompra.guardarDetalleCompra(detalleCompra);
+            //habilitamos las opciones de la compra de productos y cargammos los productos
+            cargaProductos();
+            limpiar();
+            jcbProductos.setEnabled(true);
+            jtfCantidad.setEnabled(true);
+            jtfPrecio.setEnabled(true);
+            jtfTotal.setEnabled(true);
+            jbtnAgregar.setEnabled(true);
+            
+            jbtnGuardar.setEnabled(false);
+            jdcFecha.setEnabled(false);
+            jcbProveedor.setEditable(false);
+            jbtnNvaCompra.setEnabled(true);
+
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Error al guardar la compra, verifique sus datos."+ ex.getMessage());
+
+        }
+    }//GEN-LAST:event_jbtnAgregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -294,13 +332,13 @@ public class ViewCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnAgregar;
     private javax.swing.JButton jbtnGuardar;
     private javax.swing.JButton jbtnNvaCompra;
     private javax.swing.JButton jbtnSalir;
-    private javax.swing.JButton jbtnTerminar;
     private javax.swing.JComboBox<Producto> jcbProductos;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdcFecha;
@@ -328,6 +366,10 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         for(Producto item: productos){
             jcbProductos.addItem(item);
         }      
+    }
+
+    private void limpiar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
