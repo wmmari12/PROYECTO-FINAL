@@ -26,16 +26,13 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemCompra = new javax.swing.JMenuItem();
         jMenuItemDetalleC = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuVenta = new javax.swing.JMenu();
         jMenuItemVenta = new javax.swing.JMenuItem();
         jMenuItemDetalleV = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItemInventario = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItemListaCliente = new javax.swing.JMenuItem();
-        jMenuItemListaProv = new javax.swing.JMenuItem();
-        jMenuItemListaCompra = new javax.swing.JMenuItem();
-        jMenuItemListaVenta = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
 
@@ -73,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu3.setText("Compra");
 
-        jMenuItemCompra.setText("Nueva");
+        jMenuItemCompra.setText("Nueva Compra");
         jMenuItemCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCompraActionPerformed(evt);
@@ -81,14 +78,17 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemCompra);
 
-        jMenuItemDetalleC.setText("Detalle");
+        jMenuItemDetalleC.setText("Modificar Compra");
         jMenu3.add(jMenuItemDetalleC);
+
+        jMenuItem1.setText("Ver Compras");
+        jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
 
         jMenuVenta.setText("Venta");
 
-        jMenuItemVenta.setText("Nueva");
+        jMenuItemVenta.setText("Nueva Venta");
         jMenuItemVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemVentaActionPerformed(evt);
@@ -96,13 +96,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuVenta.add(jMenuItemVenta);
 
-        jMenuItemDetalleV.setText("Detalle");
+        jMenuItemDetalleV.setText("Modificar Venta");
         jMenuItemDetalleV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemDetalleVActionPerformed(evt);
             }
         });
         jMenuVenta.add(jMenuItemDetalleV);
+
+        jMenuItem2.setText("Ver Ventas");
+        jMenuVenta.add(jMenuItem2);
 
         jMenuBar1.add(jMenuVenta);
 
@@ -117,37 +120,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.add(jMenuItemInventario);
 
         jMenuBar1.add(jMenu5);
-
-        jMenu2.setText("Consulta");
-
-        jMenuItemListaCliente.setText("Cliente");
-        jMenu2.add(jMenuItemListaCliente);
-
-        jMenuItemListaProv.setText("Proveedor");
-        jMenuItemListaProv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemListaProvActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemListaProv);
-
-        jMenuItemListaCompra.setText("Compra");
-        jMenuItemListaCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemListaCompraActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemListaCompra);
-
-        jMenuItemListaVenta.setText("Venta");
-        jMenuItemListaVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemListaVentaActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemListaVenta);
-
-        jMenuBar1.add(jMenu2);
 
         jMenu6.setText("Salir");
 
@@ -171,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
         );
 
         pack();
@@ -197,10 +169,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(vprov);//llevarla al frente
     }//GEN-LAST:event_jMenuItemNvoProvActionPerformed
 
-    private void jMenuItemListaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemListaCompraActionPerformed
-
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
         // SALIR
         System.exit(0);
@@ -219,14 +187,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(vv);//agregarla al escritorio
         escritorio.moveToFront(vv);//llevarla al frente
     }//GEN-LAST:event_jMenuItemVentaActionPerformed
-
-    private void jMenuItemListaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemListaVentaActionPerformed
-
-    private void jMenuItemListaProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListaProvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemListaProvActionPerformed
 
     private void jMenuItemCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCompraActionPerformed
         // TODO add your handling code here:
@@ -306,19 +266,16 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCompra;
     private javax.swing.JMenuItem jMenuItemDetalleC;
     private javax.swing.JMenuItem jMenuItemDetalleV;
     private javax.swing.JMenuItem jMenuItemInventario;
-    private javax.swing.JMenuItem jMenuItemListaCliente;
-    private javax.swing.JMenuItem jMenuItemListaCompra;
-    private javax.swing.JMenuItem jMenuItemListaProv;
-    private javax.swing.JMenuItem jMenuItemListaVenta;
     private javax.swing.JMenuItem jMenuItemNvoCliente;
     private javax.swing.JMenuItem jMenuItemNvoProd;
     private javax.swing.JMenuItem jMenuItemNvoProv;
