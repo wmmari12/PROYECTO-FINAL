@@ -36,7 +36,7 @@ public class VentaData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(v.getFecha()));
             ps.setInt(2, v.getIdCliente());
-            ps.setBoolean(3, v.isEstado());
+            ps.setBoolean(3, true);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
