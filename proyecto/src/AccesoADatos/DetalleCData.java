@@ -76,6 +76,7 @@ public class DetalleCData {
         try{
             ps = con.prepareStatement(sql);
             ps.setInt(1, idCompra);
+            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -109,6 +110,12 @@ public class DetalleCData {
             int filas = ps.executeUpdate();
             if (filas == 1)
             {
+               
+                ProductoData productoD= new ProductoData();
+                //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
+                productoD.modificarStock(dc.getCantidad(),dc.getIdProducto(),2);
+                JOptionPane.showMessageDialog(null, "Detalle creado");
+            
                 JOptionPane.showMessageDialog(null, "Detalle de Compra modificada");
             } else
             {
