@@ -88,6 +88,35 @@ public class ProductoData {
         }
         return p;
     }
+    public int stockProducto(int id) {
+        
+        int stock=0;
+        Producto p = null;
+        String sql = "SELECT stock FROM producto WHERE idProducto=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
+
+        PreparedStatement ps = null;
+        try
+        {
+            ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
+            ps.setInt(1, id);//1 es el primer atributo que buscamos con where y id es el valor a buscar
+            ResultSet rs = ps.executeQuery();//guardamos el resultado obtenido de la base de datos
+
+            if (rs.next())
+            {
+                p = new Producto();
+                stock=rs.getInt("stock");
+
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+            }
+            ps.close();//cerramos la conexion
+        } catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
+        }
+        return stock;
+    }
 
     public Producto buscarProductoXnombre(String nombre) {
 

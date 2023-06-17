@@ -22,8 +22,8 @@ public class ViewVenta extends javax.swing.JInternalFrame {
     private ClienteData clienteData = new ClienteData();
     private DetalleVData detVenta = new DetalleVData();
     private ProductoData productoData=new ProductoData();
-    private List<Producto> productos = null;
-    private List<Cliente> clientes = null;
+    private List<Producto> productos;
+    private List<Cliente> clientes;
     
     public ViewVenta() {
         initComponents();

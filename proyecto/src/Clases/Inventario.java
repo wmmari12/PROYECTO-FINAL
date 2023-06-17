@@ -26,17 +26,18 @@ public class Inventario {
 //        c1.bajaCliente(1);
 //        
 //        Producto p=new Producto("Monitor",150000,10,true);
-//        ProductoData pd=new ProductoData();
+        ProductoData pd=new ProductoData();
 //        pd.guardarProducto(p);
 //        System.out.println(pd.buscarProducto(1));
 //        System.out.println(pd.listaDeProductos());
 //        
 //        Proveedor prov=new Proveedor("TiendaShop","Maipu 1019","2665389234",true);
-        ProveedorData provD=new ProveedorData();
+        //ProveedorData provD=new ProveedorData();
 //        provD.guardarProveedor(prov);
 //        provD.bajaProveedor(1);
 //        System.out.println(provD.obtenerProveedorPorId(2));
-        System.out.println(provD.listaDeProveedores());
+          System.out.println("stock: "+pd.stockProducto(3));
+        //System.out.println(provD.listaDeProveedores());
         
 //        Compra compra = new Compra(LocalDate.of(2023, Month.JUNE, 8),3,true);
 //        CompraData cData=new CompraData();

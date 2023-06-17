@@ -43,7 +43,7 @@ public class CompraData {
             
             if(rs.next()){
                 c.setIdCompra(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Compra realizada");
+//              JOptionPane.showMessageDialog(null, "Compra realizada");
             }else{
                 JOptionPane.showMessageDialog(null, "La compra no pudo ser realizada");
             }
