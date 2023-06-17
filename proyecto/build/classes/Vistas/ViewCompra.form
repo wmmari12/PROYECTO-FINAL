@@ -196,9 +196,6 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbProveedorActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Proveedor&gt;"/>
       </AuxValues>
@@ -308,6 +305,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="NUEVA COMPRA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnNvaCompraActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -41,6 +41,7 @@ public class Menu extends javax.swing.JFrame {
         escritorio.setLayout(null);
 
         jMenu1.setText("Administrar");
+        jMenu1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         jMenuItemNvoCliente.setText("Cliente");
         jMenuItemNvoCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +70,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Compra");
+        jMenu3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         jMenuItemCompra.setText("Nueva Compra");
         jMenuItemCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +99,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenuVenta.setText("Venta");
+        jMenuVenta.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         jMenuItemVenta.setText("Nueva Venta");
         jMenuItemVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +128,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenuVenta);
 
         jMenu5.setText("Inventario");
+        jMenu5.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         jMenuItemInventario.setText("Consultar Inventario");
         jMenuItemInventario.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +141,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Salir");
+        jMenu6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
         jMenuItemSalir.setText("Salir");
         jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +163,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
         );
 
         pack();
@@ -237,27 +242,33 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemInventarioActionPerformed
 
     private void jMenuItemDetalleCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDetalleCActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: modificar compra
         escritorio.removeAll();//removemos todo
         escritorio.repaint();
-        ViewModificarVenta vmv=new ViewModificarVenta();//crer nueva ventana
-        vmv.setVisible(true);//hacerla visible
-        escritorio.add(vmv);//agregarla al escritorio
-        escritorio.moveToFront(vmv);//llevarla al frente
+        ViewModificarCompra vmc=new ViewModificarCompra();//crer nueva ventana
+        vmc.setVisible(true);//hacerla visible
+        escritorio.add(vmc);//agregarla al escritorio
+        escritorio.moveToFront(vmc);//llevarla al frente
     }//GEN-LAST:event_jMenuItemDetalleCActionPerformed
 
     private void jMenuItemVerComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComprasActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();//removemos todo
         escritorio.repaint();
-        ViewModificarVenta vmv=new ViewModificarVenta();//crer nueva ventana
-        vmv.setVisible(true);//hacerla visible
-        escritorio.add(vmv);//agregarla al escritorio
-        escritorio.moveToFront(vmv);//llevarla al frente
+        ViewVerCompras vvc=new ViewVerCompras();//crer nueva ventana
+        vvc.setVisible(true);//hacerla visible
+        escritorio.add(vvc);//agregarla al escritorio
+        escritorio.moveToFront(vvc);//llevarla al frente
     }//GEN-LAST:event_jMenuItemVerComprasActionPerformed
 
     private void jMenuItemVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerVentasActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();//removemos todo
+        escritorio.repaint();
+        ViewVerVentas vvv=new ViewVerVentas();//crer nueva ventana
+        vvv.setVisible(true);//hacerla visible
+        escritorio.add(vvv);//agregarla al escritorio
+        escritorio.moveToFront(vvv);//llevarla al frente
     }//GEN-LAST:event_jMenuItemVerVentasActionPerformed
 
     /**

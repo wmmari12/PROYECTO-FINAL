@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas;
 
 import AccesoADatos.*;
 import Clases.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author solmedina
- */
+
 public class ViewProducto extends javax.swing.JInternalFrame {
 
     private ProductoData productoData;
-    /**
-     * Creates new form ViewProducto
-     */
+    
     public ViewProducto() {
         this.productoData = null;
         initComponents();

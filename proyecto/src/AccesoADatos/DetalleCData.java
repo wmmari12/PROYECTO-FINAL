@@ -50,7 +50,7 @@ public class DetalleCData {
                 ProductoData productoD= new ProductoData();
                 //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
                 productoD.modificarStock(dc.getCantidad(),dc.getIdProducto(),2);
-                JOptionPane.showMessageDialog(null, "Detalle creado");
+                //JOptionPane.showMessageDialog(null, "Detalle creado");
             } else
             {
                 JOptionPane.showMessageDialog(null, "El detalle esta mal.");

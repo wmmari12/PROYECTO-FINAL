@@ -22,12 +22,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
     public ViewCompra() {
         initComponents();
         cargaProveedores();
-        jcbProductos.setEnabled(false);
-        jtfCantidad.setEnabled(false);
-        jtfPrecio.setEnabled(false);
-        jtfTotal.setEnabled(false);
-        jbtnAgregar.setEnabled(false);
-        jbtnNvaCompra.setEnabled(false);
+        inicio();
         
     }
 
@@ -75,12 +70,6 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jLabel2.setText("FECHA: ");
 
         jLabel3.setText("PROVEEDOR: ");
-
-        jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbProveedorActionPerformed(evt);
-            }
-        });
 
         jbtnGuardar.setText("GUARDAR");
         jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +121,11 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jbtnNvaCompra.setText("NUEVA COMPRA");
+        jbtnNvaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNvaCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,7 +250,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             
             jcbProductos.setEnabled(true);
             jtfCantidad.setEnabled(true);
-
+            jtfPrecio.setEnabled(true);
             jbtnAgregar.setEnabled(true);
             
             jbtnGuardar.setEnabled(false);
@@ -269,10 +263,6 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
-
-    private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbProveedorActionPerformed
 
     private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
         // TODO add your handling code here:
@@ -312,6 +302,14 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbtnSalirActionPerformed
+
+    private void jbtnNvaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNvaCompraActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        inicio();
+         
+
+    }//GEN-LAST:event_jbtnNvaCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,7 +362,21 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jtfCantidad.setText("");
         jtfPrecio.setText("");
         jtfTotal.setText("");
+        jtfIdCompra.setText("");
+        jdcFecha.getCalendar();
+    }
 
+    private void inicio() {
+        jcbProductos.setEnabled(false);
+        jtfCantidad.setEnabled(false);
+        jtfPrecio.setEnabled(false);
+        jtfTotal.setEnabled(false);
+        jbtnAgregar.setEnabled(false);
+        jbtnNvaCompra.setEnabled(true);
+        jbtnGuardar.setEnabled(true);
+        jdcFecha.setEnabled(true);
+        jcbProveedor.setEditable(true);
+        
     }
     
 }

@@ -43,7 +43,7 @@ public class VentaData {
             
             if(rs.next()){
                 v.setIdVenta(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "La venta fue cargada con exito");
+                //JOptionPane.showMessageDialog(null, "La venta fue cargada con exito");
             }
             ps.close();
             
