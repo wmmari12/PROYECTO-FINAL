@@ -82,6 +82,12 @@ public class ViewVenta extends javax.swing.JInternalFrame {
 
         jLabel3.setText("CLIENTE");
 
+        jcbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbClienteActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("NRO. VENTA");
 
         jbtnGuardar.setText("GUARDAR");
@@ -330,7 +336,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();        
             Cliente clienteSelec=(Cliente) jcbCliente.getSelectedItem();
             
-            
+            System.out.println("Entre");
             Venta venta = new Venta(fecha, clienteSelec.getIdCliente());
             ventaData.realizarVenta(venta);
             jtfCodVenta.setText(venta.getIdVenta()+"");
@@ -376,6 +382,10 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             }   
         }
     }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbClienteActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

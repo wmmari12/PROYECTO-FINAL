@@ -4,8 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Vistas/ViewVenta.java</file>
+            <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Clases/Venta.java</file>
+            <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Clases/DetalleVenta.java</file>
+            <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/AccesoADatos/ProductoData.java</file>
             <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Vistas/Menu.java</file>
             <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Vistas/ViewCompra.java</file>
+            <file>file:/C:/Users/Win10/Documents/NetBeansProjects/PROYECTO-FINAL/proyecto/src/Vistas/ViewCliente.java</file>
         </group>
     </open-files>
 </project-private>
