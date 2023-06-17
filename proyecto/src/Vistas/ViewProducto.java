@@ -29,6 +29,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jtfIdProducto.setEnabled(false);
         jtfEstado.setEnabled(false);
         jtfIdProducto.setEnabled(false);
+        jbtnModificar.setEnabled(false);
     }
 
     /**
@@ -62,6 +63,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jtfEstado = new javax.swing.JTextField();
         jbtnBuscar = new javax.swing.JButton();
+        jbtnModificar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -130,59 +132,62 @@ public class ViewProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jbtnModificar.setText("MODIFICAR");
+        jbtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(192, 192, 192)
+                .addComponent(jLabel1)
+                .addGap(86, 86, 86))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbtnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtbnActivar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnBaja)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnLimpiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLNombre)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel7)
-                                                    .addGap(8, 8, 8)
-                                                    .addComponent(jtfIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jlPrecio)
-                                                        .addComponent(jlStock)
-                                                        .addComponent(jLabel8))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jtfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                                                        .addComponent(jtfPrecio)
-                                                        .addComponent(jtfDescripcion)
-                                                        .addComponent(jtfEstado)))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jbtnBaja)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jbtnLimpiar)
-                                        .addGap(30, 30, 30)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbtnSalir)
-                                    .addComponent(jbtnBuscar)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(192, 192, 192)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jbtnGuardar)
-                                .addGap(27, 27, 27)
-                                .addComponent(jtbnActivar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(42, 42, 42))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLNombre)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addGap(8, 8, 8)
+                                            .addComponent(jtfIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jlPrecio)
+                                                .addComponent(jlStock)
+                                                .addComponent(jLabel8))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jtfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                                                .addComponent(jtfPrecio)
+                                                .addComponent(jtfDescripcion)
+                                                .addComponent(jtfEstado)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbtnBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbtnSalir, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,8 +204,9 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPrecio)
-                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnSalir))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlStock)
                     .addComponent(jtfStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,8 +224,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                     .addComponent(jtbnActivar)
                     .addComponent(jbtnBaja)
                     .addComponent(jbtnLimpiar)
-                    .addComponent(jbtnSalir))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jbtnModificar))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,7 +249,6 @@ public class ViewProducto extends javax.swing.JInternalFrame {
             jbtnBaja.setEnabled(true);
             jtfIdProducto.setEnabled(true);
             jtfEstado.setText("Activo");
-            
         } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
@@ -287,9 +292,32 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jtfDescripcion.setText(prod.getDescripcion());
         jtfPrecio.setText(prod.getPrecioActual()+"");
         jtfStock.setText(prod.getStock()+"");
+        if(prod.isEstado()){
+            jtfEstado.setText("Activo");
+        }else{
+            jtfEstado.setText("Inactivo");
+        }
         jtfEstado.setText(prod.isEstado()+"");
         jtfIdProducto.setText(prod.getIdProducto()+"");
+        jbtnModificar.setEnabled(true);
+        jbtnGuardar.setEnabled(false);
+        limpiar();
     }//GEN-LAST:event_jbtnBuscarActionPerformed
+
+    private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
+            
+            int id=Integer.parseInt(jtfIdProducto.getText());
+            String descrip = jtfDescripcion.getText();
+            int cant = Integer.parseInt(jtfStock.getText());
+            double precio=Double.parseDouble(jtfPrecio.getText());
+            
+            Producto p = new Producto(id, descrip, precio, cant);
+            productoData.modificarProducto(p);
+            limpiar();
+            jtfIdProducto.setText("");
+            jbtnBaja.setEnabled(true);
+            jbtnGuardar.setEnabled(true);
+    }//GEN-LAST:event_jbtnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -308,6 +336,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnBuscar;
     private javax.swing.JButton jbtnGuardar;
     private javax.swing.JButton jbtnLimpiar;
+    private javax.swing.JButton jbtnModificar;
     private javax.swing.JButton jbtnSalir;
     private javax.swing.JLabel jlPrecio;
     private javax.swing.JLabel jlStock;

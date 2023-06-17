@@ -231,34 +231,26 @@ private void armarCabecera() {
         
         
         private void llenarTabla(){
-            
+            Producto producto=(Producto) jcbProductos.getSelectedItem();
             List<Producto> todos = productoData.listaDeProductos();
-            for (Producto p : todos) {
-                        modelo.addRow(new Object[]
-                                {
-                                    p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()
-                                });
-                    }
+//            for (Producto p : todos) {
+//                        modelo.addRow(new Object[]
+//                                {
+//                                    p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()
+//                                });
+//                    }
             
             
             if(jrbInactivos.isSelected()){
-                jrbActivos.disable();
                 List<Producto> productoStock = productoData.listaDeProductosInactivos();
                 for(Producto p : productoStock){
-                    modelo.addRow(new Object[]
-                    {
-                        p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()
-                });
+                    modelo.addRow(new Object[]{p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()});
                     
-            }
+                }
             }else if(jrbActivos.isSelected()){
-                    jrbInactivos.disable();
                     List<Producto> productoStock = productoData.listaDeProductosActivos();
                     for (Producto p : productoStock) {
-                        modelo.addRow(new Object[]
-                                {
-                                    p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()
-                                });
+                        modelo.addRow(new Object[]{p.getIdProducto(),p.getDescripcion(),p.getPrecioActual(),p.getStock()});
                     }
                   }
         }

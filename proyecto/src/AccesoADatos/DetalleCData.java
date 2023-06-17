@@ -98,7 +98,7 @@ public class DetalleCData {
     
     public DetalleCompra modificarDetalleCompra(DetalleCompra dc) { 
 
-        String sql = "UPDATE detalleVenta SET cantidad=?, precioCosto=?, idCompra=? WHERE idDetalle=?";
+        String sql = "UPDATE detalleVenta SET cantidad=?, precioCosto=?, idCompra=? , idProducto=? WHERE idDetalle=?";
         PreparedStatement ps = null;
         try
         {
@@ -106,6 +106,7 @@ public class DetalleCData {
             ps.setInt(1, dc.getCantidad());
             ps.setDouble(2, dc.getPrecioCosto());
             ps.setInt(3, dc.getIdCompra());
+            ps.setInt(4, dc.getIdProducto());
             ps.setInt(4, dc.getIdDetalle());
             int filas = ps.executeUpdate();
             if (filas == 1)

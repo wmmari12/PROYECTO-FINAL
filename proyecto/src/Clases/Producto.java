@@ -34,6 +34,15 @@ public class Producto {
         this.estado = estado;
     }
 
+    public Producto(int idProducto, String descripcion, double precioActual, int stock) {
+        this.idProducto = idProducto;
+        this.descripcion = descripcion;
+        this.precioActual = precioActual;
+        this.stock = stock;
+    }
+    
+    
+
     public int getIdProducto() {
         return idProducto;
     }
