@@ -139,17 +139,43 @@ public class CompraData {
 
         return compras;
     }
-    
-    public void anularCompra(int id){
+    public List<Compra> listaDeComprasActivas(){
+        List<Compra> compras = new ArrayList<>();
         
         try{
-            String sql="UPDATE compra SET estado=0 WHERE idCompra=?";
+            String sql = "SELECT * FROM compra WHERE estado=1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                int idComp = rs.getInt("idCompra");
+                LocalDate fecha = rs.getDate("fecha").toLocalDate();
+                int idProv = rs.getInt("idProveedor");
+                boolean estado=rs.getBoolean("estado");
+                
+                Compra compra = new Compra(idComp, fecha, idProv,estado);
+                compras.add(compra);
+            }
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al listar Compras: "+ex.getMessage());
+        }
+
+        return compras;
+    }
+    
+    public void modificarEstadoCompra(int id,int estado){
+        
+        try{
+            String sql="UPDATE compra SET estado=? WHERE idCompra=?";
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, estado);
+            ps.setInt(2, id);
+            
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "La compra ha sido anulado");
+                 JOptionPane.showMessageDialog(null, "La compra ha sido modificada");
             }else{
                 JOptionPane.showMessageDialog(null, "No se encontro la compra!");
             }

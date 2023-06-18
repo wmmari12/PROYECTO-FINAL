@@ -26,11 +26,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemCompra = new javax.swing.JMenuItem();
         jMenuItemDetalleC = new javax.swing.JMenuItem();
-        jMenuItemVerCompras = new javax.swing.JMenuItem();
         jMenuVenta = new javax.swing.JMenu();
         jMenuItemVenta = new javax.swing.JMenuItem();
         jMenuItemDetalleV = new javax.swing.JMenuItem();
-        jMenuItemVerVentas = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItemInventario = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -88,14 +86,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemDetalleC);
 
-        jMenuItemVerCompras.setText("Ver Compras");
-        jMenuItemVerCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemVerComprasActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItemVerCompras);
-
         jMenuBar1.add(jMenu3);
 
         jMenuVenta.setText("Venta");
@@ -116,14 +106,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenuVenta.add(jMenuItemDetalleV);
-
-        jMenuItemVerVentas.setText("Ver Ventas");
-        jMenuItemVerVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemVerVentasActionPerformed(evt);
-            }
-        });
-        jMenuVenta.add(jMenuItemVerVentas);
 
         jMenuBar1.add(jMenuVenta);
 
@@ -251,26 +233,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(vmc);//llevarla al frente
     }//GEN-LAST:event_jMenuItemDetalleCActionPerformed
 
-    private void jMenuItemVerComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComprasActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();//removemos todo
-        escritorio.repaint();
-        ViewVerCompras vvc=new ViewVerCompras();//crer nueva ventana
-        vvc.setVisible(true);//hacerla visible
-        escritorio.add(vvc);//agregarla al escritorio
-        escritorio.moveToFront(vvc);//llevarla al frente
-    }//GEN-LAST:event_jMenuItemVerComprasActionPerformed
-
-    private void jMenuItemVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerVentasActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();//removemos todo
-        escritorio.repaint();
-        ViewVerVentas vvv=new ViewVerVentas();//crer nueva ventana
-        vvv.setVisible(true);//hacerla visible
-        escritorio.add(vvv);//agregarla al escritorio
-        escritorio.moveToFront(vvv);//llevarla al frente
-    }//GEN-LAST:event_jMenuItemVerVentasActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -329,8 +291,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNvoProv;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenuItem jMenuItemVenta;
-    private javax.swing.JMenuItem jMenuItemVerCompras;
-    private javax.swing.JMenuItem jMenuItemVerVentas;
     private javax.swing.JMenu jMenuVenta;
     // End of variables declaration//GEN-END:variables
 }

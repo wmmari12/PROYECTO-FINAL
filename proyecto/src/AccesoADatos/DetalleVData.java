@@ -70,10 +70,6 @@ public class DetalleVData {
         }
     }
 
-    /*
-    
-     4- anular*/
-
     public List<DetalleVenta> obtenerDetalleXventa(int idVenta) {
 
         List<DetalleVenta> detalles = new ArrayList<>();

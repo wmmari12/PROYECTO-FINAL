@@ -73,7 +73,8 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra Nro. "+ idCompra ;
+        String estadoStr = estado ? "" : " (anulada)";
+        return "Compra Nro. "+ idCompra+estadoStr;
     }
 
     

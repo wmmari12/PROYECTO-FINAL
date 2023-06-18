@@ -27,8 +27,6 @@ public class DetalleCData {
 
     }
     
-    
-    
     public void  guardarDetalleCompra(DetalleCompra dc) {
  // int idVenta, int idProducto        
         
@@ -62,10 +60,6 @@ public class DetalleCData {
             JOptionPane.showMessageDialog(null, "Error al guardar producto: " + ex.getMessage());
         }
     }
-    /*
-    
-     4- anular*/
-    
     
     public List<DetalleCompra> obtenerDetalleXcompra(int idCompra) {
         
@@ -98,7 +92,7 @@ public class DetalleCData {
     
     public DetalleCompra modificarDetalleCompra(DetalleCompra dc) { 
 
-        String sql = "UPDATE detalleVenta SET cantidad=?, precioCosto=?, idCompra=? , idProducto=? WHERE idDetalle=?";
+        String sql = "UPDATE detalleCompra SET cantidad=?, precioCosto=?, idCompra=? , idProducto=? WHERE idDetalle=?";
         PreparedStatement ps = null;
         try
         {
@@ -107,7 +101,7 @@ public class DetalleCData {
             ps.setDouble(2, dc.getPrecioCosto());
             ps.setInt(3, dc.getIdCompra());
             ps.setInt(4, dc.getIdProducto());
-            ps.setInt(4, dc.getIdDetalle());
+            ps.setInt(5, dc.getIdDetalle());
             int filas = ps.executeUpdate();
             if (filas == 1)
             {
