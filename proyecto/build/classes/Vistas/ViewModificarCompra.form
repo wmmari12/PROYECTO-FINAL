@@ -42,11 +42,11 @@
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jtnModificar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtnGuardar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jbtnSalir" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jcbIdProducto" min="-2" pref="356" max="-2" attributes="0"/>
+                                  <Component id="jcbProducto" min="-2" pref="356" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -143,11 +143,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbIdProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbProducto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -207,9 +207,6 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbIdCompraActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Compra&gt;"/>
       </AuxValues>
@@ -229,7 +226,7 @@
         <Property name="text" type="java.lang.String" value="COD. PRODUCTO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcbIdProducto">
+    <Component class="javax.swing.JComboBox" name="jcbProducto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -241,12 +238,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfPrecio">
     </Component>
-    <Component class="javax.swing.JButton" name="jtnModificar">
+    <Component class="javax.swing.JButton" name="jtnGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="GUARDAR"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtnModificarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtnGuardarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnSalir">
@@ -278,7 +275,6 @@
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbCompraItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbCompraActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Compra&gt;"/>

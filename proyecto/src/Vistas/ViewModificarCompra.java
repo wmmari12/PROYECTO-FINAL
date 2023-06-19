@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 public class ViewModificarCompra extends javax.swing.JInternalFrame {
-
+    
     private DetalleCData dCompra = new DetalleCData();
     private CompraData compraData = new CompraData();
     private ProductoData prodData = new ProductoData();
@@ -38,9 +38,9 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jcbIdProducto = new javax.swing.JComboBox<>();
+        jcbProducto = new javax.swing.JComboBox<>();
         jtfPrecio = new javax.swing.JTextField();
-        jtnModificar = new javax.swing.JButton();
+        jtnGuardar = new javax.swing.JButton();
         jbtnSalir = new javax.swing.JButton();
         jbtnMostrarD = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -65,22 +65,16 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
 
         jLabel5.setText("NRO. COMPRA");
 
-        jcbIdCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbIdCompraActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("SELECCIONAR DETALLE");
 
         jLabel7.setText("PRECIO");
 
         jLabel8.setText("COD. PRODUCTO");
 
-        jtnModificar.setText("GUARDAR");
-        jtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        jtnGuardar.setText("GUARDAR");
+        jtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtnModificarActionPerformed(evt);
+                jtnGuardarActionPerformed(evt);
             }
         });
 
@@ -103,11 +97,6 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
         jcbCompra.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbCompraItemStateChanged(evt);
-            }
-        });
-        jcbCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbCompraActionPerformed(evt);
             }
         });
 
@@ -156,10 +145,10 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jtnModificar)
+                                        .addComponent(jtnGuardar)
                                         .addGap(18, 18, 18)
                                         .addComponent(jbtnSalir))
-                                    .addComponent(jcbIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jcbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -231,10 +220,10 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jcbIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtnModificar)
+                    .addComponent(jtnGuardar)
                     .addComponent(jbtnSalir))
                 .addGap(36, 36, 36))
         );
@@ -264,19 +253,18 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
-        // TODO add your handling code here:
 
         activarCamposDetalle();
-
+        cargarDetalles(((Venta)jcbCompra.getSelectedItem()).getIdVenta());
         DetalleCompra detalleC = (DetalleCompra) jcbDetalleC.getSelectedItem();
         jtfCantidad.setText(detalleC.getCantidad() + "");
         jtfPrecio.setText(detalleC.getPrecioCosto() + "");
-
-        cargarCombo();
+        
+        cargarComboDefault(detalleC);
 
     }//GEN-LAST:event_jbtnMostrarDActionPerformed
 
-    private void jtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtnModificarActionPerformed
+    private void jtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtnGuardarActionPerformed
         // TODO add your handling code here:
         int cant = 0;
         boolean cantSi = false;
@@ -302,21 +290,21 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
         }
         int idCompra = 0;
         int idProducto = 0;
-        Producto p=null;
+        Producto p = null;
         try
         {
-            p = (Producto) jcbIdProducto.getSelectedItem();
+            p = (Producto) jcbProducto.getSelectedItem();
             idProducto = p.getIdProducto();
-
+            
         } catch (NumberFormatException e)
         {
             JOptionPane.showMessageDialog(null, "Error en producto" + e.getMessage());
-
+            
         }
-        Compra compra=null;
+        Compra compra = null;
         if (cantSi && precioSi)
         {
-
+            
             DetalleCompra detalleCompra = (DetalleCompra) jcbDetalleC.getSelectedItem();
             if (detalleCompra == null)
             {
@@ -324,20 +312,19 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
                 DetalleCompra det = new DetalleCompra(cant, precio, compra, p);
                 dCompra.guardarDetalleCompra(det);
                 limpiar();
-
+                
             } else
             {
-                Compra c = (Compra) jcbIdCompra.getSelectedItem();
-                idCompra = c.getIdCompra();
+                compra = (Compra) jcbIdCompra.getSelectedItem();
                 int idDetalle = detalleCompra.getIdDetalle();
                 DetalleCompra det = new DetalleCompra(idDetalle, cant, precio, compra, p);
                 dCompra.modificarDetalleCompra(det);
                 limpiar();
             }
             jcbIdCompra.removeAllItems();
-            jcbIdProducto.removeAllItems();
+            jcbProducto.removeAllItems();
         }
-    }//GEN-LAST:event_jtnModificarActionPerformed
+    }//GEN-LAST:event_jtnGuardarActionPerformed
 
     private void jcbCompraItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCompraItemStateChanged
         if (evt.getSource() == jcbCompra)
@@ -350,10 +337,6 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jcbCompraItemStateChanged
-
-    private void jcbIdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbIdCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbIdCompraActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
         // TODO add your handling code here:
@@ -369,15 +352,10 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbtnAnularActionPerformed
 
-    private void jcbCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbCompraActionPerformed
-
     private void jbtnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnActivarActionPerformed
         Compra c = (Compra) jcbCompra.getSelectedItem();
         int idCompra = c.getIdCompra();
         compraData.modificarEstadoCompra(idCompra, 1);
-        //jcbCompra.removeAllItems();
         actualizarVistaCompra();
 
     }//GEN-LAST:event_jbtnActivarActionPerformed
@@ -411,48 +389,48 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Compra> jcbCompra;
     private javax.swing.JComboBox<DetalleCompra> jcbDetalleC;
     private javax.swing.JComboBox<Compra> jcbIdCompra;
-    private javax.swing.JComboBox<Producto> jcbIdProducto;
+    private javax.swing.JComboBox<Producto> jcbProducto;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTextField jtfCantidad;
     private javax.swing.JTextField jtfPrecio;
-    private javax.swing.JButton jtnModificar;
+    private javax.swing.JButton jtnGuardar;
     // End of variables declaration//GEN-END:variables
 
     private void inicio() {
         jcbDetalleC.setEnabled(false);
         jtfCantidad.setEnabled(false);
         jtfPrecio.setEnabled(false);
-        jcbIdProducto.setEnabled(false);
+        jcbProducto.setEnabled(false);
         jcbIdCompra.setEnabled(false);
     }
-
+    
     private void cargarCompras(LocalDate fecha) {
         jcbCompra.removeAllItems();
         compras = compraData.obtenerComprasPorFecha(fecha);
         for (Compra item : compras)
         {
             jcbCompra.addItem(item);
-
+            
         }
     }
-
+    
     private void cargarDetalles(int idCompra) {
         jcbDetalleC.removeAllItems();
         List<DetalleCompra> detallesCompras = dCompra.obtenerDetalleXcompra(idCompra);
         for (DetalleCompra item : detallesCompras)
         {
             jcbDetalleC.addItem(item);
-
+            
         }
     }
-
+    
     private void limpiar() {
         jtfCantidad.setText("");
         jtfPrecio.setText("");
         jdcFecha.getCalendar();
-
+        
     }
-
+    
     private void actualizarVistaCompra() {
         Date date = jdcFecha.getDate();
         if (date != null)
@@ -461,16 +439,16 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
             jcbDetalleC.setEnabled(true);
             cargarCompras(fecha);
         }
-
+        
         actualizarVistaDetalle();
     }
-
+    
     private void actualizarVistaDetalle() {
         Compra compraSelec = (Compra) jcbCompra.getSelectedItem();
         if (compraSelec != null)
         {
             cargarDetalles(compraSelec.getIdCompra());
-
+            
             boolean estado = compraSelec.isEstado();
             jbtnAnular.setEnabled(estado);
             jbtnMostrarD.setEnabled(estado);
@@ -478,31 +456,53 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
             jbtnActivar.setEnabled(!estado);
         }
     }
-
+    
     private void activarCamposDetalle() {
         jtfCantidad.setEnabled(true);
         jtfPrecio.setEnabled(true);
-        jcbIdProducto.setEnabled(true);
+        jcbProducto.setEnabled(true);
         jcbIdCompra.setEnabled(true);
         jtfCantidad.setText("");
         jtfPrecio.setText("");
-        jcbIdProducto.removeAllItems();
+        jcbProducto.removeAllItems();
         jcbIdCompra.removeAllItems();
-
+        
     }
-
-    private void cargarCombo() {
+    
+    private void cargarComboDefault(DetalleCompra detCompra){
         List<Compra> compras = compraData.listaDeComprasActivas();
+        Compra compraSelec=(Compra) jcbCompra.getSelectedItem();
+        jcbIdCompra.addItem(compraSelec);
         for (Compra item : compras)
         {
-            jcbIdCompra.addItem(item);
+            if(compraSelec.getIdCompra()!=item.getIdCompra()){
+                jcbIdCompra.addItem(item);
+            }
+            
+        }
+        List<Producto> productos = prodData.listaDeProductosActivos();
+        Producto producto=detCompra.getProducto();
+        jcbProducto.addItem(producto);
+        for (Producto item : productos)
+        {
+            if(producto.getIdProducto()!=item.getIdProducto())
+            jcbProducto.addItem(item);
+            
+        }
+    }
+    
+    private void cargarCombo() {
+        List<Compra> compras = compraData.listaDeComprasActivas();
 
+        for (Compra item : compras)
+        {
+                jcbIdCompra.addItem(item);
+            
         }
         List<Producto> productos = prodData.listaDeProductosActivos();
         for (Producto item : productos)
         {
-            jcbIdProducto.addItem(item);
-
+            jcbProducto.addItem(item);
         }
     }
 }

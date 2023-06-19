@@ -36,6 +36,14 @@ public class Venta {
         this.cliente = cliente;
     }
 
+    public Venta(int idVenta, LocalDate fecha, Cliente cliente) {
+        this.idVenta = idVenta;
+        this.fecha = fecha;
+        this.cliente = cliente;
+    }
+    
+    
+
     public int getIdVenta() {
         return idVenta;
     }

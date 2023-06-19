@@ -37,7 +37,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         jtfPrecio = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jtfCantidad = new javax.swing.JTextField();
-        jbtnModificar = new javax.swing.JButton();
+        jtnGuardar = new javax.swing.JButton();
         jbtnSalir = new javax.swing.JButton();
         jbtnBuscar = new javax.swing.JButton();
         jbtnActivar = new javax.swing.JButton();
@@ -47,7 +47,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         jbtnMostrarD = new javax.swing.JButton();
         jcbIdVenta = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jcbIdProducto = new javax.swing.JComboBox<>();
+        jcbProducto = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setText("MODIFICAR DETALLE DE VENTA");
@@ -56,7 +56,18 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
         jLabel4.setText("SELECCIONAR VENTA");
 
+        jcbVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbVentaActionPerformed(evt);
+            }
+        });
+
         jbtnAgregar.setText("AGREGAR DETALLE");
+        jbtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("NRO. VENTA");
 
@@ -64,14 +75,19 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
         jLabel7.setText("CANTIDAD");
 
-        jbtnModificar.setText("GUARDAR");
-        jbtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        jtnGuardar.setText("GUARDAR");
+        jtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnModificarActionPerformed(evt);
+                jtnGuardarActionPerformed(evt);
             }
         });
 
         jbtnSalir.setText("SALIR");
+        jbtnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSalirActionPerformed(evt);
+            }
+        });
 
         jbtnBuscar.setText("BUSCAR");
         jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,8 +97,18 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         });
 
         jbtnActivar.setText("ACTIVAR VENTA");
+        jbtnActivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnActivarActionPerformed(evt);
+            }
+        });
 
         jbtnAnular.setText("ANULAR VENTA");
+        jbtnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAnularActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("SELECCIONAR DETALLE");
 
@@ -132,10 +158,10 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
                                 .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jtfPrecio)
-                            .addComponent(jcbIdProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jcbProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtnModificar)
+                        .addComponent(jtnGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(jbtnSalir)))
                 .addGap(32, 32, 32))
@@ -184,11 +210,11 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jcbIdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnSalir)
-                    .addComponent(jbtnModificar))
+                    .addComponent(jtnGuardar))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -216,15 +242,16 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
         activarCamposDetalle();
-
+        cargarDetalles(((Venta)jcbVenta.getSelectedItem()).getIdVenta());
         DetalleVenta detalleV = (DetalleVenta) jcbDetalleV.getSelectedItem();
         jtfCantidad.setText(detalleV.getCantidad() + "");
         jtfPrecio.setText(detalleV.getPrecioVenta() + "");
+        
+        cargarComboDefault(detalleV);
 
-        cargarCombo();
     }//GEN-LAST:event_jbtnMostrarDActionPerformed
 
-    private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
+    private void jtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtnGuardarActionPerformed
         
         int cant = 0;
         boolean cantSi = false;
@@ -248,23 +275,12 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para la cantidad.", "Error", JOptionPane.ERROR_MESSAGE);
             jtfPrecio.setText("");
         }
-        int idVenta = 0;
-        int idProducto = 0;
-        Producto p=null;
-        try
-        {
-            p = (Producto) jcbIdProducto.getSelectedItem();
-//            idProducto = p.getIdProducto();
-
-        } catch (NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Error en producto" + e.getMessage());
-
-        }
-        Venta venta=null;
+        
+        Producto p=(Producto) jcbProducto.getSelectedItem();
+     
         if (cantSi && precioSi)
         {
-
+            Venta venta=null;
             DetalleVenta detalleVenta = (DetalleVenta) jcbDetalleV.getSelectedItem();
             if (detalleVenta == null)
             {
@@ -275,17 +291,53 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
             } else
             {
-                venta = (Venta) jcbIdVenta.setSelectedItem();
-                idVenta = c.getIdVenta();
-                int idDetalle = detalleCompra.getIdDetalle();
-                DetalleCompra det = new DetalleCompra(idDetalle, cant, precio, compra, p);
-                dCompra.modificarDetalleCompra(det);
+                venta = (Venta) jcbIdVenta.getSelectedItem();
+                int idDetalle = detalleVenta.getIdDetalleVenta();
+                DetalleVenta det = new DetalleVenta(idDetalle, cant, precio, venta, p);
+                dVenta.modificarDetalleVenta(det);
                 limpiar();
             }
-            jcbIdCompra.removeAllItems();
-            jcbIdProducto.removeAllItems();
+            jcbIdVenta.removeAllItems();
+            jcbProducto.removeAllItems();
         }
-    }//GEN-LAST:event_jbtnModificarActionPerformed
+    }//GEN-LAST:event_jtnGuardarActionPerformed
+
+    private void jcbVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVentaActionPerformed
+        if (evt.getSource() == jcbVenta)
+        {
+            actualizarVistaDetalle();
+            if (jcbDetalleV.getSelectedItem() == null)
+            {
+                jbtnMostrarD.setEnabled(false);
+            }
+        }    }//GEN-LAST:event_jcbVentaActionPerformed
+
+    private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtnSalirActionPerformed
+
+    private void jbtnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAnularActionPerformed
+        Venta venta = (Venta) jcbVenta.getSelectedItem();
+        int idVenta = venta.getIdVenta();
+        ventaData.modificarEstadoVenta(idVenta, 0);
+        actualizarVistaVenta();
+    }//GEN-LAST:event_jbtnAnularActionPerformed
+
+    private void jbtnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnActivarActionPerformed
+        Venta venta = (Venta) jcbVenta.getSelectedItem();
+        int idVenta = venta.getIdVenta();
+        ventaData.modificarEstadoVenta(idVenta, 1);
+        actualizarVistaVenta();
+    }//GEN-LAST:event_jbtnActivarActionPerformed
+
+    private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
+        activarCamposDetalle();
+        jcbIdVenta.setEnabled(false);
+        jcbDetalleV.removeAllItems();
+        cargarCombo();
+        jcbIdVenta.removeAllItems();
+
+    }//GEN-LAST:event_jbtnAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,23 +355,23 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnAgregar;
     private javax.swing.JButton jbtnAnular;
     private javax.swing.JButton jbtnBuscar;
-    private javax.swing.JButton jbtnModificar;
     private javax.swing.JButton jbtnMostrarD;
     private javax.swing.JButton jbtnSalir;
     private javax.swing.JComboBox<DetalleVenta> jcbDetalleV;
-    private javax.swing.JComboBox<Producto> jcbIdProducto;
     private javax.swing.JComboBox<Venta> jcbIdVenta;
+    private javax.swing.JComboBox<Producto> jcbProducto;
     private javax.swing.JComboBox<Venta> jcbVenta;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTextField jtfCantidad;
     private javax.swing.JTextField jtfPrecio;
+    private javax.swing.JButton jtnGuardar;
     // End of variables declaration//GEN-END:variables
 
     private void inicio() {
         jcbDetalleV.setEnabled(false);
         jtfCantidad.setEnabled(false);
         jtfPrecio.setEnabled(false);
-        jcbIdProducto.setEnabled(false);
+        jcbProducto.setEnabled(false);
         jcbIdVenta.setEnabled(false);    }
 
     private void cargarVentas(LocalDate fecha) {
@@ -345,11 +397,11 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
     private void activarCamposDetalle() {
         jtfCantidad.setEnabled(true);
         jtfPrecio.setEnabled(true);
-        jcbIdProducto.setEnabled(true);
+        jcbProducto.setEnabled(true);
         jcbIdVenta.setEnabled(true);
         jtfCantidad.setText("");
         jtfPrecio.setText("");
-        jcbIdProducto.removeAllItems();
+        jcbProducto.removeAllItems();
         jcbIdVenta.removeAllItems();    }
 
     private void cargarCombo() {
@@ -362,7 +414,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         List<Producto> productos = prodData.listaDeProductosActivos();
         for (Producto item : productos)
         {
-            jcbIdProducto.addItem(item);
+            jcbProducto.addItem(item);
 
         }    }
 
@@ -370,4 +422,50 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
        jtfCantidad.setText("");
         jtfPrecio.setText("");
         jdcFecha.getCalendar();    }
+
+    private void actualizarVistaDetalle() {
+        Venta ventaSelec = (Venta) jcbVenta.getSelectedItem();
+        if (ventaSelec != null)
+        {
+            cargarDetalles(ventaSelec.getIdVenta());
+
+            boolean estado = ventaSelec.isEstado();
+            jbtnAnular.setEnabled(estado);
+            jbtnMostrarD.setEnabled(estado);
+            jbtnAgregar.setEnabled(estado);
+            jbtnActivar.setEnabled(!estado);
+        }    
+    }
+
+    private void actualizarVistaVenta() {
+        Date date = jdcFecha.getDate();
+        if (date != null)
+        {
+            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            jcbDetalleV.setEnabled(true);
+            cargarVentas(fecha);
+        }
+
+        actualizarVistaDetalle();    }
+
+    private void cargarComboDefault(DetalleVenta detalleV) {
+        List<Venta> ventas = ventaData.listaDeVentasActivas();
+        Venta ventaSelec=(Venta) jcbVenta.getSelectedItem();
+        jcbIdVenta.addItem(ventaSelec);
+        for (Venta item : ventas)
+        {
+            if(ventaSelec.getIdVenta()!=item.getIdVenta()){
+                jcbIdVenta.addItem(item);
+            }
+            
+        }
+        List<Producto> productos = prodData.listaDeProductosActivos();
+        Producto producto=detalleV.getProducto();
+        jcbProducto.addItem(producto);
+        for (Producto item : productos)
+        {
+            if(producto.getIdProducto()!=item.getIdProducto())
+            jcbProducto.addItem(item);
+            
+        }    }
 }

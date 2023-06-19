@@ -63,12 +63,12 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jtfPrecio" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jcbIdProducto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jcbProducto" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jbtnModificar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtnGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbtnSalir" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -130,12 +130,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbIdProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbProducto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
@@ -169,6 +169,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbVentaActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Venta&gt;"/>
       </AuxValues>
@@ -177,6 +180,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="AGREGAR DETALLE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAgregarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -197,18 +203,21 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtfCantidad">
     </Component>
-    <Component class="javax.swing.JButton" name="jbtnModificar">
+    <Component class="javax.swing.JButton" name="jtnGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="GUARDAR"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnModificarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtnGuardarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="SALIR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnSalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnBuscar">
       <Properties>
@@ -222,11 +231,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ACTIVAR VENTA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnActivarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnAnular">
       <Properties>
         <Property name="text" type="java.lang.String" value="ANULAR VENTA"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAnularActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -266,7 +281,7 @@
         <Property name="text" type="java.lang.String" value="COD. PRODUCTO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcbIdProducto">
+    <Component class="javax.swing.JComboBox" name="jcbProducto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>

@@ -59,7 +59,7 @@ public class ProductoData {
     public Producto buscarProducto(int id) {
 
         Producto p = null;
-        String sql = "SELECT * FROM producto WHERE idProducto=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
+        String sql = "SELECT * FROM producto WHERE idProducto=? AND estado = 1";//creamos la consulta a enviar
 
         PreparedStatement ps = null;
         try

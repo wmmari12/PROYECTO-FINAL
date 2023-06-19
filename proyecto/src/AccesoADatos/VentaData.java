@@ -81,6 +81,27 @@ public class VentaData {
     return v;
 }
     
+    public void modificarEstadoVenta(int id,int estado){
+        
+        try{
+            String sql="UPDATE venta SET estado=? WHERE idVenta=?";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, estado);
+            ps.setInt(2, id);
+            
+            int fila=ps.executeUpdate();
+            
+            if(fila==1){
+                 System.out.println("La venta ha sido modificada");
+            }else{
+                System.out.println("La venta no ha sido encontrada");            }
+            ps.close(); 
+        }catch(SQLException ex){
+            System.out.println("Error al anular compra: "+ex.getMessage());
+        }
+        
+    }
+    
     public Venta obtenerVentaPorId(int id){
         
         Venta v = null;
@@ -143,6 +164,7 @@ public class VentaData {
 
         return listaVentas;
     }
+    
     public List<Venta> listaDeVentas(){
         
         List<Venta> ventas = new ArrayList<>();
@@ -182,7 +204,7 @@ public class VentaData {
                 LocalDate fecha = rs.getDate("fecha").toLocalDate();
                 Cliente cliente=clienteD.obtenerClientePorId(rs.getInt("idCliente"));
                 
-                Venta venta = new Venta(fecha,cliente);
+                Venta venta = new Venta(idVta,fecha,cliente);
                 ventas.add(venta);
             }
         }catch (SQLException ex) {

@@ -38,6 +38,7 @@ public class DetalleVData {
             ps.setInt(4, dv.getProducto().getIdProducto());
             
             ProductoData productoD = new ProductoData();
+
             int stock = productoD.stockProducto(dv.getProducto().getIdProducto());
             if (dv.getCantidad() <= stock)
             {
@@ -113,14 +114,30 @@ public class DetalleVData {
             ps.setInt(3, dv.getVenta().getIdVenta());
             ps.setInt(4, dv.getProducto().getIdProducto());
             ps.setInt(5, dv.getIdDetalleVenta());
-            int filas = ps.executeUpdate();
-            if (filas == 1)
+            
+            ProductoData productoD = new ProductoData();
+            int stock = productoD.stockProducto(dv.getProducto().getIdProducto());
+            if (dv.getCantidad() <= stock)
             {
-                JOptionPane.showMessageDialog(null, "Detalle de venta modificada");
+
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+
+                if (rs.next())
+                {
+
+                    dv.setIdDetalleVenta(rs.getInt(1));
+                    //Flag= 1-venta 2-compra
+                    productoD.modificarStock(dv.getCantidad(), dv.getProducto().getIdProducto(), 1);
+                    JOptionPane.showMessageDialog(null, "Detalle creado");
+                }
+
             } else
             {
-                JOptionPane.showMessageDialog(null, "No se encontro la venta!" + ps.toString());
+                JOptionPane.showMessageDialog(null, "Stock insuficiente");
             }
+            
+            
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
         {

@@ -177,7 +177,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     private void jMenuItemDetalleVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDetalleVActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();//removemos todo
+        escritorio.repaint();
+        ViewModificarVenta vmv=new ViewModificarVenta();//crer nueva ventana
+        vmv.setVisible(true);//hacerla visible
+        escritorio.add(vmv);//agregarla al escritorio
+        escritorio.moveToFront(vmv);//llevarla al frente
     }//GEN-LAST:event_jMenuItemDetalleVActionPerformed
 
     private void jMenuItemVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVentaActionPerformed
