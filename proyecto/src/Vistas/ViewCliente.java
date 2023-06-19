@@ -250,21 +250,30 @@ public class ViewCliente extends javax.swing.JInternalFrame {
                     if(dni.length()!=8 && dni.length()!=7){
                      JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
                      jtfDni.setText(""); // Limpiar el campo JTextField
+                     return;
                     }
                     
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI ", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             try{
-                long num1=Long.parseLong(jtfTelefono.getText());
+                
+                long num=Long.parseLong(telefono);
+                if(telefono.length()<10 || telefono.length()>15){
+                    JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un telefono válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                     jtfTelefono.setText(""); // Limpiar el campo JTextField
+                     return;
+                }
             } catch (NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             Cliente cliente = new Cliente(dni, apellido, nombre, domicilio, telefono, estado);
             clienteData.guardarCliente(cliente);
             jtfIdCliente.setText(cliente.getIdCliente() + "");
-        
+            JOptionPane.showMessageDialog(this, "Cliente añadido!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());

@@ -43,10 +43,10 @@ public class ClienteData {
             
             if(rs.next()){
                 c.setIdCliente(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Cliente añadido.");
+                System.out.println("Cliente añadido.");
             } else
             {
-                JOptionPane.showMessageDialog(null, "El cliente no pudo ser ingresado.");
+                System.out.println("Cliente no añadido.");
             }
             ps.close();
             
@@ -72,9 +72,9 @@ public class ClienteData {
             
             int filas=ps.executeUpdate();
             if(filas>0){
-                JOptionPane.showMessageDialog(null, "Cliente modificado");
+                System.out.println("Cliente modificado.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!"+ps.toString());
+                System.out.println("No se encontro el cliente!"+ps.toString());
             }
         ps.close();//cerramos la conexion
     }catch(SQLException ex){
@@ -92,9 +92,9 @@ public class ClienteData {
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El cliente ha sido dado de baja.");
+                 System.out.println("El cliente ha sido dado de baja.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+                System.out.println("No se encontro el cliente!");
             }
             ps.close(); 
         }catch(SQLException ex){
@@ -112,9 +112,9 @@ public class ClienteData {
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El cliente ha sido dado de alta.");
+                 System.out.println("El cliente ha sido dado de alta.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+                System.out.println("No se encontro el cliente!");
             }
             ps.close(); 
         }catch(SQLException ex){
@@ -143,7 +143,7 @@ public class ClienteData {
                 c.setTelefono(rs.getString("telefono"));
                 c.setEstado(rs.getBoolean("estado"));
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+                JOptionPane.showMessageDialog(null, "No se encontro el cliente con el DNI ingresado.");
             }
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al obtener Cliente: "+ex.getMessage());        }
@@ -170,7 +170,7 @@ public class ClienteData {
                 c.setTelefono(rs.getString("telefono"));
                 c.setEstado(rs.getBoolean("estado"));
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+                JOptionPane.showMessageDialog(null, "No se encontro el cliente.");
             }
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al obtener Cliente: "+ex.getMessage());        }
