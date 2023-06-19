@@ -143,6 +143,32 @@ public class ProveedorData {
 
         return p;
     }
+    
+    public Proveedor obtenerProveedorPorId(int id) {
+        
+        Proveedor p = null;
+        String sql = "SELECT * FROM proveedor WHERE idProveedor = ?";
+        PreparedStatement ps=null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                p= new Proveedor();
+                p.setIdProveedor(id);
+                p.setRazonSocial(rs.getString("razonSocial"));
+                p.setDomicilio(rs.getString("domicilio"));
+                p.setTelefono(rs.getString("telefono"));
+                p.setEstado(rs.getBoolean("estado"));
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
+            }
+        } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener el Proveedor: "+ex.getMessage());        }
+
+        return p;
+    }
 
      
     public List<Proveedor> listaDeProveedores() {

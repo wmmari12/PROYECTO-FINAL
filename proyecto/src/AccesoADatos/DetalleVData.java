@@ -5,12 +5,8 @@
  */
 package AccesoADatos;
 
-import Clases.DetalleVenta;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Clases.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -38,11 +34,11 @@ public class DetalleVData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dv.getCantidad());
             ps.setDouble(2, dv.getPrecioVenta());
-            ps.setInt(3, dv.getIdVenta());
-            ps.setInt(4, dv.getIdProducto());
+            ps.setInt(3, dv.getVenta().getIdVenta());
+            ps.setInt(4, dv.getProducto().getIdProducto());
             
             ProductoData productoD = new ProductoData();
-            int stock = productoD.stockProducto(dv.getIdProducto());
+            int stock = productoD.stockProducto(dv.getProducto().getIdProducto());
             if (dv.getCantidad() <= stock)
             {
 
@@ -54,7 +50,7 @@ public class DetalleVData {
 
                     dv.setIdDetalleVenta(rs.getInt(1));
                     //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
-                    productoD.modificarStock(dv.getCantidad(), dv.getIdProducto(), 1);
+                    productoD.modificarStock(dv.getCantidad(), dv.getProducto().getIdProducto(), 1);
                     JOptionPane.showMessageDialog(null, "Detalle creado");
                 }
 
@@ -88,8 +84,12 @@ public class DetalleVData {
                 dv.setIdDetalleVenta(rs.getInt("idDetalleVenta"));
                 dv.setCantidad(rs.getInt("cantidad"));
                 dv.setPrecioVenta(rs.getDouble("precioVenta"));
-                dv.setIdVenta(rs.getInt("idVenta"));
-                dv.setIdProducto(rs.getInt("idProducto"));
+                Venta v = vd.obtenerVentaPorId(rs.getInt("idVenta"));
+                dv.setVenta(v);
+                
+                Producto p=pd.buscarProducto(rs.getInt("idProducto"));
+                dv.setProducto(p);
+
                 detalles.add(dv);
             }
 
@@ -110,8 +110,8 @@ public class DetalleVData {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
             ps.setInt(1, dv.getCantidad());
             ps.setDouble(2, dv.getPrecioVenta());
-            ps.setInt(3, dv.getIdVenta());
-            ps.setInt(4, dv.getIdProducto());
+            ps.setInt(3, dv.getVenta().getIdVenta());
+            ps.setInt(4, dv.getProducto().getIdProducto());
             ps.setInt(5, dv.getIdDetalleVenta());
             int filas = ps.executeUpdate();
             if (filas == 1)

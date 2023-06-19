@@ -75,7 +75,7 @@ public class Proveedor {
 
     @Override
     public String toString() {
-        return "Razon Social= " +razonSocial + "/Legajo= " + idProveedor ;
+        return "Razon Social= " +razonSocial + "--Legajo= " + idProveedor ;
     }
     
     

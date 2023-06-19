@@ -5,21 +5,17 @@
  */
 package AccesoADatos;
 
-import Clases.DetalleCompra;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Clases.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DetalleCData {
-      private Connection con = null;
+    private Connection con = null;
       
     private ProductoData pd=new ProductoData();
-    private CompraData vd = new CompraData();
+    private CompraData cd = new CompraData();
     public DetalleCData() {
         
     
@@ -37,8 +33,8 @@ public class DetalleCData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dc.getCantidad());
             ps.setDouble(2, dc.getPrecioCosto());
-            ps.setInt(3, dc.getIdCompra());
-            ps.setInt(4, dc.getIdProducto());
+            ps.setInt(3, dc.getCompra().getIdCompra());
+            ps.setInt(4, dc.getProducto().getIdProducto());
             
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
@@ -47,7 +43,7 @@ public class DetalleCData {
                 dc.setIdDetalle(rs.getInt(1));
                 ProductoData productoD= new ProductoData();
                 //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
-                productoD.modificarStock(dc.getCantidad(),dc.getIdProducto(),2);
+                productoD.modificarStock(dc.getCantidad(),dc.getProducto().getIdProducto(),2);
                 //JOptionPane.showMessageDialog(null, "Detalle creado");
             } else
             {
@@ -74,12 +70,17 @@ public class DetalleCData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                dc = new DetalleCompra();
+                dc=new DetalleCompra();
                 dc.setIdDetalle(rs.getInt("idDetalle"));
                 dc.setCantidad(rs.getInt("cantidad"));
                 dc.setPrecioCosto(rs.getDouble("precioCosto"));
-                dc.setIdCompra(rs.getInt("idCompra"));
-                dc.setIdProducto(rs.getInt("idProducto"));
+                
+                Compra c = cd.obtenerComprasPorId(rs.getInt("idCompra"));
+                
+                dc.setCompra(c);
+                
+                Producto p=pd.buscarProducto(rs.getInt("idProducto"));
+                dc.setProducto(p);
                 detalles.add(dc);
             }
 
@@ -88,7 +89,6 @@ public class DetalleCData {
 
         return detalles;
     }
-    
     
     public DetalleCompra modificarDetalleCompra(DetalleCompra dc) { 
 
@@ -99,8 +99,8 @@ public class DetalleCData {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
             ps.setInt(1, dc.getCantidad());
             ps.setDouble(2, dc.getPrecioCosto());
-            ps.setInt(3, dc.getIdCompra());
-            ps.setInt(4, dc.getIdProducto());
+            ps.setInt(3, dc.getCompra().getIdCompra());
+            ps.setInt(4, dc.getProducto().getIdProducto());
             ps.setInt(5, dc.getIdDetalle());
             int filas = ps.executeUpdate();
             if (filas == 1)
@@ -108,7 +108,7 @@ public class DetalleCData {
                
                 ProductoData productoD= new ProductoData();
                 //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
-                productoD.modificarStock(dc.getCantidad(),dc.getIdProducto(),2);
+                productoD.modificarStock(dc.getCantidad(),dc.getProducto().getIdProducto(),2);
                 JOptionPane.showMessageDialog(null, "Detalle creado");
             
                 JOptionPane.showMessageDialog(null, "Detalle de Compra modificada");

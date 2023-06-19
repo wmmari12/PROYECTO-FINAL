@@ -12,7 +12,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
     private CompraData compraData = new CompraData();
     private ProductoData prodData = new ProductoData();
     private List<Compra> compras;
-    private List<DetalleCompra> detallesCompra;
+    //private List<DetalleCompra> detallesCompra;
 
     public ViewModificarCompra() {
         initComponents();
@@ -302,25 +302,26 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
         }
         int idCompra = 0;
         int idProducto = 0;
+        Producto p=null;
         try
         {
-            Producto p = (Producto) jcbIdProducto.getSelectedItem();
+            p = (Producto) jcbIdProducto.getSelectedItem();
             idProducto = p.getIdProducto();
 
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(null, "Error en id--" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error en producto" + e.getMessage());
 
         }
-
+        Compra compra=null;
         if (cantSi && precioSi)
         {
 
             DetalleCompra detalleCompra = (DetalleCompra) jcbDetalleC.getSelectedItem();
             if (detalleCompra == null)
             {
-                idCompra = ((Compra) jcbCompra.getSelectedItem()).getIdCompra();
-                DetalleCompra det = new DetalleCompra(cant, precio, idCompra, idProducto);
+                compra = (Compra) jcbCompra.getSelectedItem();
+                DetalleCompra det = new DetalleCompra(cant, precio, compra, p);
                 dCompra.guardarDetalleCompra(det);
                 limpiar();
 
@@ -329,7 +330,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
                 Compra c = (Compra) jcbIdCompra.getSelectedItem();
                 idCompra = c.getIdCompra();
                 int idDetalle = detalleCompra.getIdDetalle();
-                DetalleCompra det = new DetalleCompra(idDetalle, cant, precio, idCompra, idProducto);
+                DetalleCompra det = new DetalleCompra(idDetalle, cant, precio, compra, p);
                 dCompra.modificarDetalleCompra(det);
                 limpiar();
             }

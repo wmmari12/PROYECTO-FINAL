@@ -6,44 +6,36 @@
 package Clases;
 
 import java.time.LocalDate;
-import java.util.logging.Logger;
 
 
 public class Venta {
     
     private int idVenta;
     private LocalDate fecha;
-    private int idCliente;
+    private Cliente cliente;
     private boolean estado;
 
     public Venta() {
     }
 
-    public Venta(int idVenta, LocalDate fecha, int idCliente, boolean estado) {
+    public Venta(int idVenta, LocalDate fecha, Cliente cliente, boolean estado) {
         this.idVenta = idVenta;
         this.fecha = fecha;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.estado = estado;
     }
 
-    public Venta(LocalDate fecha, int idCliente, boolean estado) {
+    public Venta(LocalDate fecha, Cliente cliente, boolean estado) {
         this.fecha = fecha;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.estado = estado;
     }
 
-    public Venta(LocalDate fecha, int idCliente) {
+    public Venta(LocalDate fecha, Cliente cliente) {
         this.fecha = fecha;
-        this.idCliente = idCliente;    }
-
-    public boolean isEstado() {
-        return estado;
+        this.cliente = cliente;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-    
     public int getIdVenta() {
         return idVenta;
     }
@@ -60,17 +52,27 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", fecha=" + fecha + ", idCliente=" + idCliente + ", estado=" + estado + '}';
+        return "Venta Nº " + idVenta ;
     }
     
     

@@ -12,40 +12,29 @@ public class Compra {
     
     private int idCompra;
     private LocalDate fecha;
-    private int idProveedor;//idproveedor como en la BD;
+    private Proveedor proveedor;//idproveedor como en la BD;
     private boolean estado;
 
     public Compra() {
     }
 
-    public Compra(int idCompra, LocalDate fecha, int idProveedor, boolean estado) {
+    public Compra(int idCompra, LocalDate fecha, Proveedor proveedor, boolean estado) {
         this.idCompra = idCompra;
         this.fecha = fecha;
-        this.idProveedor = idProveedor;
+        this.proveedor = proveedor;
         this.estado = estado;
     }
 
-    public Compra(LocalDate fecha, int idProveedor, boolean estado) {
+    public Compra(LocalDate fecha, Proveedor proveedor, boolean estado) {
         this.fecha = fecha;
-        this.idProveedor = idProveedor;
+        this.proveedor = proveedor;
         this.estado = estado;
     }
 
-    public Compra(LocalDate fecha, int idProveedor) {
+    public Compra(LocalDate fecha, Proveedor proveedor) {
         this.fecha = fecha;
-        this.idProveedor = idProveedor;
+        this.proveedor = proveedor;
     }
-    
-    
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
 
     public int getIdCompra() {
         return idCompra;
@@ -63,14 +52,23 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public int getIdProveedor() {
-        return idProveedor;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    
     @Override
     public String toString() {
         String estadoStr = estado ? "" : " (anulada)";

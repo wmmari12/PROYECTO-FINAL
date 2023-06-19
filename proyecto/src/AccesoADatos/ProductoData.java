@@ -88,6 +88,7 @@ public class ProductoData {
         }
         return p;
     }
+    
     public int stockProducto(int id) {
         
         int stock=0;

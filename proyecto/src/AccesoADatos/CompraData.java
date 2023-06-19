@@ -6,6 +6,7 @@
 package AccesoADatos;
 
 import Clases.Compra;
+import Clases.Proveedor;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,12 +21,19 @@ import javax.swing.JOptionPane;
 
 public class CompraData {
     
+    private ProveedorData proveedorD=new ProveedorData();
+    
     private Connection con = null;
 
     public CompraData() {
 
         con = Conexion.getConexion();
 
+    }
+    
+    private Proveedor nuevoProveedor(int id){
+        ProveedorData proveedor=new ProveedorData();
+        return proveedor.obtenerProveedorPorId(id);
     }
     
     public void hacerCompra(Compra c){
@@ -35,7 +43,7 @@ public class CompraData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setDate(1, Date.valueOf(c.getFecha()));
-            ps.setInt(2, c.getIdProveedor());
+            ps.setInt(2, c.getProveedor().getIdProveedor());
             ps.setBoolean(3, true);
             
             ps.executeUpdate();
@@ -64,7 +72,7 @@ public class CompraData {
             ps = con.prepareStatement(sql);
             
             ps.setDate(1, Date.valueOf(c.getFecha()));
-            ps.setInt(2, c.getIdProveedor());
+            ps.setInt(2, c.getProveedor().getIdProveedor());
             ps.setBoolean(3, c.isEstado());
             ps.setInt(4, c.getIdCompra());
             
@@ -89,7 +97,7 @@ public class CompraData {
         List<Compra> listaCompras = new ArrayList<>();
         
         Compra c = null;
-        String sql = "SELECT * FROM compra WHERE fecha=?";
+        String sql = "SELECT * FROM compra WHERE fecha=? AND estado=1";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);
@@ -100,7 +108,10 @@ public class CompraData {
                 c = new Compra();
                 c.setIdCompra(rs.getInt("idCompra"));
                 c.setFecha(rs.getDate("fecha").toLocalDate());
-                c.setIdProveedor(rs.getInt("idProveedor"));
+                
+                Proveedor p= nuevoProveedor(rs.getInt("idProveedor"));
+                c.setProveedor(p);
+                
                 c.setEstado(rs.getBoolean("estado"));
                 listaCompras.add(c);
 //          
@@ -126,10 +137,11 @@ public class CompraData {
             while(rs.next()) {
                 int idComp = rs.getInt("idCompra");
                 LocalDate fecha = rs.getDate("fecha").toLocalDate();
-                int idProv = rs.getInt("idProveedor");
+                
+                Proveedor p= proveedorD.obtenerProveedorPorId(rs.getInt("idProveedor"));
                 boolean estado=rs.getBoolean("estado");
                 
-                Compra compra = new Compra(idComp, fecha, idProv,estado);
+                Compra compra = new Compra(idComp, fecha, p,estado);
                 compras.add(compra);
             }
             ps.close();
@@ -150,10 +162,10 @@ public class CompraData {
             while(rs.next()) {
                 int idComp = rs.getInt("idCompra");
                 LocalDate fecha = rs.getDate("fecha").toLocalDate();
-                int idProv = rs.getInt("idProveedor");
+                Proveedor p= proveedorD.obtenerProveedorPorId(rs.getInt("idProveedor"));
                 boolean estado=rs.getBoolean("estado");
                 
-                Compra compra = new Compra(idComp, fecha, idProv,estado);
+                Compra compra = new Compra(idComp, fecha, p,estado);
                 compras.add(compra);
             }
             ps.close();
@@ -162,6 +174,35 @@ public class CompraData {
         }
 
         return compras;
+    }
+    public Compra obtenerComprasPorId(int id){
+        
+        Compra c = null;
+        String sql = "SELECT * FROM compra WHERE idCompra=?";
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                c = new Compra();
+                c.setIdCompra(id);
+                c.setFecha(rs.getDate("fecha").toLocalDate());
+                
+                Proveedor p= nuevoProveedor(rs.getInt("idProveedor"));
+                c.setProveedor(p);
+                
+                c.setEstado(rs.getBoolean("estado"));
+                
+//          
+            }
+            
+            ps.close();
+        }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener compras: "+ex.getMessage());        }
+
+        return c;
     }
     
     public void modificarEstadoCompra(int id,int estado){

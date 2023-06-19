@@ -56,8 +56,6 @@ public class ViewVenta extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jbtnNvaVenta = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jtfIdProducto = new javax.swing.JTextField();
         jbtnBuscar = new javax.swing.JButton();
@@ -115,19 +113,6 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         jLabel8.setText("INGRESAR CODIGO");
 
         jbtnBuscar.setText("BUSCAR");
@@ -162,7 +147,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jtfIdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,10 +181,6 @@ public class ViewVenta extends javax.swing.JInternalFrame {
                                 .addGap(8, 8, 8))
                             .addComponent(jbtnAgregar, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,9 +255,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
                         .addComponent(jbtnNvaVenta)
                         .addGap(18, 18, 18)
                         .addComponent(jbtnSalir)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 58, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(17, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,9 +268,12 @@ public class ViewVenta extends javax.swing.JInternalFrame {
 
     private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
         // TODO add your handling code here:
+        Venta venta=new Venta();
+
         try
         {
             int idVenta = Integer.parseInt(jtfIdVenta.getText());
+            venta=ventaData.obtenerVentaPorId(idVenta);
             int idProd = 0;
             boolean idNum = false;
             try
@@ -334,7 +316,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             {
                 jtfTotal.setText(total + "");
                 jtfTotal.setEditable(false);
-                DetalleVenta detalleVenta = new DetalleVenta(cant, precio, idVenta, prodSelec.getIdProducto());
+                DetalleVenta detalleVenta = new DetalleVenta(cant, precio, venta, prodSelec);
                 detVenta.guardarDetalleVta(detalleVenta);
                 limpiar();
                 //habilitamos las opciones de la venta de productos y cargammos los productos
@@ -362,7 +344,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             Cliente clienteSelec = (Cliente) jcbCliente.getSelectedItem();
 
             System.out.println("Entre");
-            Venta venta = new Venta(fecha, clienteSelec.getIdCliente());
+            Venta venta = new Venta(fecha, clienteSelec);
             ventaData.realizarVenta(venta);
             jtfIdVenta.setText(venta.getIdVenta() + "");
             //habilitamos las opciones de la venta de productos y cargammos los productos
@@ -449,8 +431,6 @@ public class ViewVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnAgregar;
     private javax.swing.JButton jbtnBuscar;
     private javax.swing.JButton jbtnGuardar;

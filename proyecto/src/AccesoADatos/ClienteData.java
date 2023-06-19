@@ -150,6 +150,33 @@ public class ClienteData {
 
         return c;
     }
+    public Cliente obtenerClientePorId(int id) {
+        
+        Cliente c = null;
+        String sql = "SELECT * FROM cliente WHERE idCliente = ?";
+        PreparedStatement ps=null;
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                c= new Cliente();
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setDni(rs.getString("dni"));
+                c.setApellido(rs.getString("apellido"));
+                c.setNombre(rs.getString("nombre"));
+                c.setDomicilio(rs.getString("domicilio"));
+                c.setTelefono(rs.getString("telefono"));
+                c.setEstado(rs.getBoolean("estado"));
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+            }
+        } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener Cliente: "+ex.getMessage());        }
+
+        return c;
+    }
      
     public List<Cliente> listaDeClientes() {
         
