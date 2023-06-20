@@ -233,7 +233,7 @@ public class ViewCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
-        
+
         try
         {
 
@@ -244,32 +244,38 @@ public class ViewCliente extends javax.swing.JInternalFrame {
             Boolean estado = jcbEstado.isSelected();
             String dni = jtfDni.getText();
 
-            try{
+            try
+            {
                 int num = Integer.parseInt(dni);
-                
-                    if(dni.length()!=8 && dni.length()!=7){
-                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                     jtfDni.setText(""); // Limpiar el campo JTextField
-                     return;
-                    }
-                    
-            } catch (NumberFormatException e){
+
+                if (dni.length() != 8 && dni.length() != 7)
+                {
+                    JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfDni.setText(""); // Limpiar el campo JTextField
+                    return;
+                }
+
+            } catch (NumberFormatException e)
+            {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI ", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            try{
-                
-                long num=Long.parseLong(telefono);
-                if(telefono.length()<10 || telefono.length()>15){
+            try
+            {
+
+                long num = Long.parseLong(telefono);
+                if (telefono.length() < 10 || telefono.length() > 15)
+                {
                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un telefono válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                     jtfTelefono.setText(""); // Limpiar el campo JTextField
-                     return;
+                    jtfTelefono.setText(""); // Limpiar el campo JTextField
+                    return;
                 }
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e)
+            {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             Cliente cliente = new Cliente(dni, apellido, nombre, domicilio, telefono, estado);
             clienteData.guardarCliente(cliente);
             jtfIdCliente.setText(cliente.getIdCliente() + "");
@@ -288,142 +294,179 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
 
-            //Obtenemos los datos ingresados por el usuario
-            String dni=jtfDni.getText();
-            try{
-                int num = Integer.parseInt(dni);
-            } catch (NumberFormatException e)
+        //Obtenemos los datos ingresados por el usuario
+        int id = Integer.parseInt(jtfIdCliente.getText());
+        String nombre = jtfNombre.getText();
+        String apellido = jtfApellido.getText();
+        String dom = jtfDomicilio.getText();
+        String telefono = jtfTelefono.getText();
+        Boolean estado = jcbEstado.isSelected();
+        String dni = jtfDni.getText();
+        try
+        {
+            int num = Integer.parseInt(dni);
+            if (dni.length() != 8 && dni.length() != 7)
             {
-                JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfDni.setText(""); // Limpiar el campo JTextField
+                return;
             }
-            try{
-                int num1=Integer.parseInt(jtfTelefono.getText());
-            } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try
+        {
+//                int num1=Integer.parseInt(jtfTelefono.getText());
+            long num = Long.parseLong(telefono);
+            if (telefono.length() < 10 || telefono.length() > 15)
+            {
+                JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un telefono válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfTelefono.setText(""); // Limpiar el campo JTextField
+                return;
             }
-            
-            int id=Integer.parseInt(jtfIdCliente.getText());
-            String nombre = jtfNombre.getText();
-            String apellido = jtfApellido.getText();
-            String dom=jtfDomicilio.getText();
-            String tel=jtfTelefono.getText();
-            Boolean estado = jcbEstado.isSelected(); 
-            
-            //Construye nuevo cliente y lo guarda en la BD
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            Cliente c = new Cliente(id, dni, apellido, nombre, dom, tel, estado);
-            clienteData.modificarCliente(c);
-            limpiar();
-            jtfIdCliente.setText("");
-            jbtnBaja.setEnabled(true);
-            jbtnGuardar.setEnabled(true);
+        //Construye nuevo cliente y lo guarda en la BD
+        Cliente c = new Cliente(id, dni, apellido, nombre, dom, telefono, estado);
+        clienteData.modificarCliente(c);
+        JOptionPane.showMessageDialog(this, "Cliente modificado!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+        jtfIdCliente.setText("");
+        jbtnBaja.setEnabled(true);
+        jbtnGuardar.setEnabled(true);
     }//GEN-LAST:event_jbtnModificarActionPerformed
 
     private void jbtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBajaActionPerformed
         // TODO add your handling code here:
-            String dni=jtfDni.getText();
-            try
+        String dni = jtfDni.getText();
+        try
+        {
+            int num = Integer.parseInt(dni);
+            if (dni.length() != 8 && dni.length() != 7)
             {
-                int num = Integer.parseInt(dni);
-            } catch (NumberFormatException e)
-            {
-                
-                JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
+                JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfDni.setText(""); // Limpiar el campo JTextField
+                return;
             }
-            jtfIdCliente.setEnabled(true);
-            int id=Integer.parseInt(jtfIdCliente.getText());
-            //public void bajaCliente(int id)
-            //Cliente c = new Cliente();
-            clienteData.bajaCliente(id);
-            
-            jbtnBaja.setEnabled(true);
-            jbtnGuardar.setEnabled(true);
-            jbtnLimpiar.setEnabled(true);
-            jbtnModificar.setEnabled(true);
-            limpiar();
+        } catch (NumberFormatException e)
+        {
+
+            JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        jtfIdCliente.setEnabled(true);
+        int id = Integer.parseInt(jtfIdCliente.getText());
+
+        clienteData.bajaCliente(id);
+        JOptionPane.showMessageDialog(this, "El cliente con DNI " + dni + " ha sido dado de baja!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
+        jbtnBaja.setEnabled(true);
+        jbtnGuardar.setEnabled(true);
+        jbtnLimpiar.setEnabled(true);
+        jbtnModificar.setEnabled(true);
+        limpiar();
     }//GEN-LAST:event_jbtnBajaActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
         // TODO add your handling code here:
-            jtfApellido.setText("");
-            jtfNombre.setText("");
-            jtfDni.setText("");
-            jtfDomicilio.setText("");
-            jtfTelefono.setText("");
-            jtfEstado.setText("");
-            jtfIdCliente.setText("");
-            jtfDni.requestFocus();
-            jbtnGuardar.setEnabled(true);
-            jbtnBaja.setEnabled(true);
+        jtfApellido.setText("");
+        jtfNombre.setText("");
+        jtfDni.setText("");
+        jtfDomicilio.setText("");
+        jtfTelefono.setText("");
+        jtfEstado.setText("");
+        jtfIdCliente.setText("");
+        jtfDni.requestFocus();
+        jbtnGuardar.setEnabled(true);
+        jbtnBaja.setEnabled(true);
     }//GEN-LAST:event_jbtnLimpiarActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         // TODO add your handling code here:
         try
         {
-            String dni=jtfDni.getText();
+            String dni = jtfDni.getText();
             try
             {
                 int num = Integer.parseInt(dni);
+                if (dni.length() != 8 && dni.length() != 7)
+                {
+                    JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfDni.setText(""); // Limpiar el campo JTextField
+                    return;
+                }
             } catch (NumberFormatException e)
             {
-                
+
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el DNI.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
+                return;
             }
             Cliente c = new Cliente();
-            c=clienteData.obtenerClientePorDni(dni);
+            c = clienteData.obtenerClientePorDni(dni);
             jtfApellido.setText(c.getApellido());
             jtfNombre.setText(c.getNombre());
             jtfDni.setText(c.getDni());
             jtfDomicilio.setText(c.getDomicilio());
             jtfTelefono.setText(c.getTelefono());
             //jcbEstado.setSelected(c.isEstado());
-            if(c.isEstado()){
+            if (c.isEstado())
+            {
                 jtfEstado.setText("Activo");
                 jbtnAlta.setEnabled(false);
                 jbtnBaja.setEnabled(true);
-            }else{
+            } else
+            {
                 jtfEstado.setText("Inactivo");
                 jbtnAlta.setEnabled(true);
                 jbtnBaja.setEnabled(false);
             }
-            jtfIdCliente.setText(c.getIdCliente()+"");
+            jtfIdCliente.setText(c.getIdCliente() + "");
             jtfIdCliente.setEnabled(false);
             jbtnLimpiar.setEnabled(true);
             jbtnModificar.setEnabled(true);
             jbtnGuardar.setEnabled(false);
-            } catch (Exception ex)
+        } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
             jtfDni.requestFocus();
+            return;
         }
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
         // TODO add your handling code here:
-        String dni=jtfDni.getText();
-            try
-            {
-                int num = Integer.parseInt(dni);
-            } catch (NumberFormatException e)
-            {
-                
-                JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
-            }
-            jtfIdCliente.setEnabled(true);
-            int id=Integer.parseInt(jtfIdCliente.getText());
-            //public void bajaCliente(int id)
-            //Cliente c = new Cliente();
-            clienteData.altaCliente(id);
-            
-            jbtnBaja.setEnabled(true);
-            jbtnGuardar.setEnabled(true);
-            jbtnLimpiar.setEnabled(true);
-            jbtnModificar.setEnabled(true);
-            limpiar();
+        String dni = jtfDni.getText();
+        try
+        {
+            int num = Integer.parseInt(dni);
+            if(dni.length()!=8 && dni.length()!=7){
+                     JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                     jtfDni.setText(""); // Limpiar el campo JTextField
+                     return;
+                    }
+        } catch (NumberFormatException e)
+        {
+
+            JOptionPane.showMessageDialog(null, "Debe  ingresar un numero valido para el DNI para poder modificar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        jtfIdCliente.setEnabled(true);
+        int id = Integer.parseInt(jtfIdCliente.getText());
+
+        clienteData.altaCliente(id);
+        JOptionPane.showMessageDialog(this, "El cliente con DNI " + dni + " ha sido dado de alta!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
+        jbtnBaja.setEnabled(true);
+        jbtnGuardar.setEnabled(true);
+        jbtnLimpiar.setEnabled(true);
+        jbtnModificar.setEnabled(true);
+        limpiar();
     }//GEN-LAST:event_jbtnAltaActionPerformed
 
 
@@ -459,12 +502,12 @@ public class ViewCliente extends javax.swing.JInternalFrame {
 
     private void limpiar() {
         jtfApellido.setText("");
-            jtfNombre.setText("");
-            jtfDni.setText("");
-            jtfDomicilio.setText("");
-            jtfTelefono.setText("");
-            jtfEstado.setText("");
-            jtfIdCliente.setText("");
-            jtfDni.requestFocus();
+        jtfNombre.setText("");
+        jtfDni.setText("");
+        jtfDomicilio.setText("");
+        jtfTelefono.setText("");
+        jtfEstado.setText("");
+        jtfIdCliente.setText("");
+        jtfDni.requestFocus();
     }
 }

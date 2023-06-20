@@ -255,7 +255,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
 
         activarCamposDetalle();
-        cargarDetalles(((Venta)jcbCompra.getSelectedItem()).getIdVenta());
+        cargarDetalles(((Compra)jcbCompra.getSelectedItem()).getIdCompra());
         DetalleCompra detalleC = (DetalleCompra) jcbDetalleC.getSelectedItem();
         jtfCantidad.setText(detalleC.getCantidad() + "");
         jtfPrecio.setText(detalleC.getPrecioCosto() + "");

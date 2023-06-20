@@ -232,6 +232,8 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             
             Compra compra=new Compra(fecha,provSelec);
             compraData.hacerCompra(compra);
+            JOptionPane.showMessageDialog(this, "La compra ha sido realizada!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
             jtfIdCompra.setText(compra.getIdCompra()+"");
             //habilitamos las opciones de la compra de productos y cargamos los productos
             cargaProductos();
@@ -269,10 +271,8 @@ public class ViewCompra extends javax.swing.JInternalFrame {
             jtfPrecio.setEditable(false);
             DetalleCompra detalleCompra=new DetalleCompra(cant,precio,compra,prodSelec);
             detCompra.guardarDetalleCompra(detalleCompra);
-            //FALTA habilitamos las opciones de la compra de productos y cargamos los productos
-//            detCompra.obtenerDetalleXcompra(idCompra);
-//            detalles.add(detCompra);
-            
+            JOptionPane.showMessageDialog(this, "Producto agregado", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
             cargaProductos();
             
             limpiar();
@@ -297,8 +297,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
         inicio();
-         
-
+        
     }//GEN-LAST:event_jbtnNvaCompraActionPerformed
 
 
@@ -334,8 +333,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         List<Proveedor> proveedores= proveedorData.listaDeProveedores();
         for(Proveedor item: proveedores){
             jcbProveedor.addItem(item);
-            }    
-        
+            }   
     }
 
     private void cargaProductos() {

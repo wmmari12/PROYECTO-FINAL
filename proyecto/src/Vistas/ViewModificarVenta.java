@@ -1,4 +1,3 @@
-
 package Vistas;
 
 import Clases.*;
@@ -7,14 +6,13 @@ import java.time.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-
 public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
     private DetalleVData dVenta = new DetalleVData();
     private VentaData ventaData = new VentaData();
     private ProductoData prodData = new ProductoData();
     private List<Venta> ventas;
-    
+
     public ViewModificarVenta() {
         initComponents();
         inicio();
@@ -111,6 +109,12 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setText("SELECCIONAR DETALLE");
+
+        jcbDetalleV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbDetalleVItemStateChanged(evt);
+            }
+        });
 
         jbtnMostrarD.setText("MOSTRAR DETALLE");
         jbtnMostrarD.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +226,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
-        
+
         Date date = jdcFecha.getDate();
         if (date != null)
         {
@@ -230,7 +234,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
             jcbDetalleV.setEnabled(true);
             cargarVentas(fecha);
             Venta ventaSelec = (Venta) jcbVenta.getSelectedItem();
-            if (ventaSelec == null)
+            if (ventaSelec != null)
             {
                 cargarDetalles(ventaSelec.getIdVenta());
             }
@@ -238,21 +242,24 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
             {
                 jbtnMostrarD.setEnabled(false);
             }
+        } else
+        {
+            jcbDetalleV.removeAllItems();
         }    }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
         activarCamposDetalle();
-        cargarDetalles(((Venta)jcbVenta.getSelectedItem()).getIdVenta());
+        cargarDetalles(((Venta) jcbVenta.getSelectedItem()).getIdVenta());
         DetalleVenta detalleV = (DetalleVenta) jcbDetalleV.getSelectedItem();
         jtfCantidad.setText(detalleV.getCantidad() + "");
         jtfPrecio.setText(detalleV.getPrecioVenta() + "");
-        
+
         cargarComboDefault(detalleV);
 
     }//GEN-LAST:event_jbtnMostrarDActionPerformed
 
     private void jtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtnGuardarActionPerformed
-        
+
         int cant = 0;
         boolean cantSi = false;
         try
@@ -275,12 +282,12 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para la cantidad.", "Error", JOptionPane.ERROR_MESSAGE);
             jtfPrecio.setText("");
         }
-        
-        Producto p=(Producto) jcbProducto.getSelectedItem();
-     
+
+        Producto p = (Producto) jcbProducto.getSelectedItem();
+
         if (cantSi && precioSi)
         {
-            Venta venta=null;
+            Venta venta = null;
             DetalleVenta detalleVenta = (DetalleVenta) jcbDetalleV.getSelectedItem();
             if (detalleVenta == null)
             {
@@ -339,6 +346,17 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbtnAgregarActionPerformed
 
+    private void jcbDetalleVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbDetalleVItemStateChanged
+        if (evt.getSource() == jcbVenta)
+        {
+            actualizarVistaDetalle();
+            if (jcbDetalleV.getSelectedItem() == null)
+            {
+                jbtnMostrarD.setEnabled(false);
+            }
+        }        
+    }//GEN-LAST:event_jcbDetalleVItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar jCalendar1;
@@ -372,7 +390,8 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         jtfCantidad.setEnabled(false);
         jtfPrecio.setEnabled(false);
         jcbProducto.setEnabled(false);
-        jcbIdVenta.setEnabled(false);    }
+        jcbIdVenta.setEnabled(false);
+    }
 
     private void cargarVentas(LocalDate fecha) {
         jcbVenta.removeAllItems();
@@ -381,10 +400,10 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         {
             jcbVenta.addItem(item);
 
-        }   
+        }
     }
-    
-    private void cargarDetalles(int idVenta){
+
+    private void cargarDetalles(int idVenta) {
         jcbDetalleV.removeAllItems();
         List<DetalleVenta> detallesVentas = dVenta.obtenerDetalleXventa(idVenta);
         for (DetalleVenta item : detallesVentas)
@@ -402,7 +421,8 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         jtfCantidad.setText("");
         jtfPrecio.setText("");
         jcbProducto.removeAllItems();
-        jcbIdVenta.removeAllItems();    }
+        jcbIdVenta.removeAllItems();
+    }
 
     private void cargarCombo() {
         List<Venta> ventas = ventaData.listaDeVentasActivas();
@@ -416,25 +436,26 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
         {
             jcbProducto.addItem(item);
 
-        }    }
+        }
+    }
 
     private void limpiar() {
-       jtfCantidad.setText("");
+        jtfCantidad.setText("");
         jtfPrecio.setText("");
-        jdcFecha.getCalendar();    }
+        jdcFecha.getCalendar();
+    }
 
     private void actualizarVistaDetalle() {
         Venta ventaSelec = (Venta) jcbVenta.getSelectedItem();
         if (ventaSelec != null)
         {
             cargarDetalles(ventaSelec.getIdVenta());
-
             boolean estado = ventaSelec.isEstado();
             jbtnAnular.setEnabled(estado);
             jbtnMostrarD.setEnabled(estado);
             jbtnAgregar.setEnabled(estado);
             jbtnActivar.setEnabled(!estado);
-        }    
+        }
     }
 
     private void actualizarVistaVenta() {
@@ -446,26 +467,31 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
             cargarVentas(fecha);
         }
 
-        actualizarVistaDetalle();    }
+        actualizarVistaDetalle();
+    }
 
     private void cargarComboDefault(DetalleVenta detalleV) {
         List<Venta> ventas = ventaData.listaDeVentasActivas();
-        Venta ventaSelec=(Venta) jcbVenta.getSelectedItem();
+        Venta ventaSelec = (Venta) jcbVenta.getSelectedItem();
         jcbIdVenta.addItem(ventaSelec);
         for (Venta item : ventas)
         {
-            if(ventaSelec.getIdVenta()!=item.getIdVenta()){
+            if (ventaSelec.getIdVenta() != item.getIdVenta())
+            {
                 jcbIdVenta.addItem(item);
             }
-            
+
         }
         List<Producto> productos = prodData.listaDeProductosActivos();
-        Producto producto=detalleV.getProducto();
+        Producto producto = detalleV.getProducto();
         jcbProducto.addItem(producto);
         for (Producto item : productos)
         {
-            if(producto.getIdProducto()!=item.getIdProducto())
-            jcbProducto.addItem(item);
-            
-        }    }
+            if (producto.getIdProducto() != item.getIdProducto())
+            {
+                jcbProducto.addItem(item);
+            }
+
+        }
+    }
 }

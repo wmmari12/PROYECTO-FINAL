@@ -59,6 +59,39 @@ public class ProductoData {
     public Producto buscarProducto(int id) {
 
         Producto p = null;
+        String sql = "SELECT * FROM producto WHERE idProducto=? ";//creamos la consulta a enviar
+
+        PreparedStatement ps = null;
+        try
+        {
+            ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
+            ps.setInt(1, id);//1 es el primer atributo que buscamos con where y id es el valor a buscar
+            ResultSet rs = ps.executeQuery();//guardamos el resultado obtenido de la base de datos
+
+            if (rs.next())
+            {//se posiciona en la primer fila de la busqueda
+                p = new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setPrecioActual(rs.getDouble("precioActual"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+            }
+            ps.close();//cerramos la conexion
+        } catch (SQLException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
+        }
+        return p;
+    }
+    
+    public Producto buscarProductoActivo(int id) {
+
+        Producto p = null;
         String sql = "SELECT * FROM producto WHERE idProducto=? AND estado = 1";//creamos la consulta a enviar
 
         PreparedStatement ps = null;
@@ -119,7 +152,42 @@ public class ProductoData {
         return stock;
     }
 
+    
     public Producto buscarProductoXnombre(String nombre) {
+
+        Producto p = null;
+        String sql = "SELECT * FROM producto WHERE descripcion=? ";//AND estado = 1  creamos la consulta a enviar
+
+        PreparedStatement ps = null;
+        try
+        {
+            ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
+            ps.setString(1, nombre);//1 es el primer atributo que buscamos con where y id es el valor a buscar
+            ResultSet rs = ps.executeQuery();//guardamos el resultado obtenido de la base de datos
+
+            if (rs.next())
+            {//se posiciona en la primer fila de la busqueda
+                p = new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setPrecioActual(rs.getDouble("precioActual"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+            }
+            ps.close();//cerramos la conexion
+        } catch (SQLException ex)
+            
+        {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
+        }
+        return p;
+    }
+    
+    public Producto buscarProductoXnombreActivo(String nombre) {
 
         Producto p = null;
         String sql = "SELECT * FROM producto WHERE descripcion=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
@@ -146,6 +214,7 @@ public class ProductoData {
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
+            
         {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
         }
@@ -154,22 +223,25 @@ public class ProductoData {
 
     public Producto modificarProducto(Producto p) {
 
-        String sql = "UPDATE producto SET descripcion=?, precioActual=?, estado=? WHERE idProducto=?";
+        String sql = "UPDATE producto SET descripcion=?, precioActual=?,stock=?, estado=?  WHERE idProducto=?";
         PreparedStatement ps = null;
         try
         {
             ps = con.prepareStatement(sql);//envia la sentencia sql a la base de datos
             ps.setString(1, p.getDescripcion());
             ps.setDouble(2, p.getPrecioActual());
-            ps.setBoolean(3, p.isEstado());
-            ps.setInt(4, p.getIdProducto());
+            ps.setInt(3, p.getStock());
+            ps.setBoolean(4, p.isEstado());
+            ps.setInt(5, p.getIdProducto());
+            
+            
             int filas = ps.executeUpdate();
             if (filas == 1)
             {
-                JOptionPane.showMessageDialog(null, "Producto modificado");
+                System.out.println("Producto modificado");
             } else
             {
-                JOptionPane.showMessageDialog(null, "No se encontro el Producto!" + ps.toString());
+                System.out.println("No se encontro el Producto!" + ps.toString());
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
@@ -195,15 +267,15 @@ public class ProductoData {
                 case 1://venta
                     if (cant <= stockActual){//vendemos producto
                         stockActual -= cant;
-                        JOptionPane.showMessageDialog(null, "Venta realizada");
+                        System.out.println("Venta realizada");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Cantidad insuficiente! El stock actual es: "+stockActual);
+                        System.out.println("Cantidad insuficiente! El stock actual es: "+stockActual);
                     }
                     break;
 
                 case 2://compra
                     stockActual += cant;
-                    JOptionPane.showMessageDialog(null, "Compra realizada");
+                    System.out.println("Compra realizada");
                     break;
             }
             
@@ -215,7 +287,7 @@ public class ProductoData {
             
             if (filas == 1)
             {
-                JOptionPane.showMessageDialog(null, "Consulta realizada con exito!");
+                System.out.println("Consulta realizada con exito!");
             } 
             
             ps.close();//cerramos la conexion
@@ -237,10 +309,10 @@ public class ProductoData {
 
             if (fila == 1)
             {
-                JOptionPane.showMessageDialog(null, "El producto ha sido dado de baja.");
+                System.out.println("El producto ha sido dado de baja.");
             } else
             {
-                JOptionPane.showMessageDialog(null, "No se encontro el producto!");
+                System.out.println("No se encontro el producto!");
             }
             ps.close();
         } catch (SQLException ex)
@@ -253,15 +325,15 @@ public class ProductoData {
      public void altaProducto(int id){
         
         try{
-            String sql="UPDATE cliente SET estado=1 WHERE idProducto=?";
+            String sql="UPDATE producto SET estado=1 WHERE idProducto=?";
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El Producto ha sido dado de alta.");
+                 System.out.println("El Producto ha sido dado de alta.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el Producto!");
+                System.out.println("No se encontro el Producto!");
             }
             ps.close(); 
         }catch(SQLException ex){
@@ -293,7 +365,7 @@ public class ProductoData {
             ps.close();
         } catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, " Error al listar Clientes: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al listar Producto: " + ex.getMessage());
 
         }
 
@@ -323,7 +395,7 @@ public class ProductoData {
             ps.close();
         } catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, " Error al listar Clientes: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al listar Producto: " + ex.getMessage());
 
         }
 
@@ -353,7 +425,7 @@ public class ProductoData {
             ps.close();
         } catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, " Error al listar Clientes: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al listar Producto: " + ex.getMessage());
 
         }
 

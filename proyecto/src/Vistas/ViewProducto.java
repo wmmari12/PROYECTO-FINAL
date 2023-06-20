@@ -17,9 +17,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         this.productoData = new ProductoData();
         jbtnLimpiar.setEnabled(true);
         jbtnBaja.setEnabled(true);
-        jtfIdProducto.setEnabled(false);
-        jtfEstado.setEnabled(false);
-        jtfIdProducto.setEnabled(false);
+        jtfIdProducto.setEditable(false);
+        jtfEstado.setEditable(false);
         jbtnModificar.setEnabled(false);
     }
 
@@ -48,7 +47,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jbtnSalir = new javax.swing.JButton();
         jbtnLimpiar = new javax.swing.JButton();
         jbtnBaja = new javax.swing.JButton();
-        jtbnActivar = new javax.swing.JButton();
+        jbtnAlta = new javax.swing.JButton();
         jtfIdProducto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -105,10 +104,10 @@ public class ViewProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jtbnActivar.setText("ALTA");
-        jtbnActivar.addActionListener(new java.awt.event.ActionListener() {
+        jbtnAlta.setText("ALTA");
+        jbtnAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtbnActivarActionPerformed(evt);
+                jbtnAltaActionPerformed(evt);
             }
         });
 
@@ -146,7 +145,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtbnActivar)
+                        .addComponent(jbtnAlta)
                         .addGap(18, 18, 18)
                         .addComponent(jbtnBaja)
                         .addGap(18, 18, 18)
@@ -212,7 +211,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnGuardar)
-                    .addComponent(jtbnActivar)
+                    .addComponent(jbtnAlta)
                     .addComponent(jbtnBaja)
                     .addComponent(jbtnLimpiar)
                     .addComponent(jbtnModificar))
@@ -228,13 +227,28 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         {
             //Obtenemos los datos ingresados por el usuario
             String nombre = jtfDescripcion.getText();
-            double precio =(double) Double.parseDouble(jtfPrecio.getText());
-            int stock = Integer.parseInt(jtfStock.getText());
-            Boolean estado = true;
-//String descripcion, double precioActual, int stock, boolean estado
-            Producto producto = new Producto(nombre, precio, stock, true);
-            productoData.guardarProducto(producto);
             
+            String precioStr =jtfPrecio.getText();
+            double precio;
+            try
+            {
+                precio = Double.parseDouble(precioStr);
+                if(precio<1){
+                    JOptionPane.showMessageDialog(null, "Ingrese un valor mayor que 1.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfPrecio.setText("");
+                    return;
+                }
+                     
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para el precio.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            Producto producto = new Producto(nombre, precio, true);
+            productoData.guardarProducto(producto);
+            JOptionPane.showMessageDialog(this, "Producto añadido!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
             jtfIdProducto.setText(producto.getIdProducto() + "");
             jbtnLimpiar.setEnabled(true);
             jbtnBaja.setEnabled(true);
@@ -256,9 +270,8 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int idProducto = Integer.parseInt(jtfIdProducto.getText());
         productoData.bajaProducto(idProducto);
-        //String descripcion, double precioActual, int stock, boolean estado
+        JOptionPane.showMessageDialog(this, "El producto ha sido dado de Baja!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
         jtfEstado.setText("Inactivo");
-        
         
     }//GEN-LAST:event_jbtnBajaActionPerformed
 
@@ -267,17 +280,19 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbtnSalirActionPerformed
 
-    private void jtbnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbnActivarActionPerformed
+    private void jbtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAltaActionPerformed
         // TODO add your handling code here:
         int id=Integer.parseInt(jtfIdProducto.getText());
         productoData.altaProducto(id);
+        JOptionPane.showMessageDialog(this, "El producto ha sido dado de Alta!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
         jtfEstado.setText("Activo");
-    }//GEN-LAST:event_jtbnActivarActionPerformed
+    }//GEN-LAST:event_jbtnAltaActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
-        // TODO add your handling code here:
+
+    try{
+       
         String nombre=jtfDescripcion.getText();
-        
         Producto prod=new Producto();
         prod=productoData.buscarProductoXnombre(nombre);
         jtfDescripcion.setText(prod.getDescripcion());
@@ -285,25 +300,65 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         jtfStock.setText(prod.getStock()+"");
         if(prod.isEstado()){
             jtfEstado.setText("Activo");
+            jbtnAlta.setEnabled(false);
+            jbtnBaja.setEnabled(true);
         }else{
             jtfEstado.setText("Inactivo");
+            jbtnAlta.setEnabled(true);
+            jbtnBaja.setEnabled(false);
         }
-        jtfEstado.setText(prod.isEstado()+"");
         jtfIdProducto.setText(prod.getIdProducto()+"");
         jbtnModificar.setEnabled(true);
         jbtnGuardar.setEnabled(false);
-        limpiar();
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada ");
+            jtfDescripcion.requestFocus();
+        }
+        
     }//GEN-LAST:event_jbtnBuscarActionPerformed
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
             
             int id=Integer.parseInt(jtfIdProducto.getText());
             String descrip = jtfDescripcion.getText();
-            int cant = Integer.parseInt(jtfStock.getText());
-            double precio=Double.parseDouble(jtfPrecio.getText());
             
+            String cantStr =jtfStock.getText();
+            int cant;
+            try
+            {
+                cant = Integer.parseInt(cantStr);
+                if(cant<0){
+                    JOptionPane.showMessageDialog(null, "Ingrese un valor mayor o igual que cero para la cantidad.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfStock.setText("");
+                    return;
+                }
+                     
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un numero para la cantidad", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String precioStr=jtfPrecio.getText();
+            double precio;
+            try
+            {
+                precio = Double.parseDouble(precioStr);
+                if(precio<0){
+                    JOptionPane.showMessageDialog(null, "Ingrese un valor mayor o igual que cero para el precio.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfPrecio.setText("");
+                    return;
+                }
+                     
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un numero para el precio", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             Producto p = new Producto(id, descrip, precio, cant);
             productoData.modificarProducto(p);
+            JOptionPane.showMessageDialog(this, "El producto ha sido dado modificado!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+            
             limpiar();
             jtfIdProducto.setText("");
             jbtnBaja.setEnabled(true);
@@ -323,6 +378,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbtnAlta;
     private javax.swing.JButton jbtnBaja;
     private javax.swing.JButton jbtnBuscar;
     private javax.swing.JButton jbtnGuardar;
@@ -331,7 +387,6 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtnSalir;
     private javax.swing.JLabel jlPrecio;
     private javax.swing.JLabel jlStock;
-    private javax.swing.JButton jtbnActivar;
     private javax.swing.JTextField jtfDescripcion;
     private javax.swing.JTextField jtfEstado;
     private javax.swing.JTextField jtfIdProducto;
@@ -342,6 +397,8 @@ private void limpiar(){
     jtfDescripcion.setText("");
     jtfPrecio.setText("");
     jtfStock.setText("");
+    jtfIdProducto.setText("");
+    jtfEstado.setText("");
 }
 
 }

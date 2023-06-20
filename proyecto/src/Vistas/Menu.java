@@ -41,6 +41,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.setText("Administrar");
         jMenu1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jMenuItemNvoCliente.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemNvoCliente.setText("Cliente");
         jMenuItemNvoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +50,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemNvoCliente);
 
+        jMenuItemNvoProv.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemNvoProv.setText("Proveedor");
         jMenuItemNvoProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemNvoProv);
 
+        jMenuItemNvoProd.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemNvoProd.setText("Producto");
         jMenuItemNvoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +73,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.setText("Compra");
         jMenu3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jMenuItemCompra.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemCompra.setText("Nueva Compra");
         jMenuItemCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +82,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemCompra);
 
+        jMenuItemDetalleC.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemDetalleC.setText("Modificar Compra");
         jMenuItemDetalleC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +96,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuVenta.setText("Venta");
         jMenuVenta.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jMenuItemVenta.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemVenta.setText("Nueva Venta");
         jMenuItemVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +105,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenuVenta.add(jMenuItemVenta);
 
+        jMenuItemDetalleV.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemDetalleV.setText("Modificar Venta");
         jMenuItemDetalleV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +119,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setText("Inventario");
         jMenu5.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jMenuItemInventario.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemInventario.setText("Consultar Inventario");
         jMenuItemInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +133,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.setText("Salir");
         jMenu6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
 
+        jMenuItemSalir.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jMenuItemSalir.setText("Salir");
         jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -51,15 +51,15 @@ public class CompraData {
             
             if(rs.next()){
                 c.setIdCompra(rs.getInt(1));
-//              JOptionPane.showMessageDialog(null, "Compra realizada");
+                System.out.println("Compra realizada");
             }else{
-                JOptionPane.showMessageDialog(null, "La compra no pudo ser realizada");
+                System.out.println("La compra no pudo ser realizada");
             }
             ps.close();;
             
         } catch (SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, "Error al generar Compra: " + ex.getMessage());
+            System.out.println("Error al generar Compra: " + ex.getMessage());
         }
         
     }
@@ -80,13 +80,13 @@ public class CompraData {
             
             
             if(filas==1){
-                JOptionPane.showMessageDialog(null, "Compra modificada");
+                System.out.println("Compra modificada");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro la compra!"+ps.toString());
+                System.out.println("No se encontro la compra!"+ps.toString());
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al modificar Compra: "+ex.getMessage());
+            System.out.println("Error al modificar Compra: "+ex.getMessage());
     }
         
     return c;

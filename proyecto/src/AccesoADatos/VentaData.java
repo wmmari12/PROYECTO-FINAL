@@ -136,7 +136,7 @@ public class VentaData {
         List<Venta> listaVentas = new ArrayList<>();
         
         Venta venta = null;
-        String sql = "SELECT * FROM venta WHERE fecha=? AND estado=1";
+        String sql = "SELECT * FROM venta WHERE fecha=? ";
         PreparedStatement ps = null;
         try{
             ps = con.prepareStatement(sql);

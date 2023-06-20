@@ -40,6 +40,12 @@ public class Producto {
         this.precioActual = precioActual;
         this.stock = stock;
     }
+
+    public Producto(String descripcion, double precioActual, boolean estado) {
+        this.descripcion = descripcion;
+        this.precioActual = precioActual;
+        this.estado = estado;
+    }
     
     
 
@@ -85,7 +91,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Cod.= " + idProducto +  " -- Nombre: " + precioActual + " -- Stock= " + stock;
+        return "Cod.= " + idProducto +  " -- Nombre: " + descripcion + " -- Stock= " + stock;
     }
     
     
