@@ -294,6 +294,8 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
                 venta = (Venta) jcbVenta.getSelectedItem();
                 DetalleVenta det = new DetalleVenta(cant, precio, venta, p);
                 dVenta.guardarDetalleVta(det);
+                JOptionPane.showMessageDialog(this, "Detalle agregado!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
                 limpiar();
 
             } else
@@ -302,6 +304,8 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
                 int idDetalle = detalleVenta.getIdDetalleVenta();
                 DetalleVenta det = new DetalleVenta(idDetalle, cant, precio, venta, p);
                 dVenta.modificarDetalleVenta(det);
+                JOptionPane.showMessageDialog(this, "Detalle modificado!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
                 limpiar();
             }
             jcbIdVenta.removeAllItems();
