@@ -125,7 +125,7 @@ public class ProductoData {
     public int stockProducto(int id) {
         
         int stock=0;
-        Producto p = null;
+        Producto p ;
         String sql = "SELECT stock FROM producto WHERE idProducto=? AND estado = 1";//AND estado = 1  creamos la consulta a enviar
 
         PreparedStatement ps = null;
@@ -139,7 +139,7 @@ public class ProductoData {
             {
                 p = new Producto();
                 stock=rs.getInt("stock");
-
+                return stock;
             } else
             {
                 System.out.println("No existe el producto buscado");

@@ -30,7 +30,6 @@ public class DetalleVData {
 
         try
         {
-
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dv.getCantidad());
             ps.setDouble(2, dv.getPrecioVenta());
@@ -48,7 +47,7 @@ public class DetalleVData {
 
                 if (rs.next())
                 {
-
+                    System.out.println("stock if "+stock);
                     dv.setIdDetalleVenta(rs.getInt(1));
                     //modificarStock(int cant, int idP, int flag)//1=venta 2=compra
                     productoD.modificarStock(dv.getCantidad(), dv.getProducto().getIdProducto(), 1);
@@ -57,6 +56,7 @@ public class DetalleVData {
 
             } else
             {
+                System.out.println("stock else"+stock);
                 JOptionPane.showMessageDialog(null, "Stock insuficiente");
             }
 
