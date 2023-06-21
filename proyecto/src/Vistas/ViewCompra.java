@@ -1,4 +1,3 @@
-
 package Vistas;
 
 import AccesoADatos.*;
@@ -8,25 +7,23 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
-
 public class ViewCompra extends javax.swing.JInternalFrame {
 
-    private CompraData compraData=new CompraData();
+    private CompraData compraData = new CompraData();
     private ProveedorData proveedorData = new ProveedorData();
-    private DetalleCData detCompra=new DetalleCData();
-    private ProductoData productoData=new ProductoData();
-    private List<Producto> productos=null;
-    private List<Proveedor> proveedores=null;
-    private List<DetalleCData> detalles=new ArrayList();
-    
+    private DetalleCData detCompra = new DetalleCData();
+    private ProductoData productoData = new ProductoData();
+    private List<Producto> productos;
+    private List<Proveedor> proveedores;
+    private List<DetalleCData> detalles = new ArrayList();
+
     public ViewCompra() {
         initComponents();
         cargaProveedores();
         inicio();
-        
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +90,8 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
         jLabel8.setText("PRECIO UNITARIO");
 
+        jtfPrecio.setEditable(false);
+
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel9.setText("CARGAR  PRODUCTOS");
 
@@ -144,8 +143,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jbtnGuardar)
                                         .addGap(88, 88, 88)
-                                        .addComponent(jbtnNvaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(jbtnNvaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel6)
@@ -180,8 +178,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,8 +188,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
                                 .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jtfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jtfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnGuardar)
@@ -225,67 +221,82 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
-        try{
+        try
+        {
             Date date = jdcFecha.getDate();
             LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Proveedor provSelec=(Proveedor) jcbProveedor.getSelectedItem();
-            
-            Compra compra=new Compra(fecha,provSelec);
+            Proveedor provSelec = (Proveedor) jcbProveedor.getSelectedItem();
+
+            Compra compra = new Compra(fecha, provSelec);
             compraData.hacerCompra(compra);
             JOptionPane.showMessageDialog(this, "La compra ha sido realizada!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
 
-            jtfIdCompra.setText(compra.getIdCompra()+"");
+            jtfIdCompra.setText(compra.getIdCompra() + "");
             //habilitamos las opciones de la compra de productos y cargamos los productos
             cargaProductos();
-            
+
             jcbProductos.setEnabled(true);
             jtfCantidad.setEnabled(true);
             jtfPrecio.setEnabled(true);
             jbtnAgregar.setEnabled(true);
-            
+
             jbtnGuardar.setEnabled(false);
             jdcFecha.setEnabled(false);
             jcbProveedor.setEditable(false);
             jbtnNvaCompra.setEnabled(true);
 
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Error al guardar la compra, verifique sus datos."+ ex.getMessage());
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error al guardar la compra, verifique sus datos." + ex.getMessage());
 
         }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
-        // TODO add your handling code here:
-        try{
-            
-            int idCompra=Integer.parseInt(jtfIdCompra.getText());
-            Compra compra=compraData.obtenerComprasPorId(idCompra);
-            Producto prodSelec=(Producto) jcbProductos.getSelectedItem();
-            int cant=Integer.parseInt(jtfCantidad.getText());
-            jtfPrecio.setText(prodSelec.getPrecioActual()+"");
-            double precio=prodSelec.getPrecioActual();
 
-            double total=cant*precio;
-            jtfTotal.setText(total+"");
+        try
+        {
+
+            int idCompra = Integer.parseInt(jtfIdCompra.getText());
+            Compra compra = compraData.obtenerComprasPorId(idCompra);
+            Producto prodSelec = (Producto) jcbProductos.getSelectedItem();
+
+//            int cant = Integer.parseInt(jtfCantidad.getText());
+            int cant=0;
+            try
+            {
+                cant = Integer.parseInt(jtfCantidad.getText());
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para la cantidad.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfCantidad.setText("");
+            }
+            jtfPrecio.setText(prodSelec.getPrecioActual() + "");
+            double precio = prodSelec.getPrecioActual();
+
+            double total = cant * precio;
+            jtfTotal.setText(total + "");
             jtfTotal.setEditable(false);
             jtfPrecio.setEditable(false);
-            DetalleCompra detalleCompra=new DetalleCompra(cant,precio,compra,prodSelec);
+            DetalleCompra detalleCompra = new DetalleCompra(cant, precio, compra, prodSelec);
             detCompra.guardarDetalleCompra(detalleCompra);
             JOptionPane.showMessageDialog(this, "Producto agregado", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
 
             cargaProductos();
-            
+
             limpiar();
-            
+
             jbtnGuardar.setEnabled(false);
             jdcFecha.setEnabled(false);
             jcbProveedor.setEditable(false);
             jbtnNvaCompra.setEnabled(true);
 
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Error al guardar la compra, verifique sus datos."+ ex.getMessage());
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Error al guardar la compra, verifique sus datos." + ex.getMessage());
 
         }
+
     }//GEN-LAST:event_jbtnAgregarActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
@@ -297,7 +308,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
         inicio();
-        
+
     }//GEN-LAST:event_jbtnNvaCompraActionPerformed
 
 
@@ -330,18 +341,20 @@ public class ViewCompra extends javax.swing.JInternalFrame {
 
     private void cargaProveedores() {
         jcbProveedor.removeAllItems();
-        List<Proveedor> proveedores= proveedorData.listaDeProveedores();
-        for(Proveedor item: proveedores){
+        List<Proveedor> proveedores = proveedorData.listaDeProveedores();
+        for (Proveedor item : proveedores)
+        {
             jcbProveedor.addItem(item);
-            }   
+        }
     }
 
     private void cargaProductos() {
         jcbProductos.removeAllItems();
-        List<Producto> productos= productoData.listaDeProductos();
-        for(Producto item: productos){
+        List<Producto> productos = productoData.listaDeProductos();
+        for (Producto item : productos)
+        {
             jcbProductos.addItem(item);
-        }      
+        }
     }
 
     private void limpiar() {
@@ -362,8 +375,7 @@ public class ViewCompra extends javax.swing.JInternalFrame {
         jbtnGuardar.setEnabled(true);
         jdcFecha.setEnabled(true);
         jcbProveedor.setEditable(true);
-        
-    }
-    
-}
 
+    }
+
+}

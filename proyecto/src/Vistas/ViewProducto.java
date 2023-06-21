@@ -227,7 +227,19 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         {
             //Obtenemos los datos ingresados por el usuario
             String nombre = jtfDescripcion.getText();
-            
+            int stock=Integer.parseInt(jtfStock.getText());
+            String stockStr=jtfStock.getText();
+            try
+            {
+                stock = Integer.parseInt(stockStr);
+                JOptionPane.showMessageDialog(null, "El Stock debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+
+
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico valido para el Stock ", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             String precioStr =jtfPrecio.getText();
             double precio;
             try
@@ -245,7 +257,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
                 return;
             }
             
-            Producto producto = new Producto(nombre, precio, true);
+            Producto producto = new Producto(nombre, precio, stock, true);
             productoData.guardarProducto(producto);
             JOptionPane.showMessageDialog(this, "Producto añadido!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
 
@@ -253,6 +265,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
             jbtnLimpiar.setEnabled(true);
             jbtnBaja.setEnabled(true);
             jtfIdProducto.setEnabled(true);
+            jtfStock.setText(producto.getStock()+ "");
             jtfEstado.setText("Activo");
         } catch (Exception ex)
         {
@@ -272,7 +285,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         productoData.bajaProducto(idProducto);
         JOptionPane.showMessageDialog(this, "El producto ha sido dado de Baja!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
         jtfEstado.setText("Inactivo");
-        
+        limpiar();
     }//GEN-LAST:event_jbtnBajaActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
@@ -286,6 +299,7 @@ public class ViewProducto extends javax.swing.JInternalFrame {
         productoData.altaProducto(id);
         JOptionPane.showMessageDialog(this, "El producto ha sido dado de Alta!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
         jtfEstado.setText("Activo");
+        limpiar();
     }//GEN-LAST:event_jbtnAltaActionPerformed
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed

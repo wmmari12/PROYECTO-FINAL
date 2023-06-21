@@ -249,7 +249,7 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
 
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
         activarCamposDetalle();
-        cargarDetalles(((Venta) jcbVenta.getSelectedItem()).getIdVenta());
+//        cargarDetalles(((Venta) jcbVenta.getSelectedItem()).getIdVenta());
         DetalleVenta detalleV = (DetalleVenta) jcbDetalleV.getSelectedItem();
         jtfCantidad.setText(detalleV.getCantidad() + "");
         jtfPrecio.setText(detalleV.getPrecioVenta() + "");
@@ -347,14 +347,14 @@ public class ViewModificarVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnAgregarActionPerformed
 
     private void jcbDetalleVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbDetalleVItemStateChanged
-        if (evt.getSource() == jcbVenta)
-        {
-            actualizarVistaDetalle();
-            if (jcbDetalleV.getSelectedItem() == null)
-            {
-                jbtnMostrarD.setEnabled(false);
-            }
-        }        
+//        if (evt.getSource() == jcbVenta)
+//        {
+//            actualizarVistaDetalle();
+//            if (jcbDetalleV.getSelectedItem() == null)
+//            {
+//                jbtnMostrarD.setEnabled(false);
+//            }
+//        }        
     }//GEN-LAST:event_jcbDetalleVItemStateChanged
 
 

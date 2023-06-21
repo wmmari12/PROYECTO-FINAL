@@ -27,7 +27,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
         cargaClientes();
         inicio();
         this.ventaData = new VentaData();
-        
+
     }
 
     /**
@@ -268,12 +268,12 @@ public class ViewVenta extends javax.swing.JInternalFrame {
 
     private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
         // TODO add your handling code here:
-        Venta venta=new Venta();
+        Venta venta = new Venta();
 
         try
         {
             int idVenta = Integer.parseInt(jtfIdVenta.getText());
-            venta=ventaData.obtenerVentaPorId(idVenta);
+            venta = ventaData.obtenerVentaPorId(idVenta);
             int idProd = 0;
             boolean idNum = false;
             try
@@ -287,7 +287,6 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             }
 
             Producto prodSelec = (Producto) productoData.buscarProducto(idProd);
-            //Producto prodSelec=(Producto) jcbProductos.getSelectedItem();
             int cant = 0;
             boolean cantNum = false;
             try
@@ -318,8 +317,9 @@ public class ViewVenta extends javax.swing.JInternalFrame {
                 jtfTotal.setEditable(false);
                 DetalleVenta detalleVenta = new DetalleVenta(cant, precio, venta, prodSelec);
                 detVenta.guardarDetalleVta(detalleVenta);
+                JOptionPane.showMessageDialog(this, "Producto agregado", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
                 limpiar();
-                //habilitamos las opciones de la venta de productos y cargammos los productos
             }
             cargaProductos();
 
@@ -342,10 +342,9 @@ public class ViewVenta extends javax.swing.JInternalFrame {
             Date date = jdcFecha.getDate();
             LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Cliente clienteSelec = (Cliente) jcbCliente.getSelectedItem();
-
-            System.out.println("Entre");
             Venta venta = new Venta(fecha, clienteSelec);
             ventaData.realizarVenta(venta);
+            JOptionPane.showMessageDialog(this, "Venta realizada", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
             jtfIdVenta.setText(venta.getIdVenta() + "");
             //habilitamos las opciones de la venta de productos y cargammos los productos
             cargaProductos();
@@ -480,7 +479,7 @@ public class ViewVenta extends javax.swing.JInternalFrame {
         jbtnAgregar.setEnabled(false);
         jcbProductos.setEnabled(false);
         jtfIdProducto.setEnabled(false);
-        jtfNombre.setEnabled(false);    
+        jtfNombre.setEnabled(false);
     }
 
 }

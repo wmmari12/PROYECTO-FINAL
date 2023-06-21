@@ -15,11 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class ViewProveedor extends javax.swing.JInternalFrame {
     
-    private ProveedorData proveedorData;
+    private ProveedorData proveedorData=new ProveedorData();
     
     public ViewProveedor() {
         initComponents();
-        this.proveedorData = null;
         jbtnLimpiar.setEnabled(false);
         jbtnBaja.setEnabled(false);
         jtfEstado.setEnabled(false);
@@ -205,7 +204,21 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
             String domicilio = jtfDomicilio.getText();
             String telefono = jtfTelefono.getText();
             Boolean estado = true;
+            try
+            {
 
+                long num = Long.parseLong(telefono);
+                if (telefono.length() < 10 || telefono.length() > 15)
+                {
+                    JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un telefono válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    jtfTelefono.setText(""); // Limpiar el campo JTextField
+                    return;
+                }
+            } catch (NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             Proveedor proveedor = new Proveedor(nombre, domicilio, telefono, true);
             proveedorData.guardarProveedor(proveedor);
             
@@ -214,7 +227,8 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
             jbtnBaja.setEnabled(true);
             jtfIdProveedor.setEnabled(true);
             jtfEstado.setText("Activo");
-            
+            JOptionPane.showMessageDialog(this, "Proveedor añadido!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+ 
         } catch (Exception ex)
         {
             JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
@@ -231,27 +245,44 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int id=Integer.parseInt(jtfIdProveedor.getText());
         proveedorData.altaProveedor(id);
+        JOptionPane.showMessageDialog(this, "Proveedor dado de alta!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
+
     }//GEN-LAST:event_jbtnAltaActionPerformed
 
     private void JbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnModificarActionPerformed
-        // TODO add your handling code here:
+        //Obtenemos los datos ingresados por el usuario
+
         boolean estado;
         int id=Integer.parseInt(jtfIdProveedor.getText());
-        
         String nombre = jtfNombre.getText();
         String domicilio = jtfDomicilio.getText();
         String telefono = jtfTelefono.getText();
         String estadoString = jtfEstado.getText();
+        
         if(estadoString=="Activo"){
             estado=true;
         }else{
             estado=false;
         }
-        int idProveedor = Integer.parseInt(jtfIdProveedor.getText());
-       
-        //(int idProveedor, String razonSocial, String domicilio, String telefono, boolean estado)
-        Proveedor p = new Proveedor(idProveedor, nombre, domicilio, telefono, estado);
+        try
+        {
+            long num = Long.parseLong(telefono);
+            if (telefono.length() < 10 || telefono.length() > 15)
+            {
+                JOptionPane.showMessageDialog(null, "El número ingresado no es correcto para un telefono válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtfTelefono.setText(""); // Limpiar el campo JTextField
+                return;
+            }
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Ingrese un valor numérico válido para el telefono", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Proveedor p = new Proveedor(id, nombre, domicilio, telefono, estado);
         proveedorData.modificarProveedor(p);
+        JOptionPane.showMessageDialog(this, "Proveedor Modificado!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+
         limpiar();
     }//GEN-LAST:event_JbtnModificarActionPerformed
 
@@ -259,6 +290,8 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int id=Integer.parseInt(jtfIdProveedor.getText());
         proveedorData.bajaProveedor(id);
+        JOptionPane.showMessageDialog(this, "Proveedor dado de baja!", "¡ÉXITO!", JOptionPane.INFORMATION_MESSAGE);
+        limpiar();
     }//GEN-LAST:event_jbtnBajaActionPerformed
 
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
@@ -268,10 +301,11 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
 
     private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
         // TODO add your handling code here:
-       try{ 
+        String nombre = jtfNombre.getText();
+        try{
             Proveedor p = new Proveedor();
-            String nombre = jtfNombre.getText();
             p=proveedorData.obtenerProveedorPorNombre(nombre);
+//          
             jtfDomicilio.setText(p.getDomicilio());
             jtfTelefono.setText(p.getTelefono());
             if(p.isEstado()){
@@ -284,9 +318,10 @@ public class ViewProveedor extends javax.swing.JInternalFrame {
                 jbtnBaja.setEnabled(false);
             }
             jtfIdProveedor.setText(String.valueOf(p.getIdProveedor()));
+            
        } catch (Exception ex)
         {
-            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique su entrada " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Datos invalidos, verifique el nombre " + ex.getMessage());
             jtfNombre.requestFocus();
         }
     }//GEN-LAST:event_jbtnBuscarActionPerformed

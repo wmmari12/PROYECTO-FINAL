@@ -318,7 +318,6 @@ public class ViewCliente extends javax.swing.JInternalFrame {
         }
         try
         {
-//                int num1=Integer.parseInt(jtfTelefono.getText());
             long num = Long.parseLong(telefono);
             if (telefono.length() < 10 || telefono.length() > 15)
             {

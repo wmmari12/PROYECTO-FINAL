@@ -43,10 +43,10 @@ public class ProductoData {
             if (rs.next())
             {
                 p.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido.");
+                System.out.println("Producto añadido.");
             } else
             {
-                JOptionPane.showMessageDialog(null, "El producto no pudo ser ingresado.");
+                System.out.println("El producto no pudo ser ingresado.");
             }
             ps.close();
 
@@ -79,7 +79,7 @@ public class ProductoData {
 
             } else
             {
-                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+                System.out.println("No existe el producto buscado");
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
@@ -112,7 +112,7 @@ public class ProductoData {
 
             } else
             {
-                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+                System.out.println("No existe el producto buscado");
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
@@ -142,7 +142,7 @@ public class ProductoData {
 
             } else
             {
-                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+                System.out.println("No existe el producto buscado");
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
@@ -176,7 +176,7 @@ public class ProductoData {
 
             } else
             {
-                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+                System.out.println("No existe el producto buscado");
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)
@@ -210,7 +210,7 @@ public class ProductoData {
 
             } else
             {
-                JOptionPane.showMessageDialog(null, "No existe el producto buscado");
+                System.out.println("No existe el producto buscado");
             }
             ps.close();//cerramos la conexion
         } catch (SQLException ex)

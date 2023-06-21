@@ -39,10 +39,10 @@ public class ProveedorData {
             
             if(rs.next()){
                 p.setIdProveedor(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Proveedor añadido.");
+                System.out.println("Proveedor añadido.");
             } else
             {
-                JOptionPane.showMessageDialog(null, "El proveedor no pudo ser ingresado.");
+                System.out.println("El proveedor no pudo ser ingresado.");
             }
             ps.close();
             
@@ -54,7 +54,7 @@ public class ProveedorData {
     
     public Proveedor modificarProveedor(Proveedor p) {
 
-        String sql = "UPDATE proveedor SET razonSocial=?,domicilio=?, telefono=?, estado=? WHERE idProducto=?";
+        String sql = "UPDATE proveedor SET razonSocial=?,domicilio=?, telefono=?, estado=? WHERE idProveedor=?";
         PreparedStatement ps = null;
         try
         {
@@ -67,9 +67,9 @@ public class ProveedorData {
             
             int filas=ps.executeUpdate();
             if(filas==1){
-                JOptionPane.showMessageDialog(null, "Proveedor modificado");
+                System.out.println("Proveedor modificado");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!"+ps.toString());
+                System.out.println("No se encontro el Proveedor!"+ps.toString());
             }
         ps.close();//cerramos la conexion
     }catch(SQLException ex){
@@ -87,9 +87,9 @@ public class ProveedorData {
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El Proveedor ha sido dado de baja.");
+                 System.out.println("El Proveedor ha sido dado de baja.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
+                System.out.println("No se encontro el Proveedor!");
             }
             ps.close(); 
         }catch(SQLException ex){
@@ -107,9 +107,9 @@ public class ProveedorData {
             int fila=ps.executeUpdate();
             
             if(fila==1){
-                 JOptionPane.showMessageDialog(null, "El cliente ha sido dado de alta.");
+                 System.out.println("El cliente ha sido dado de alta.");
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el cliente!");
+                System.out.println("No se encontro el cliente!");
             }
             ps.close(); 
         }catch(SQLException ex){
@@ -136,7 +136,7 @@ public class ProveedorData {
                 p.setTelefono(rs.getString("telefono"));
                 p.setEstado(rs.getBoolean("estado"));
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
+                System.out.println("No se encontro el Proveedor!");
             }
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al obtener el Proveedor: "+ex.getMessage());        }
@@ -162,7 +162,7 @@ public class ProveedorData {
                 p.setTelefono(rs.getString("telefono"));
                 p.setEstado(rs.getBoolean("estado"));
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro el Proveedor!");
+                System.out.println("No se encontro el Proveedor!");
             }
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al obtener el Proveedor: "+ex.getMessage());        }

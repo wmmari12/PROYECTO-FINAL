@@ -48,7 +48,7 @@ public class VentaData {
             
             if(rs.next()){
                 v.setIdVenta(rs.getInt(1));
-                //JOptionPane.showMessageDialog(null, "La venta fue cargada con exito");
+                System.out.println("La venta fue cargada con exito");
             }
             ps.close();
             
@@ -70,9 +70,9 @@ public class VentaData {
         
         int filas=ps.executeUpdate();
         if(filas==1){
-            JOptionPane.showMessageDialog(null, "Venta modificada");
+            System.out.println("Venta modificada");
         }else{
-            JOptionPane.showMessageDialog(null, "Error al modificar Venta: " + ps.toString());
+            System.out.println("Error al modificar Venta: " + ps.toString());
 
         }
     }catch(SQLException ex){
@@ -120,7 +120,7 @@ public class VentaData {
                 Cliente cliente=nuevoCliente(rs.getInt("idCliente"));
                 v.setCliente(cliente);
             }else{
-                JOptionPane.showMessageDialog(null, "No se encontro la venta!");
+                System.out.println("No se encontro la venta!");
 
             }
     }catch (SQLException ex) {

@@ -240,7 +240,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
             jcbDetalleC.setEnabled(true);
             cargarCompras(fecha);
             Compra compraSelec = (Compra) jcbCompra.getSelectedItem();
-            if (compraSelec == null)
+            if (compraSelec != null)
             {
                 cargarDetalles(compraSelec.getIdCompra());
             }
@@ -255,7 +255,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
     private void jbtnMostrarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarDActionPerformed
 
         activarCamposDetalle();
-        cargarDetalles(((Compra)jcbCompra.getSelectedItem()).getIdCompra());
+//        cargarDetalles(((Compra)jcbCompra.getSelectedItem()).getIdCompra());
         DetalleCompra detalleC = (DetalleCompra) jcbDetalleC.getSelectedItem();
         jtfCantidad.setText(detalleC.getCantidad() + "");
         jtfPrecio.setText(detalleC.getPrecioCosto() + "");
@@ -285,7 +285,7 @@ public class ViewModificarCompra extends javax.swing.JInternalFrame {
             precioSi = true;
         } catch (NumberFormatException e)
         {
-            JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para la cantidad.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingrese un valor numérico para el precio.", "Error", JOptionPane.ERROR_MESSAGE);
             jtfPrecio.setText("");
         }
         int idCompra = 0;
